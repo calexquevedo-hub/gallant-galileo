@@ -1,24 +1,60 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Shield, CheckCircle2, ArrowRight, MapPin, Users } from 'lucide-react';
 
 export default function Hero() {
+  const [offsetY, setOffsetY] = useState(0);
+
+  useEffect(() => {
+    // Subtle parallax that respects prefers-reduced-motion
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    if (mediaQuery.matches) return;
+
+    let ticking = false;
+    const handleScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          // Subtle damping factor: maximum offset limited to 40px for elegance
+          const currentScroll = window.scrollY;
+          if (currentScroll < 1200) {
+            setOffsetY(currentScroll);
+          }
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   const whatsappUrl = "https://wa.me/5585989234111?text=Olá!%20Gostaria%20de%20agendar%20uma%20consulta%20com%20o%20Psicólogo%20Carlos%20Alexandre%20Quevedo.";
 
+  // Calculated soft offsets (0% to 8% travel speed)
+  const glowTranslate = `translate3d(0, ${offsetY * 0.12}px, 0)`;
+  const imageTranslate = `translate3d(0, ${offsetY * -0.05}px, 0)`;
+  const badgeTranslate = `translate3d(0, ${offsetY * 0.04}px, 0)`;
+
   return (
-    <section className="section reveal-on-scroll" style={{ position: 'relative', overflow: 'hidden', padding: '5rem 0 6rem 0' }}>
+    <section className="section reveal-on-scroll" style={{ position: 'relative', overflow: 'hidden', padding: '5.5rem 0 6.5rem 0' }}>
       
-      {/* Subtle Background Accent */}
-      <div style={{
-        position: 'absolute',
-        top: '-10%',
-        right: '-5%',
-        width: '500px',
-        height: '500px',
-        borderRadius: '50%',
-        background: 'radial-gradient(circle, rgba(197, 168, 128, 0.12) 0%, rgba(250, 248, 245, 0) 70%)',
-        pointerEvents: 'none',
-        zIndex: 0
-      }} />
+      {/* Dynamic Ambient Glow Parallax */}
+      <div 
+        style={{
+          position: 'absolute',
+          top: '-15%',
+          right: '-5%',
+          width: '580px',
+          height: '580px',
+          borderRadius: '50%',
+          background: 'radial-gradient(circle, rgba(197, 168, 128, 0.16) 0%, rgba(250, 248, 245, 0) 70%)',
+          pointerEvents: 'none',
+          transform: glowTranslate,
+          transition: 'transform 0.1s cubic-bezier(0, 0, 0.2, 1)',
+          willChange: 'transform',
+          zIndex: 0
+        }} 
+      />
 
       <div className="container" style={{ position: 'relative', zIndex: 1 }}>
         <div className="grid-2" style={{ alignItems: 'center', gap: '4rem' }}>
@@ -28,19 +64,19 @@ export default function Hero() {
             
             {/* Approach Badge */}
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', flexWrap: 'wrap' }}>
-              <span className="badge badge-sage">
+              <span className="badge badge-sage" style={{ boxShadow: '0 2px 10px rgba(90, 115, 99, 0.15)' }}>
                 <Shield size={14} />
                 <span>Análise do Comportamento</span>
               </span>
             </div>
 
             {/* Main Headline */}
-            <h1 style={{ fontSize: 'clamp(2.4rem, 4.8vw, 3.6rem)', color: 'var(--text-main)', letterSpacing: '-0.02em', fontWeight: '700' }}>
+            <h1 style={{ fontSize: 'clamp(2.4rem, 4.8vw, 3.6rem)', color: 'var(--text-main)', letterSpacing: '-0.02em', fontWeight: '700', lineHeight: '1.15' }}>
               Psicologia embasada na Análise do Comportamento.
             </h1>
 
             {/* Subheadline */}
-            <p style={{ fontSize: '1.15rem', color: 'var(--text-muted)', maxWidth: '560px', lineHeight: '1.7' }}>
+            <p style={{ fontSize: '1.15rem', color: 'var(--text-muted)', maxWidth: '560px', lineHeight: '1.75' }}>
               Atendimento por <strong>Carlos Alexandre Quevedo</strong> (CRP 11/24669). Consultório presencial para <strong>Crianças, Jovens, Adultos, Casais e Idosos</strong> no bairro Aldeota em Fortaleza/CE, além de psicoterapia online (e-PSI).
             </p>
 
@@ -92,10 +128,21 @@ export default function Hero() {
 
           </div>
 
-          {/* Portrait Photo Container */}
+          {/* Portrait Photo Container with Depth Parallax */}
           <div style={{ position: 'relative', display: 'flex', justifyContent: 'center' }}>
             
-            {/* Frame */}
+            {/* Soft Shadow Base Under Frame */}
+            <div style={{
+              position: 'absolute',
+              bottom: '-20px',
+              width: '80%',
+              height: '30px',
+              background: 'radial-gradient(ellipse, rgba(15, 23, 42, 0.25) 0%, rgba(0,0,0,0) 70%)',
+              filter: 'blur(10px)',
+              zIndex: 0
+            }} />
+
+            {/* Frame with Parallax */}
             <div style={{
               position: 'relative',
               borderRadius: 'var(--radius-lg)',
@@ -103,7 +150,11 @@ export default function Hero() {
               boxShadow: '0 25px 50px -12px rgba(15, 23, 42, 0.18)',
               border: '8px solid #FFFFFF',
               maxWidth: '440px',
-              width: '100%'
+              width: '100%',
+              transform: imageTranslate,
+              transition: 'transform 0.12s cubic-bezier(0, 0, 0.2, 1)',
+              willChange: 'transform',
+              zIndex: 1
             }}>
               <img 
                 src="/images/psicologo.jpg" 
@@ -111,26 +162,30 @@ export default function Hero() {
                 style={{ width: '100%', height: 'auto', display: 'block', objectFit: 'cover' }}
               />
               
-              {/* Floating Credential Overlay */}
+              {/* Floating Credential Overlay with Counter-Parallax */}
               <div style={{
                 position: 'absolute',
                 bottom: '1.5rem',
                 left: '1.5rem',
                 right: '1.5rem',
                 background: 'rgba(15, 23, 42, 0.88)',
-                backdropFilter: 'blur(10px)',
-                padding: '1rem 1.25rem',
+                backdropFilter: 'blur(12px)',
+                WebkitBackdropFilter: 'blur(12px)',
+                padding: '1.1rem 1.35rem',
                 borderRadius: 'var(--radius-md)',
                 color: '#FFFFFF',
-                border: '1px solid rgba(255, 255, 255, 0.15)'
+                border: '1px solid rgba(255, 255, 255, 0.18)',
+                boxShadow: '0 12px 25px rgba(0, 0, 0, 0.25)',
+                transform: badgeTranslate,
+                transition: 'transform 0.15s cubic-bezier(0, 0, 0.2, 1)'
               }}>
-                <div style={{ fontSize: '1.1rem', fontFamily: 'var(--font-serif)', fontWeight: '600' }}>
+                <div style={{ fontSize: '1.12rem', fontFamily: 'var(--font-serif)', fontWeight: '600' }}>
                   Carlos Alexandre Quevedo
                 </div>
                 <div style={{ fontSize: '0.82rem', color: 'rgba(255, 255, 255, 0.85)' }}>
                   Psicólogo • CRP 11/24669
                 </div>
-                <div style={{ fontSize: '0.78rem', color: 'var(--accent-gold)', marginTop: '0.2rem' }}>
+                <div style={{ fontSize: '0.78rem', color: 'var(--accent-gold)', marginTop: '0.2rem', fontWeight: '500' }}>
                   Análise do Comportamento • Aldeota, Fortaleza
                 </div>
               </div>

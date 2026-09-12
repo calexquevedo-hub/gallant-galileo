@@ -104,32 +104,32 @@ button {
   }
 }
 
-/* Glassmorphism Navbar (Karalee Wellness inspired) */
+/* Glassmorphism Header */
 .glass-header {
-  background: rgba(250, 248, 245, 0.92);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border-bottom: 1px solid rgba(226, 232, 240, 0.6);
   position: sticky;
   top: 0;
   z-index: 1000;
+  background: rgba(250, 248, 245, 0.88);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(203, 213, 225, 0.5);
   transition: var(--transition);
 }
 
 .glass-header.scrolled {
-  background: rgba(255, 255, 255, 0.96);
-  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.05);
   border-bottom-color: rgba(203, 213, 225, 0.8);
 }
 
-/* Navigation Links with Smooth Underline Expand Animation */
+/* Nav Links */
 .nav-link {
-  position: relative;
-  font-size: 0.94rem;
+  font-size: 0.92rem;
   font-weight: 500;
   color: var(--text-main);
-  padding: 0.4rem 0;
+  position: relative;
   transition: color 0.25s ease;
+  padding: 0.4rem 0;
 }
 
 .nav-link::after {
@@ -137,32 +137,29 @@ button {
   position: absolute;
   bottom: 0;
   left: 0;
-  width: 100%;
+  width: 0%;
   height: 2px;
   background-color: var(--accent-gold);
-  transform: scaleX(0);
-  transform-origin: right;
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  border-radius: 2px;
 }
 
 .nav-link:hover {
-  color: var(--accent-gold-hover);
+  color: #000000;
 }
 
 .nav-link:hover::after {
-  transform: scaleX(1);
-  transform-origin: left;
+  width: 100%;
 }
 
-/* Header CTA Button (Karalee Wellness Style Pill) */
+/* Button Call to Action in Nav */
 .btn-nav-cta {
-  background-color: var(--accent-sage-pastel);
-  color: #1D1C1D;
-  font-weight: 600;
-  padding: 0.65rem 1.4rem;
+  background-color: var(--bg-dark);
+  color: #FFFFFF;
   border-radius: var(--radius-full);
-  border: 1px solid rgba(73, 88, 103, 0.2);
+  padding: 0.6rem 1.35rem;
   font-size: 0.88rem;
+  font-weight: 500;
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
@@ -170,19 +167,17 @@ button {
 }
 
 .btn-nav-cta:hover {
-  background-color: #303F4E;
-  color: #FFFFFF;
-  border-color: #303F4E;
+  background-color: #1E293B;
   transform: translateY(-2px);
-  box-shadow: 0 8px 18px rgba(48, 63, 78, 0.2);
+  box-shadow: 0 8px 18px rgba(15, 23, 42, 0.15);
 }
 
-/* Floating WhatsApp Action Bubble */
+/* Floating WhatsApp Button */
 .floating-whatsapp {
   position: fixed;
-  bottom: 24px;
-  right: 24px;
-  z-index: 999;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 9999;
   background-color: #25D366;
   color: #FFFFFF;
   display: flex;
@@ -282,19 +277,37 @@ button {
   border: 1px solid rgba(90, 115, 99, 0.3);
 }
 
-/* Cards & Elevate Effects */
+/* Modern Card with Ambient Glow on Hover */
 .card-hover {
   background: var(--bg-surface);
   border-radius: var(--radius-lg);
   border: 1px solid var(--border-subtle);
   padding: 2.2rem;
-  transition: var(--transition);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.card-hover::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--accent-gold), transparent);
+  opacity: 0;
+  transition: opacity 0.4s ease;
 }
 
 .card-hover:hover {
-  transform: translateY(-5px);
-  box-shadow: var(--shadow-lg);
-  border-color: rgba(197, 168, 128, 0.4);
+  transform: translateY(-6px);
+  box-shadow: 0 20px 40px -15px rgba(15, 23, 42, 0.08), 0 0 25px rgba(197, 168, 128, 0.14);
+  border-color: rgba(197, 168, 128, 0.45);
+}
+
+.card-hover:hover::before {
+  opacity: 1;
 }
 
 /* Accordion */
@@ -356,7 +369,7 @@ button {
 .slogan-banner {
   background-color: var(--accent-sage-pastel);
   color: #1D1C1D;
-  padding: 5rem 0;
+  padding: 5.5rem 0;
   text-align: center;
   position: relative;
   overflow: hidden;
@@ -367,7 +380,7 @@ button {
 /* Smooth Scroll Reveal Animations */
 .reveal-on-scroll {
   opacity: 0;
-  transform: translateY(32px);
+  transform: translateY(28px);
   transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: opacity, transform;
 }
@@ -381,3 +394,18 @@ button {
 .delay-1 { transition-delay: 0.12s; }
 .delay-2 { transition-delay: 0.24s; }
 .delay-3 { transition-delay: 0.36s; }
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .reveal-on-scroll {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  .card-hover:hover {
+    transform: none !important;
+  }
+  .floating-whatsapp {
+    animation: none !important;
+  }
+}
