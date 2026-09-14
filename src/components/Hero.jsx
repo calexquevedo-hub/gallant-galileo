@@ -159,7 +159,7 @@ export default function Hero() {
               <img 
                 src="/images/psicologo.jpg" 
                 alt="Carlos Alexandre Quevedo - Psicólogo CRP 11/24669" 
-                style={{ width: '100%', height: 'auto', display: 'block', objectFit: 'cover' }}
+                style={{ width: '100%', aspectRatio: '896 / 1200', display: 'block', objectFit: 'cover', objectPosition: 'center 30%' }}
               />
               
               {/* Floating Credential Overlay with Counter-Parallax */}
