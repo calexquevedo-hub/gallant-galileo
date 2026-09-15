@@ -175,7 +175,8 @@ button {
 /* Floating WhatsApp Button */
 .floating-whatsapp {
   position: fixed;
-  bottom: 2rem;
+  /* Reserve the lower corner for the hosting badge, including its spacing. */
+  bottom: calc(5rem + env(safe-area-inset-bottom, 0px));
   right: 2rem;
   z-index: 9999;
   background-color: #25D366;
