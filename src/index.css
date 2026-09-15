@@ -409,3 +409,15 @@ button {
     animation: none !important;
   }
 }
+
+/* Keep the portrait secondary to the introduction and appointment action. */
+.hero-section { padding: 3rem 0 4rem; }
+.hero-grid { grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); align-items: center; gap: 3rem; }
+.hero-portrait { max-width: 350px; }
+@media (max-width: 992px) {
+  .hero-grid { grid-template-columns: minmax(0, 1fr); gap: 2.5rem; }
+  .hero-portrait { max-width: 290px; }
+}
+@media (max-width: 600px) {
+  .hero-section { padding: 2rem 0 3rem; }
+}

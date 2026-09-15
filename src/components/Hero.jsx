@@ -36,7 +36,7 @@ export default function Hero() {
   const badgeTranslate = `translate3d(0, ${offsetY * 0.04}px, 0)`;
 
   return (
-    <section className="section reveal-on-scroll" style={{ position: 'relative', overflow: 'hidden', padding: '5.5rem 0 6.5rem 0' }}>
+    <section className="section hero-section reveal-on-scroll" style={{ position: 'relative', overflow: 'hidden' }}>
       
       {/* Dynamic Ambient Glow Parallax */}
       <div 
@@ -57,10 +57,10 @@ export default function Hero() {
       />
 
       <div className="container" style={{ position: 'relative', zIndex: 1 }}>
-        <div className="grid-2" style={{ alignItems: 'center', gap: '4rem' }}>
+        <div className="grid-2 hero-grid">
           
           {/* Text Content */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1.1rem' }}>
             
             {/* Approach Badge */}
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', flexWrap: 'wrap' }}>
@@ -71,13 +71,13 @@ export default function Hero() {
             </div>
 
             {/* Main Headline */}
-            <h1 style={{ fontSize: 'clamp(2.4rem, 4.8vw, 3.6rem)', color: 'var(--text-main)', letterSpacing: '-0.02em', fontWeight: '700', lineHeight: '1.15' }}>
+            <h1 style={{ fontSize: 'clamp(2.2rem, 4vw, 3.25rem)', color: 'var(--text-main)', letterSpacing: '-0.02em', fontWeight: '700', lineHeight: '1.15' }}>
               Psicologia embasada na Análise do Comportamento.
             </h1>
 
             {/* Subheadline */}
             <p style={{ fontSize: '1.15rem', color: 'var(--text-muted)', maxWidth: '560px', lineHeight: '1.75' }}>
-              Atendimento por <strong>Carlos Alexandre Quevedo</strong> (CRP 11/24669). Consultório presencial para <strong>Crianças, Jovens, Adultos, Casais e Idosos</strong> no bairro Aldeota em Fortaleza/CE, além de psicoterapia online (e-PSI).
+              Atendimento com <strong>Carlos Alexandre Quevedo</strong> (CRP 11/24669), presencial na Aldeota, em Fortaleza, e online.
             </p>
 
             {/* Highlights List */}
@@ -143,13 +143,12 @@ export default function Hero() {
             }} />
 
             {/* Frame with Parallax */}
-            <div style={{
+            <div className="hero-portrait" style={{
               position: 'relative',
               borderRadius: 'var(--radius-lg)',
               overflow: 'hidden',
               boxShadow: '0 25px 50px -12px rgba(15, 23, 42, 0.18)',
-              border: '8px solid #FFFFFF',
-              maxWidth: '440px',
+              border: '6px solid #FFFFFF',
               width: '100%',
               transform: imageTranslate,
               transition: 'transform 0.12s cubic-bezier(0, 0, 0.2, 1)',
@@ -159,19 +158,19 @@ export default function Hero() {
               <img 
                 src="/images/psicologo.jpg" 
                 alt="Carlos Alexandre Quevedo - Psicólogo CRP 11/24669" 
-                style={{ width: '100%', aspectRatio: '896 / 1200', display: 'block', objectFit: 'cover', objectPosition: 'center 30%' }}
+                style={{ width: '100%', aspectRatio: '2 / 3', display: 'block', objectFit: 'cover', objectPosition: 'center 30%' }}
               />
               
               {/* Floating Credential Overlay with Counter-Parallax */}
               <div style={{
                 position: 'absolute',
-                bottom: '1.5rem',
-                left: '1.5rem',
-                right: '1.5rem',
+                bottom: '0.75rem',
+                left: '0.75rem',
+                right: '0.75rem',
                 background: 'rgba(15, 23, 42, 0.88)',
                 backdropFilter: 'blur(12px)',
                 WebkitBackdropFilter: 'blur(12px)',
-                padding: '1.1rem 1.35rem',
+                padding: '0.75rem 0.9rem',
                 borderRadius: 'var(--radius-md)',
                 color: '#FFFFFF',
                 border: '1px solid rgba(255, 255, 255, 0.18)',
@@ -179,14 +178,11 @@ export default function Hero() {
                 transform: badgeTranslate,
                 transition: 'transform 0.15s cubic-bezier(0, 0, 0.2, 1)'
               }}>
-                <div style={{ fontSize: '1.12rem', fontFamily: 'var(--font-serif)', fontWeight: '600' }}>
+                <div style={{ fontSize: '1rem', fontFamily: 'var(--font-serif)', fontWeight: '600' }}>
                   Carlos Alexandre Quevedo
                 </div>
                 <div style={{ fontSize: '0.82rem', color: 'rgba(255, 255, 255, 0.85)' }}>
                   Psicólogo • CRP 11/24669
-                </div>
-                <div style={{ fontSize: '0.78rem', color: 'var(--accent-gold)', marginTop: '0.2rem', fontWeight: '500' }}>
-                  Análise do Comportamento • Aldeota, Fortaleza
                 </div>
               </div>
 
