@@ -5,7 +5,7 @@ import { fileURLToPath } from 'node:url';
 import React from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
 import { createServer } from 'vite';
-import { site, audience, sessionSummary, firstSession, topics, faqs, whatsappUrl, emailUrl, mapsUrl } from '../src/data/site.js';
+import { site, audience, serviceSummary, firstSession, topics, faqs, whatsappUrl, emailUrl, mapsUrl } from '../src/data/site.js';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const index = await readFile(new URL('../index.html', import.meta.url), 'utf8');
@@ -25,15 +25,14 @@ before(async () => {
 });
 after(async () => { await server?.close(); });
 
-test('keeps the agreed contact, age and session duration', () => {
+test('keeps the agreed contact, audience and appointment information', () => {
   assert.equal(site.email, 'alexandrequevedo@outlook.com');
   assert.equal(site.whatsappNumber, '5585989234111');
   assert.equal(site.minimumAge, 8);
-  assert.equal(site.sessionMinutes, 50);
-  assert.equal(sessionSummary, 'As sessões individuais e de casal têm duração de 50 minutos.');
+  assert.equal(serviceSummary, 'Atendimento individual e de casal, mediante agendamento.');
   assert.equal(site.availability, 'Atendimento mediante agendamento. Consulte os horários disponíveis.');
   assert.match(audience, /Crianças a partir de 8 anos, adolescentes, adultos, idosos e casais/);
-  assert.ok(html.includes(sessionSummary));
+  assert.ok(html.includes(serviceSummary));
   assert.ok(html.includes(audience));
   assert.ok(html.includes(site.availability));
 });
@@ -193,4 +192,9 @@ test('content is visible by default with focus, anchor offset and reduced-motion
   assert.match(css, /:focus-visible/);
   assert.match(css, /scroll-margin-top/);
   assert.match(css, /prefers-reduced-motion:\s*reduce/);
+});
+
+test('does not publish session duration in content, FAQ or metadata', () => {
+  assert.doesNotMatch(html + index, /\b\d+\s*minutos\b|duração\s+d[ae]s?\s+sess[ãõ][oe]s?|quanto tempo dura cada sessão/i);
+  assert.doesNotMatch(JSON.stringify(faqs), /duração|minutos|tempo dura/i);
 });

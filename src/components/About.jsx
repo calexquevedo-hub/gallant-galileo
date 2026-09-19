@@ -1,6 +1,6 @@
 import React from 'react';
 import { Clock, Users } from 'lucide-react';
-import { site, audience, sessionSummary } from '../data/site';
+import { site, audience, serviceSummary } from '../data/site';
 
 export default function About() {
   return (
@@ -20,7 +20,7 @@ export default function About() {
           <div className="card-hover">
             <Clock size={24} aria-hidden="true" />
             <h3>Como nos encontramos</h3>
-            <p>{sessionSummary}</p>
+            <p>{serviceSummary}</p>
             <p className="small-note">Presencialmente na Aldeota, em Fortaleza, ou online, mediante agendamento.</p>
           </div>
         </div>

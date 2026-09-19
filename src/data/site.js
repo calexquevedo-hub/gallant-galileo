@@ -13,12 +13,11 @@ export const site = Object.freeze({
   locality: 'Aldeota, Fortaleza, CE',
   postalCode: '60160-196',
   minimumAge: 8,
-  sessionMinutes: 50,
   availability: 'Atendimento mediante agendamento. Consulte os horários disponíveis.'
 });
 
 export const audience = 'Crianças a partir de ' + site.minimumAge + ' anos, adolescentes, adultos, idosos e casais';
-export const sessionSummary = 'As sessões individuais e de casal têm duração de ' + site.sessionMinutes + ' minutos.';
+export const serviceSummary = 'Atendimento individual e de casal, mediante agendamento.';
 export const emailUrl = 'mailto:' + site.email;
 export const mapsUrl = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(
   site.clinic + ', ' + site.street + ', ' + site.suite + ', ' + site.building + ', ' + site.locality
@@ -48,11 +47,10 @@ export const topics = [
 ];
 
 export const faqs = [
-  { question: 'Quanto tempo dura cada sessão?', answer: sessionSummary },
   { question: 'Qual é o valor da sessão?', answer: 'Entre em contato pelo WhatsApp para consultar os valores, as formas de pagamento e os horários disponíveis. Essas informações são combinadas antes do agendamento.' },
   { question: 'Com que frequência acontecem as sessões?', answer: 'A frequência é combinada a partir das suas necessidades e da disponibilidade de horários. Esse acordo pode ser revisto ao longo do acompanhamento.' },
   { question: 'Você atende crianças a partir de qual idade?', answer: 'Atendo crianças a partir de ' + site.minimumAge + ' anos. O acompanhamento é adaptado à idade e às necessidades da criança e envolve também os responsáveis. Conversaremos sobre a demanda e o formato mais adequado antes de iniciar.' },
-  { question: 'Como funciona a terapia de casal?', answer: 'O atendimento oferece espaço para escutar os dois integrantes e compreender a relação, suas dificuldades e expectativas. Os objetivos do acompanhamento são construídos em conjunto. Cada sessão tem duração de ' + site.sessionMinutes + ' minutos.' },
+  { question: 'Como funciona a terapia de casal?', answer: 'O atendimento oferece espaço para escutar os dois integrantes e compreender a relação, suas dificuldades e expectativas. Os objetivos do acompanhamento são construídos em conjunto.' },
   { question: 'Como funciona o atendimento online?', answer: 'As sessões acontecem por videochamada, em horário previamente agendado. Você precisará de conexão com a internet e de um local reservado. As orientações de acesso são enviadas após o agendamento, e a adequação dessa modalidade é conversada antes do início.' },
   { question: 'Como a Análise do Comportamento orienta o atendimento?', answer: 'Buscamos compreender como sua história, suas relações e as situações do dia a dia se relacionam com o que você sente, pensa e faz. A partir dessa compreensão, construímos possibilidades de lidar com as dificuldades e com aquilo que é importante para você.' },
   { question: 'Posso solicitar reembolso ao plano de saúde?', answer: 'Converse comigo sobre o comprovante do atendimento e consulte previamente seu plano para conhecer a cobertura e os documentos exigidos. A aprovação e o valor do reembolso dependem das condições do seu contrato com a operadora.' },

@@ -18,12 +18,12 @@ Os testes verificam a renderização HTML, contatos, âncoras, relações de ace
 
 ## Onde atualizar as informações
 
-- `src/data/site.js`: contatos, endereço, idade mínima, duração das sessões, temas e perguntas frequentes.
+- `src/data/site.js`: contatos, endereço, idade mínima, modalidades, temas e perguntas frequentes.
 - `src/components/`: apresentação de cada seção.
 - `src/index.css`: estilos e comportamento responsivo.
 - `index.html`: título, descrição, compartilhamento, dados estruturados e contato sem JavaScript. Ao alterar dados cadastrais, mantenha estes metadados sincronizados.
 
-O contato é direto por WhatsApp ou e-mail. Não há formulário nem serviço de envio de mensagens no site. Os valores e horários são informados antes do agendamento. Não foram incluídos horários fixos, preços ou autorização e-Psi nos metadados.
+O contato é direto por WhatsApp ou e-mail. Não há formulário nem serviço de envio de mensagens no site. Os valores e horários são informados antes do agendamento. Não há divulgação da duração das sessões. Não foram incluídos horários fixos, preços ou autorização e-Psi nos metadados.
 
 ## Antes de publicar
 

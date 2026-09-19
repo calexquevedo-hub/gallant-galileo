@@ -1,6 +1,6 @@
 import React from 'react';
 import { CheckCircle2, ArrowRight, MapPin, Users } from 'lucide-react';
-import { site, audience, sessionSummary, whatsappUrl } from '../data/site';
+import { site, audience, serviceSummary, whatsappUrl } from '../data/site';
 
 export default function Hero() {
   return (
@@ -14,7 +14,7 @@ export default function Hero() {
             <p><strong>{site.fullName}</strong><br />Psicólogo · {site.crp}</p>
             <ul className="hero-highlights">
               <li><CheckCircle2 size={18} aria-hidden="true" /><span>Atendimento fundamentado na Análise do Comportamento.</span></li>
-              <li><CheckCircle2 size={18} aria-hidden="true" /><span>{sessionSummary}</span></li>
+              <li><CheckCircle2 size={18} aria-hidden="true" /><span>{serviceSummary}</span></li>
             </ul>
             <div className="hero-actions">
               <a href={whatsappUrl()} target="_blank" rel="noopener noreferrer" className="btn btn-gold">

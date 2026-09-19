@@ -1,6 +1,6 @@
 import React from 'react';
 import { Video, MapPin, ArrowUpRight, MessageCircle } from 'lucide-react';
-import { site, sessionSummary, whatsappUrl, mapsUrl } from '../data/site';
+import { site, serviceSummary, whatsappUrl, mapsUrl } from '../data/site';
 
 export default function Modalities() {
   return (
@@ -9,7 +9,7 @@ export default function Modalities() {
         <div className="section-heading">
           <span className="badge badge-gold">Presencial e online</span>
           <h2>Atendimento que considera sua rotina.</h2>
-          <p>{sessionSummary}</p>
+          <p>{serviceSummary}</p>
         </div>
         <div className="grid-2">
           <article className="modality-card">
