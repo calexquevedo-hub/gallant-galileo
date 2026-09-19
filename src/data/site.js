@@ -1,0 +1,60 @@
+export const site = Object.freeze({
+  name: 'Alexandre Quevedo',
+  fullName: 'Carlos Alexandre Quevedo',
+  crp: 'CRP 11/24669',
+  email: 'alexandrequevedo@outlook.com',
+  whatsappNumber: '5585989234111',
+  phoneDisplay: '(85) 98923-4111',
+  url: 'https://alexandrequevedo.com.br',
+  clinic: 'Transcender Psicologia',
+  street: 'Av. Dom Luís, 500',
+  suite: 'Sala 818, 8º andar',
+  building: 'Torre do Shopping Aldeota',
+  locality: 'Aldeota, Fortaleza, CE',
+  postalCode: '60160-196',
+  minimumAge: 8,
+  sessionMinutes: 50,
+  availability: 'Atendimento mediante agendamento. Consulte os horários disponíveis.'
+});
+
+export const audience = 'Crianças a partir de ' + site.minimumAge + ' anos, adolescentes, adultos, idosos e casais';
+export const sessionSummary = 'As sessões individuais e de casal têm duração de ' + site.sessionMinutes + ' minutos.';
+export const emailUrl = 'mailto:' + site.email;
+export const mapsUrl = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(
+  site.clinic + ', ' + site.street + ', ' + site.suite + ', ' + site.building + ', ' + site.locality
+);
+
+const messages = {
+  general: 'Olá, Alexandre! Encontrei seu site e gostaria de consultar valores e horários para atendimento psicológico.',
+  online: 'Olá, Alexandre! Gostaria de consultar valores e horários para atendimento psicológico online.',
+  presencial: 'Olá, Alexandre! Gostaria de consultar valores e horários para atendimento presencial na Transcender Psicologia.'
+};
+
+export function whatsappUrl(modality = 'general') {
+  return 'https://wa.me/' + site.whatsappNumber + '?text=' + encodeURIComponent(messages[modality] || messages.general);
+}
+
+export const firstSession = [
+  'O primeiro encontro é um momento para nos conhecermos, conversar sobre o que motivou sua busca por atendimento e começar a construir uma relação de confiança. Você poderá compartilhar suas dificuldades e expectativas no seu ritmo, sem precisar chegar com tudo organizado ou saber por onde começar.',
+  'Também explicarei como trabalho, esclareceremos suas dúvidas e combinaremos os próximos passos do acompanhamento.'
+];
+
+export const topics = [
+  { title: 'Ansiedade', description: 'Preocupações, medos e situações que têm gerado desconforto ou dificultado o seu dia a dia.' },
+  { title: 'Luto', description: 'Um espaço para falar sobre perdas, saudade e as mudanças que elas trazem, respeitando a sua história.' },
+  { title: 'Relacionamentos', description: 'Dificuldades de comunicação, conflitos, limites e convivência, em sessões individuais ou de casal.' },
+  { title: 'Sobrecarga no trabalho', description: 'Exigências, cansaço e dificuldades para conciliar o trabalho com outras áreas da vida.' },
+  { title: 'Questões de sexualidade', description: 'Escuta respeitosa sobre desejos, experiências, dúvidas e dificuldades relacionadas à sexualidade, sem julgamentos.' }
+];
+
+export const faqs = [
+  { question: 'Quanto tempo dura cada sessão?', answer: sessionSummary },
+  { question: 'Qual é o valor da sessão?', answer: 'Entre em contato pelo WhatsApp para consultar os valores, as formas de pagamento e os horários disponíveis. Essas informações são combinadas antes do agendamento.' },
+  { question: 'Com que frequência acontecem as sessões?', answer: 'A frequência é combinada a partir das suas necessidades e da disponibilidade de horários. Esse acordo pode ser revisto ao longo do acompanhamento.' },
+  { question: 'Você atende crianças a partir de qual idade?', answer: 'Atendo crianças a partir de ' + site.minimumAge + ' anos. O acompanhamento é adaptado à idade e às necessidades da criança e envolve também os responsáveis. Conversaremos sobre a demanda e o formato mais adequado antes de iniciar.' },
+  { question: 'Como funciona a terapia de casal?', answer: 'O atendimento oferece espaço para escutar os dois integrantes e compreender a relação, suas dificuldades e expectativas. Os objetivos do acompanhamento são construídos em conjunto. Cada sessão tem duração de ' + site.sessionMinutes + ' minutos.' },
+  { question: 'Como funciona o atendimento online?', answer: 'As sessões acontecem por videochamada, em horário previamente agendado. Você precisará de conexão com a internet e de um local reservado. As orientações de acesso são enviadas após o agendamento, e a adequação dessa modalidade é conversada antes do início.' },
+  { question: 'Como a Análise do Comportamento orienta o atendimento?', answer: 'Buscamos compreender como sua história, suas relações e as situações do dia a dia se relacionam com o que você sente, pensa e faz. A partir dessa compreensão, construímos possibilidades de lidar com as dificuldades e com aquilo que é importante para você.' },
+  { question: 'Posso solicitar reembolso ao plano de saúde?', answer: 'Converse comigo sobre o comprovante do atendimento e consulte previamente seu plano para conhecer a cobertura e os documentos exigidos. A aprovação e o valor do reembolso dependem das condições do seu contrato com a operadora.' },
+  { question: 'O WhatsApp oferece atendimento de emergência?', answer: 'Não. O WhatsApp e o e-mail são canais de contato para informações e agendamento, sem resposta imediata garantida. Em uma emergência ou risco à vida, acione o SAMU pelo 192 ou procure um pronto-socorro. Para apoio emocional, o CVV atende gratuitamente pelo 188, 24 horas por dia; ele não substitui o atendimento de emergência.' }
+];
