@@ -24,7 +24,7 @@ export default function TriageModal({ isOpen, initialModality = '', onClose }) {
       document.body.style.overflow = previousOverflow;
       document.removeEventListener('keydown', onKeyDown);
     };
-  }, [isOpen, initialModality, onClose]);
+  }, [isOpen, initialModality]);
 
   if (!isOpen) return null;
 
