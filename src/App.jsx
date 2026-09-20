@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+
+// Public release: restore the first-session path as a dedicated section.
 import Header from './components/Header';
 import Hero from './components/Hero';
 import About from './components/About';
