@@ -1,0 +1,108 @@
+---
+import '../index.css';
+import { site, offices } from '../data/site';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = 'Alexandre Quevedo | Psicólogo em Fortaleza e online',
+  description = 'Psicoterapia com Carlos Alexandre Quevedo, CRP 11/24669. Atendimento presencial na Aldeota e na Maraponga, em Fortaleza, e online, mediante agendamento.'
+} = Astro.props;
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfessionalService',
+  '@id': `${site.url}/#psicologo`,
+  name: 'Alexandre Quevedo, Psicólogo',
+  alternateName: site.fullName,
+  description: 'Atendimento psicológico presencial na Aldeota e na Maraponga, em Fortaleza, e online. Atendimento mediante agendamento.',
+  image: `${site.url}/images/psicologo.jpg`,
+  logo: `${site.url}/images/logo-tree-forest.png`,
+  url: `${site.url}/`,
+  telephone: `+${site.whatsappNumber}`,
+  email: site.email,
+  identifier: site.crp,
+  location: [
+    {
+      '@type': 'Place',
+      name: 'Transcender Psicologia · Aldeota',
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: 'Av. Dom Luís, 500, sala 818, 8º andar, Torre do Shopping Aldeota, Aldeota',
+        addressLocality: 'Fortaleza',
+        addressRegion: 'CE',
+        postalCode: offices.aldeota.postalCode,
+        addressCountry: 'BR'
+      },
+      openingHoursSpecification: {
+        '@type': 'OpeningHoursSpecification',
+        dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+        opens: '18:00',
+        closes: '21:00'
+      }
+    },
+    {
+      '@type': 'Place',
+      name: 'MultiMais Clínica · Maraponga',
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: 'Rua Luxemburgo, 148, Maraponga',
+        addressLocality: 'Fortaleza',
+        addressRegion: 'CE',
+        postalCode: offices.maraponga.postalCode,
+        addressCountry: 'BR'
+      },
+      openingHoursSpecification: {
+        '@type': 'OpeningHoursSpecification',
+        dayOfWeek: 'Saturday',
+        opens: '08:00',
+        closes: '12:00'
+      }
+    }
+  ]
+};
+---
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" href="/images/logo-tree-forest.png" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="theme-color" content="#142336" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="author" content={site.fullName} />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href={`${site.url}/`} />
+    <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="pt_BR" />
+    <meta property="og:url" content={`${site.url}/`} />
+    <meta property="og:site_name" content="Alexandre Quevedo | Psicólogo" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content="Atendimento presencial na Aldeota e na Maraponga, em Fortaleza, e online. Crianças a partir de 8 anos, adolescentes, adultos, idosos e casais." />
+    <meta property="og:image" content={`${site.url}/images/psicologo.jpg`} />
+    <meta property="og:image:alt" content="Carlos Alexandre Quevedo, psicólogo, em retrato profissional" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content="Psicoterapia presencial em Fortaleza e online. Atendimento individual e de casal, mediante agendamento. CRP 11/24669." />
+    <meta name="twitter:image" content={`${site.url}/images/psicologo.jpg`} />
+    <meta name="twitter:image:alt" content="Carlos Alexandre Quevedo, psicólogo, em retrato profissional" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <script type="application/ld+json" set:html={JSON.stringify(structuredData)}></script>
+  </head>
+  <body>
+    <slot />
+    <noscript>
+      <p>Este site funciona melhor com JavaScript habilitado. Você também pode entrar em contato pelo WhatsApp para iniciar uma conversa.</p>
+    </noscript>
+  </body>
+</html>

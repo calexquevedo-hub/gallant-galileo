@@ -1,0 +1,27 @@
+---
+import { Brain, Briefcase, Compass, Heart, Users } from 'lucide-react';
+import { audience, topics } from '../data/site';
+
+const icons = [Brain, Heart, Users, Briefcase, Compass];
+---
+<section id="atendimento" class="section reveal-on-scroll">
+  <div class="container">
+    <div class="section-heading">
+      <span class="eyebrow eyebrow-sage">Atendimento psicológico</span>
+      <h2>Para quem é este atendimento?</h2>
+      <p>{audience}. Cada pessoa chega com uma história, e os temas abaixo são alguns dos que podem fazer parte da busca por acompanhamento.</p>
+    </div>
+    <div class="grid-3 topic-grid">
+      {topics.map((topic, index) => {
+        const Icon = icons[index];
+        return (
+          <article class="topic-card">
+            <div class="topic-icon"><Icon size={23} aria-hidden="true" /></div>
+            <h3>{topic.title}</h3>
+            <p>{topic.description}</p>
+          </article>
+        );
+      })}
+    </div>
+  </div>
+</section>

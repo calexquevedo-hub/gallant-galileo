@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { ArrowRight, Menu, X } from 'lucide-react';
 import { site } from '../data/site';
 
@@ -8,12 +8,12 @@ const navigation = [
   { href: '#atendimento', label: 'Atendimento' },
   { href: '#locais', label: 'Onde atendo' },
   { href: '#duvidas', label: 'Dúvidas' }
-];
+] as const;
 
-export default function Header({ onOpenTriage }) {
+export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const toggleRef = useRef(null);
+  const toggleRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -24,7 +24,7 @@ export default function Header({ onOpenTriage }) {
 
   useEffect(() => {
     if (!mobileMenuOpen) return undefined;
-    const handleEscape = (event) => {
+    const handleEscape = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
         setMobileMenuOpen(false);
         toggleRef.current?.focus();
@@ -36,7 +36,7 @@ export default function Header({ onOpenTriage }) {
 
   const startTriage = () => {
     setMobileMenuOpen(false);
-    onOpenTriage?.();
+    window.dispatchEvent(new Event('open-triage'));
   };
 
   return (
@@ -44,8 +44,7 @@ export default function Header({ onOpenTriage }) {
       <a className="skip-link" href="#conteudo">Pular para o conteúdo</a>
       <header className={'glass-header' + (scrolled ? ' scrolled' : '')}>
         <div className="container header-inner">
-          <a className="brand" href="#inicio" onClick={() => setMobileMenuOpen(false)}
-            aria-label={site.name + ', início'}>
+          <a className="brand" href="#inicio" onClick={() => setMobileMenuOpen(false)} aria-label={`${site.name}, início`}>
             <img src="/images/logo-tree-forest.png" alt="" width="48" height="48" />
             <span className="brand-copy">
               <span className="brand-name">{site.name}</span>
@@ -54,27 +53,21 @@ export default function Header({ onOpenTriage }) {
           </a>
 
           <nav className="desktop-nav" aria-label="Navegação principal">
-            {navigation.map((item) => (
-              <a key={item.href} href={item.href} className="nav-link">{item.label}</a>
-            ))}
+            {navigation.map((item) => <a key={item.href} href={item.href} className="nav-link">{item.label}</a>)}
           </nav>
 
           <div className="header-actions">
             <button type="button" className="btn-nav-cta" onClick={startTriage}>
               <span>Iniciar triagem</span><ArrowRight size={16} aria-hidden="true" />
             </button>
-            <button ref={toggleRef} type="button" className="mobile-toggle"
-              onClick={() => setMobileMenuOpen((open) => !open)}
-              aria-label={mobileMenuOpen ? 'Fechar menu' : 'Abrir menu'}
-              aria-expanded={mobileMenuOpen} aria-controls="menu-mobile">
+            <button ref={toggleRef} type="button" className="mobile-toggle" onClick={() => setMobileMenuOpen((open) => !open)}
+              aria-label={mobileMenuOpen ? 'Fechar menu' : 'Abrir menu'} aria-expanded={mobileMenuOpen} aria-controls="menu-mobile">
               {mobileMenuOpen ? <X size={24} aria-hidden="true" /> : <Menu size={24} aria-hidden="true" />}
             </button>
           </div>
         </div>
         <nav id="menu-mobile" className="mobile-nav" aria-label="Navegação no celular" hidden={!mobileMenuOpen}>
-          {navigation.map((item) => (
-            <a key={item.href} href={item.href} onClick={() => setMobileMenuOpen(false)}>{item.label}</a>
-          ))}
+          {navigation.map((item) => <a key={item.href} href={item.href} onClick={() => setMobileMenuOpen(false)}>{item.label}</a>)}
         </nav>
       </header>
     </>

@@ -1,0 +1,23 @@
+---
+import { firstSession } from '../data/site';
+
+const firstSessionSteps = [
+  'Conhecer o motivo que trouxe você até aqui.',
+  'Explicar como trabalho e responder às suas dúvidas.',
+  'Combinar os próximos passos do acompanhamento.'
+];
+---
+<section id="primeiro-encontro" class="section reveal-on-scroll first-session-section">
+  <div class="container first-session-layout">
+    <div class="first-session-copy">
+      <span class="eyebrow eyebrow-sage">Primeiro encontro</span>
+      <h2>Como começamos?</h2>
+      {firstSession.map((paragraph) => <p>{paragraph}</p>)}
+    </div>
+    <ol class="first-session-steps">
+      {firstSessionSteps.map((step, index) => (
+        <li><span>{String(index + 1).padStart(2, '0')}</span><strong>{step}</strong></li>
+      ))}
+    </ol>
+  </div>
+</section>

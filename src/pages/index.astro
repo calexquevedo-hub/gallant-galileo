@@ -1,0 +1,36 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import Header from '../components/Header';
+import Hero from '../components/Hero.astro';
+import About from '../components/About.astro';
+import FirstSession from '../components/FirstSession.astro';
+import Specialties from '../components/Specialties.astro';
+import Modalities from '../components/Modalities.astro';
+import FAQ from '../components/FAQ';
+import Footer from '../components/Footer.astro';
+import FloatingWhatsApp from '../components/FloatingWhatsApp';
+import TriageModal from '../components/TriageModal';
+import PrivacyModal from '../components/PrivacyModal';
+import PrivacyTrigger from '../components/PrivacyTrigger';
+---
+
+<SiteLayout>
+  <Header client:load />
+
+  <main id="conteudo" tabindex="-1">
+    <Hero />
+    <About />
+    <FirstSession />
+    <Specialties />
+    <Modalities />
+    <FAQ client:load />
+  </main>
+
+  <Footer>
+    <PrivacyTrigger slot="privacy" client:load />
+  </Footer>
+
+  <FloatingWhatsApp client:load />
+  <TriageModal client:load />
+  <PrivacyModal client:load />
+</SiteLayout>

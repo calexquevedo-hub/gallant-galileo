@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { ChevronDown, HelpCircle } from 'lucide-react';
 import { faqs } from '../data/site';
 
 export default function FAQ() {
-  const [openIndex, setOpenIndex] = useState(0);
+  const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
     <section id="duvidas" className="section reveal-on-scroll surface-section">
@@ -20,15 +20,15 @@ export default function FAQ() {
               return (
                 <div key={faq.question} className="accordion-item">
                   <h3>
-                    <button type="button" id={'faq-question-' + index} className="accordion-header"
-                      onClick={() => setOpenIndex(isOpen ? null : index)}
-                      aria-expanded={isOpen} aria-controls={'faq-answer-' + index}>
+                    <button type="button" id={`faq-question-${index}`} className="accordion-header"
+                      onClick={() => setOpenIndex(isOpen ? null : index)} aria-expanded={isOpen} aria-controls={`faq-answer-${index}`}>
                       <span className="faq-question"><HelpCircle size={18} aria-hidden="true" />{faq.question}</span>
                       <ChevronDown size={20} aria-hidden="true" className={isOpen ? 'faq-chevron is-open' : 'faq-chevron'} />
                     </button>
                   </h3>
-                  <div id={'faq-answer-' + index} role="region" aria-labelledby={'faq-question-' + index}
-                    className="accordion-body" hidden={!isOpen}>{faq.answer}</div>
+                  <div id={`faq-answer-${index}`} role="region" aria-labelledby={`faq-question-${index}`} className="accordion-body" hidden={!isOpen}>
+                    {faq.answer}
+                  </div>
                 </div>
               );
             })}

@@ -1,6 +1,6 @@
 # Site de Alexandre Quevedo
 
-Site institucional em React e Vite. A configuração existente de hospedagem está em `netlify.toml`; a saída de produção é `dist/`.
+Site institucional de Carlos Alexandre Quevedo, Psicólogo, construído com Astro, TypeScript e React para as partes interativas.
 
 ## Desenvolvimento e verificações
 
@@ -9,26 +9,29 @@ Use uma versão LTS mantida do Node.js.
 ```sh
 npm ci
 npm run dev
+npm run check
 npm test
 npm run build
 npm run preview
 ```
 
-Os testes verificam a renderização HTML, contatos, âncoras, relações de acessibilidade, metadados e contraste das cores dos botões. Não substituem revisão visual e testes de interação em navegador, especialmente no celular.
+O conteúdo público fica nos componentes Astro e os comportamentos interativos são ilhas React em TypeScript. A configuração de hospedagem continua em `netlify.toml`, com saída de produção em `dist/`.
 
 ## Onde atualizar as informações
 
-- `src/data/site.js`: contatos, consultórios, horários presenciais, idade mínima, modalidades, temas e perguntas frequentes.
-- `src/components/`: apresentação de cada seção.
+- `src/data/site.ts`: dados profissionais, consultórios, horários, modalidades, temas e dúvidas frequentes.
+- `src/components/`: seções visuais e componentes interativos.
+- `src/layouts/SiteLayout.astro`: metadados, dados estruturados e estrutura HTML da página.
 - `src/index.css`: estilos e comportamento responsivo.
-- `index.html`: título, descrição, compartilhamento, dados estruturados e contato sem JavaScript. Ao alterar dados cadastrais, mantenha estes metadados sincronizados.
+- `public/images/`: logotipos e retrato profissional.
 
-O contato é direto por WhatsApp ou e-mail. Não há formulário nem serviço de envio de mensagens no site. Os valores e horários são informados antes do agendamento. Não há divulgação da duração das sessões. O atendimento presencial ocorre na Aldeota de segunda a sexta-feira, das 18h às 21h, e na Maraponga aos sábados, das 8h às 12h, sempre mediante agendamento. Os dois locais e horários constam também nos dados estruturados. O horário online continua sujeito a consulta. Não foram incluídos preços ou autorização e-Psi nos metadados.
+O site mantém dois pontos de entrada para a triagem: o botão do menu superior e o botão fixo no canto inferior direito. A jornada de triagem continua antes da abertura do WhatsApp. Não há formulário de contato nem fotos dos consultórios.
+
+Os atendimentos presenciais ocorrem na Aldeota, de segunda a sexta-feira, das 18h às 21h, e na Maraponga, aos sábados, das 8h às 12h, sempre mediante agendamento. O atendimento online permanece sujeito a consulta.
 
 ## Antes de publicar
 
 - Revisar o menu no celular, o FAQ, os links de WhatsApp, e-mail e localização.
 - Confirmar a apresentação da marca e da foto pessoal nos tamanhos de tela usados pelo público.
-- Nenhuma foto de consultório é exibida ou mantida nos arquivos públicos do site.
-- Se for necessário publicar uma política de privacidade, levantar antes os serviços efetivamente ativos na hospedagem, analytics, cookies e canais de contato. O texto de sigilo clínico não substitui uma política de privacidade do site.
-- Conferir qual branch a hospedagem utiliza antes de integrar alterações. Abrir uma revisão no GitHub não equivale a publicar o site.
+- Conferir os horários e endereços nos dados da página e nos dados estruturados.
+- Se for necessário alterar a política de privacidade, conferir antes os serviços efetivamente ativos na hospedagem, analytics, cookies e canais de contato.
