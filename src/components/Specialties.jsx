@@ -1,18 +1,25 @@
 import React from 'react';
-import { Brain, Heart, Users, Briefcase, Compass } from 'lucide-react';
-import { topics } from '../data/site';
+import { ArrowRight, Brain, Briefcase, Compass, Heart, Users } from 'lucide-react';
+import { audience, topics } from '../data/site';
 
 const icons = [Brain, Heart, Users, Briefcase, Compass];
 
-export default function Specialties() {
+export default function Specialties({ onOpenTriage }) {
   return (
-    <section id="atuacao" className="section reveal-on-scroll">
+    <section id="atendimento" className="section reveal-on-scroll">
       <div className="container">
         <div className="section-heading">
           <span className="badge badge-sage">Atendimento psicológico</span>
-          <h2>Questões que podemos trabalhar na terapia.</h2>
-          <p>Cada pessoa chega com uma história. Estes são alguns dos temas que fazem parte da minha atuação.</p>
+          <h2>Para quem é este atendimento?</h2>
+          <p>{audience}. Cada pessoa chega com uma história, e os temas abaixo são alguns dos que fazem parte da minha atuação.</p>
         </div>
+
+        <div className="approach-strip" aria-label="Como funciona o atendimento">
+          <div><span>Abordagem</span><strong>Análise do Comportamento</strong></div>
+          <div><span>Formato</span><strong>Individual e de casal</strong></div>
+          <div><span>Agendamento</span><strong>Presencial ou online</strong></div>
+        </div>
+
         <div className="grid-3 topic-grid">
           {topics.map((topic, index) => {
             const Icon = icons[index];
@@ -27,7 +34,9 @@ export default function Specialties() {
           <div className="topic-invitation">
             <h3>Não sabe por onde começar?</h3>
             <p>Você não precisa ter tudo definido para buscar atendimento.</p>
-            <a href="#primeiro-encontro" className="text-link">Conheça o primeiro encontro</a>
+            <button type="button" className="text-link button-link" onClick={() => onOpenTriage?.()}>
+              Iniciar triagem rápida <ArrowRight size={16} aria-hidden="true" />
+            </button>
           </div>
         </div>
       </div>
