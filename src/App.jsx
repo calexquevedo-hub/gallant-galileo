@@ -8,10 +8,12 @@ import FAQ from './components/FAQ';
 import Footer from './components/Footer';
 import FloatingWhatsApp from './components/FloatingWhatsApp';
 import TriageModal from './components/TriageModal';
+import PrivacyModal from './components/PrivacyModal';
 
 export default function App() {
   const [triageOpen, setTriageOpen] = useState(false);
   const [triageModality, setTriageModality] = useState('');
+  const [privacyOpen, setPrivacyOpen] = useState(false);
 
   useEffect(() => {
     if (!('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
@@ -53,15 +55,16 @@ export default function App() {
     <div className="site-shell">
       <Header onOpenTriage={() => openTriage()} />
       <main id="conteudo" tabIndex={-1}>
-        <Hero onOpenTriage={() => openTriage()} />
+        <Hero />
         <About />
-        <Specialties onOpenTriage={() => openTriage()} />
-        <Modalities onOpenTriage={openTriage} />
-        <FAQ onOpenTriage={() => openTriage()} />
+        <Specialties />
+        <Modalities />
+        <FAQ />
       </main>
-      <Footer onOpenTriage={() => openTriage()} />
+      <Footer onOpenPrivacy={() => setPrivacyOpen(true)} />
       <FloatingWhatsApp onOpenTriage={() => openTriage()} />
       <TriageModal isOpen={triageOpen} initialModality={triageModality} onClose={closeTriage} />
+      <PrivacyModal isOpen={privacyOpen} onClose={() => setPrivacyOpen(false)} />
     </div>
   );
 }

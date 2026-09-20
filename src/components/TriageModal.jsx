@@ -116,3 +116,4 @@ export default function TriageModal({ isOpen, initialModality = '', onClose }) {
     </div>
   );
 }
+

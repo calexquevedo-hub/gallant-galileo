@@ -74,7 +74,6 @@ export default function Header({ onOpenTriage }) {
           {navigation.map((item) => (
             <a key={item.href} href={item.href} onClick={() => setMobileMenuOpen(false)}>{item.label}</a>
           ))}
-          <button type="button" onClick={startTriage} className="mobile-contact-link">Iniciar triagem rápida</button>
         </nav>
       </header>
     </>

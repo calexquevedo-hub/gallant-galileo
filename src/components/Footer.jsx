@@ -1,43 +1,21 @@
 import React from 'react';
-import { ArrowRight } from 'lucide-react';
-import { site, offices, emailUrl } from '../data/site';
+import { site } from '../data/site';
 
-function FooterOffice({ officeKey }) {
-  const office = offices[officeKey];
-  return (
-    <div className="footer-office">
-      <strong>{office.clinic} · {office.district}</strong>
-      <span>{office.hours}</span>
-      <a href="#locais">Ver endereço e como chegar</a>
-    </div>
-  );
-}
-
-export default function Footer({ onOpenTriage }) {
+export default function Footer({ onOpenPrivacy }) {
   return (
     <footer className="site-footer">
       <div className="container">
         <div className="footer-grid">
           <div>
             <div className="brand footer-brand">
-              <img src="/images/logo-tree-white.png" alt="" width="48" height="48" loading="lazy" />
+              <img src="/images/logo-tree-white.png" alt="" width="42" height="42" loading="lazy" />
               <span className="brand-copy">
                 <span className="brand-name">{site.name}</span>
                 <span className="brand-registration">{site.profession}</span>
               </span>
             </div>
-            <p>{site.fullName}<br />{site.profession} · {site.crp}</p>
-            <p>Atendimento presencial na Aldeota e na Maraponga, em Fortaleza, além do atendimento online.</p>
-            <button type="button" className="btn btn-gold footer-cta" onClick={() => onOpenTriage?.()}>
-              Iniciar triagem <ArrowRight size={16} aria-hidden="true" />
-            </button>
-            <a className="email-link" href={emailUrl}>{site.email}</a>
-          </div>
-
-          <div>
-            <h3>Onde atendo</h3>
-            <FooterOffice officeKey="aldeota" />
-            <FooterOffice officeKey="maraponga" />
+            <p><strong>{site.fullName}</strong><br />{site.profession} · {site.crp}</p>
+            <p>Atendimento presencial em Fortaleza e online, mediante agendamento.</p>
           </div>
 
           <div className="footer-support">
@@ -50,8 +28,7 @@ export default function Footer({ onOpenTriage }) {
 
         <div className="footer-bottom">
           <span>© {new Date().getFullYear()} {site.fullName} · {site.crp}</span>
-          <a href="#duvidas">Sigilo e cuidado no atendimento</a>
-          <a href={emailUrl}>Dúvidas sobre privacidade? Entre em contato.</a>
+          <button type="button" className="footer-privacy-link" onClick={() => onOpenPrivacy?.()}>Sigilo e privacidade</button>
         </div>
       </div>
     </footer>

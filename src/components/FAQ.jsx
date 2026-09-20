@@ -1,8 +1,14 @@
 import React, { useState } from 'react';
-import { ChevronDown, HelpCircle, Mail } from 'lucide-react';
-import { emailUrl, faqs, firstSession, site } from '../data/site';
+import { ChevronDown, HelpCircle } from 'lucide-react';
+import { faqs, firstSession } from '../data/site';
 
-export default function FAQ({ onOpenTriage }) {
+const firstSessionSteps = [
+  'Conhecer o motivo que trouxe você até aqui.',
+  'Explicar como trabalho e responder às suas dúvidas.',
+  'Combinar os próximos passos do acompanhamento.'
+];
+
+export default function FAQ() {
   const [openIndex, setOpenIndex] = useState(0);
 
   return (
@@ -10,14 +16,22 @@ export default function FAQ({ onOpenTriage }) {
       <div className="container">
         <div className="first-session-layout">
           <div className="first-session-copy">
-            <span className="badge badge-sage">Primeiro encontro</span>
+            <span className="eyebrow eyebrow-sage">Primeiro encontro</span>
             <h2>Como começamos?</h2>
             {firstSession.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+            <ol className="first-session-steps">
+              {firstSessionSteps.map((step, index) => (
+                <li key={step}>
+                  <span>{String(index + 1).padStart(2, '0')}</span>
+                  <strong>{step}</strong>
+                </li>
+              ))}
+            </ol>
           </div>
 
           <div className="faq-panel">
             <div className="section-heading section-heading-left">
-              <span className="badge badge-gold">Dúvidas frequentes</span>
+              <span className="eyebrow eyebrow-gold">Dúvidas frequentes</span>
               <h2>Antes de agendar</h2>
             </div>
             <div className="faq-list">
@@ -39,20 +53,6 @@ export default function FAQ({ onOpenTriage }) {
                 );
               })}
             </div>
-          </div>
-        </div>
-
-        <div className="triage-callout">
-          <div>
-            <span className="badge badge-gold">Próximo passo</span>
-            <h3>Você não precisa ter tudo definido para entrar em contato.</h3>
-            <p>A triagem inicial é uma conversa breve para entender sua busca e indicar os próximos passos.</p>
-          </div>
-          <div className="triage-callout-actions">
-            <button type="button" className="btn btn-gold" onClick={() => onOpenTriage?.()}>
-              Iniciar triagem rápida
-            </button>
-            <a className="text-link" href={emailUrl}><Mail size={17} aria-hidden="true" />{site.email}</a>
           </div>
         </div>
       </div>

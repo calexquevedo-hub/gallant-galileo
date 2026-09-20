@@ -29,6 +29,7 @@ let server;
 let html;
 let triageHtml;
 let triageSource;
+let privacyHtml;
 
 before(async () => {
   server = await createServer({
@@ -39,11 +40,16 @@ before(async () => {
   });
   const appModule = await server.ssrLoadModule('/src/App.jsx');
   const triageModule = await server.ssrLoadModule('/src/components/TriageModal.jsx');
+  const privacyModule = await server.ssrLoadModule('/src/components/PrivacyModal.jsx');
   html = renderToStaticMarkup(React.createElement(appModule.default));
   triageSource = triageModule.default.toString();
   triageHtml = renderToStaticMarkup(React.createElement(triageModule.default, {
     isOpen: true,
     initialModality: 'Presencial na Aldeota',
+    onClose: () => {}
+  }));
+  privacyHtml = renderToStaticMarkup(React.createElement(privacyModule.default, {
+    isOpen: true,
     onClose: () => {}
   }));
 });
@@ -83,7 +89,10 @@ test('usa uma navegação curta, sem seções repetidas', () => {
   assert.match(html, /href="#inicio"[^>]*aria-label="Alexandre Quevedo, início"/);
   assert.doesNotMatch(html, /id="(?:atuacao|modalidades|faq|primeiro-encontro|cuidado|contato)"/);
   assert.equal([...html.matchAll(/<h1\b/g)].length, 1);
-  assert.match(html, /<h1>Psicólogo em Fortaleza e online\.<\/h1>/);
+  assert.match(html, /<h1>Um espaço para compreender o que você vive\.<\/h1>/);
+  assert.match(html, /hero-eyebrow">Psicólogo em Fortaleza e online<\/span>/);
+  assert.equal((html.match(/>Iniciar triagem<\/span>/g) || []).length, 2);
+  assert.doesNotMatch(html, /Conheça meu trabalho|Iniciar triagem na|Iniciar triagem online|Não sabe por onde começar|Próximo passo/);
 });
 
 test('mantém a jornada de triagem em três etapas e termina no WhatsApp', () => {
@@ -107,7 +116,7 @@ test('mantém a jornada de triagem em três etapas e termina no WhatsApp', () =>
   assert.match(triageSource, /Como posso chamar você/);
   assert.match(triageSource, /Continuar no WhatsApp/);
   assert.match(triageSource, /Será usado apenas para iniciar o contato pelo WhatsApp/);
-  assert.match(html, /Iniciar triagem rápida/);
+  assert.match(html, /Iniciar triagem/);
   assert.match(html, /aria-label="Iniciar triagem rápida pelo WhatsApp"/);
 });
 
@@ -153,11 +162,11 @@ test('FAQ e imagem mantêm acessibilidade básica', () => {
   const images = [...html.matchAll(/<img\s[^>]*>/g)];
   assert.equal(images.length, 3);
   for (const image of images) assert.match(image[0], /\salt="[^"]*"/);
-  assert.match(html, /src="\/images\/psicologo\.jpg"[^>]*fetchpriority="high"/);
+  assert.match(html, /src="\/images\/psicologo\.jpg"[^>]*loading="lazy"/);
   assert.doesNotMatch(html, /consultorio(?:-aldeota)?\.(?:jpg|png|webp)/i);
 });
 
-test('mapas, e-mail e dados estruturados continuam corretos', () => {
+test('mapas, privacidade e dados estruturados continuam corretos', () => {
   const hrefs = [...html.matchAll(/href="([^"]+)"/g)].map((match) => match[1].replaceAll('&amp;', '&'));
   const mapLinks = hrefs.filter((href) => href.startsWith('https://www.google.com/maps/'));
   assert.equal(mapLinks.length, 2);
@@ -170,9 +179,9 @@ test('mapas, e-mail e dados estruturados continuam corretos', () => {
       assert.ok(mapQuery.includes(part));
     }
   }
-  const emailLinks = hrefs.filter((href) => href.startsWith('mailto:'));
-  assert.ok(emailLinks.length >= 2);
-  for (const href of emailLinks) assert.equal(href, emailUrl);
+  assert.equal(hrefs.filter((href) => href.startsWith('mailto:')).length, 0);
+  assert.match(privacyHtml, new RegExp('mailto:' + site.email.replace('.', '\\.') ));
+  assert.match(privacyHtml, /Lei Geral de Proteção de Dados Pessoais/);
 
   const json = index.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)?.[1];
   const data = JSON.parse(json);
