@@ -28,6 +28,7 @@ const sitemap = await readFile(new URL('../public/sitemap.xml', import.meta.url)
 let server;
 let html;
 let triageHtml;
+let triageSource;
 
 before(async () => {
   server = await createServer({
@@ -39,6 +40,7 @@ before(async () => {
   const appModule = await server.ssrLoadModule('/src/App.jsx');
   const triageModule = await server.ssrLoadModule('/src/components/TriageModal.jsx');
   html = renderToStaticMarkup(React.createElement(appModule.default));
+  triageSource = triageModule.default.toString();
   triageHtml = renderToStaticMarkup(React.createElement(triageModule.default, {
     isOpen: true,
     initialModality: 'Presencial na Aldeota',
@@ -103,8 +105,8 @@ test('mantém a jornada de triagem em três etapas e termina no WhatsApp', () =>
   assert.match(triageHtml, /O que motivou seu contato\?/);
   assert.match(triageHtml, /Qual modalidade você procura\?/);
   assert.match(triageHtml, /Como posso chamar você\?/);
-  assert.match(triageHtml, /Continuar no WhatsApp/);
-  assert.match(triageHtml, /Será usado apenas para iniciar o contato pelo WhatsApp/);
+  assert.match(triageSource, /Continuar no WhatsApp/);
+  assert.match(triageSource, /Será usado apenas para iniciar o contato pelo WhatsApp/);
   assert.match(html, /Iniciar triagem rápida/);
   assert.match(html, /aria-label="Iniciar triagem rápida pelo WhatsApp"/);
 });
