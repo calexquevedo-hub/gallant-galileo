@@ -80,6 +80,7 @@ test('mantém identidade, contatos e locais confirmados', () => {
 test('usa uma navegação curta, sem seções repetidas', () => {
   for (const [id, label] of [
     ['sobre', 'Sobre mim'],
+    ['primeiro-encontro', 'Primeiro encontro'],
     ['atendimento', 'Atendimento'],
     ['locais', 'Onde atendo'],
     ['duvidas', 'Dúvidas']
@@ -88,7 +89,7 @@ test('usa uma navegação curta, sem seções repetidas', () => {
     assert.match(html, new RegExp('id="' + id + '"'));
   }
   assert.match(html, /href="#inicio"[^>]*aria-label="Alexandre Quevedo, início"/);
-  assert.doesNotMatch(html, /id="(?:atuacao|modalidades|faq|primeiro-encontro|cuidado|contato)"/);
+  assert.doesNotMatch(html, /id="(?:atuacao|modalidades|faq|cuidado|contato)"/);
   assert.equal([...html.matchAll(/<h1\b/g)].length, 1);
   assert.match(html, /<h1>Um espaço para compreender o que você vive\.<\/h1>/);
   assert.match(html, /hero-eyebrow">Psicólogo em Fortaleza e online<\/span>/);
@@ -137,6 +138,17 @@ test('o conteúdo clínico essencial aparece uma única vez, sem promessas', () 
   assert.doesNotMatch(html + index, /relato verificado|pacientes satisfeitos|garantia de resultado|sigilo absoluto|75 minutos/i);
   assert.doesNotMatch(html, /contato@alexandrequevedo\.com\.br|e-psi|e-Psi/i);
   assert.doesNotMatch(html, /<form\b|<textarea\b/);
+});
+
+test('separa o primeiro encontro da seção de dúvidas', () => {
+  const firstSessionPosition = html.indexOf('id="primeiro-encontro"');
+  const attendancePosition = html.indexOf('id="atendimento"');
+  const faqPosition = html.indexOf('id="duvidas"');
+  assert.ok(firstSessionPosition >= 0);
+  assert.ok(firstSessionPosition < attendancePosition);
+  assert.ok(firstSessionPosition < faqPosition);
+  assert.match(html.slice(firstSessionPosition, attendancePosition), /Como começamos\?/);
+  assert.match(html, /class="grid-3 topic-grid"/);
 });
 
 test('âncoras internas apontam para elementos únicos', () => {
