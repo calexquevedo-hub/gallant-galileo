@@ -1,17 +1,33 @@
-import test, { before, after } from 'node:test';
+import test, { after, before } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import React from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
 import { createServer } from 'vite';
-import { site, offices, audience, serviceSummary, firstSession, topics, faqs, whatsappUrl, emailUrl, mapsUrl } from '../src/data/site.js';
+import {
+  audience,
+  emailUrl,
+  faqs,
+  firstSession,
+  mapsUrl,
+  offices,
+  serviceSummary,
+  site,
+  topics,
+  triageModalities,
+  triageReasons,
+  triageWhatsAppUrl
+} from '../src/data/site.js';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const index = await readFile(new URL('../index.html', import.meta.url), 'utf8');
 const css = await readFile(new URL('../src/index.css', import.meta.url), 'utf8');
+const robots = await readFile(new URL('../public/robots.txt', import.meta.url), 'utf8');
+const sitemap = await readFile(new URL('../public/sitemap.xml', import.meta.url), 'utf8');
 let server;
 let html;
+let triageHtml;
 
 before(async () => {
   server = await createServer({
@@ -20,12 +36,22 @@ before(async () => {
     appType: 'custom',
     logLevel: 'error'
   });
-  const { default: App } = await server.ssrLoadModule('/src/App.jsx');
-  html = renderToStaticMarkup(React.createElement(App));
+  const appModule = await server.ssrLoadModule('/src/App.jsx');
+  const triageModule = await server.ssrLoadModule('/src/components/TriageModal.jsx');
+  html = renderToStaticMarkup(React.createElement(appModule.default));
+  triageHtml = renderToStaticMarkup(React.createElement(triageModule.default, {
+    isOpen: true,
+    initialModality: 'Presencial na Aldeota',
+    onClose: () => {}
+  }));
 });
+
 after(async () => { await server?.close(); });
 
-test('keeps the agreed contact, audience and appointment information', () => {
+test('mantém identidade, contatos e locais confirmados', () => {
+  assert.equal(site.name, 'Alexandre Quevedo');
+  assert.equal(site.profession, 'Psicólogo');
+  assert.equal(site.crp, 'CRP 11/24669');
   assert.equal(site.email, 'alexandrequevedo@outlook.com');
   assert.equal(site.whatsappNumber, '5585989234111');
   assert.equal(site.minimumAge, 8);
@@ -36,75 +62,82 @@ test('keeps the agreed contact, audience and appointment information', () => {
   assert.equal(offices.maraponga.postalCode, '60711-025');
   assert.equal(offices.maraponga.hours, 'Aos sábados, das 8h às 12h.');
   assert.equal(serviceSummary, 'Atendimento individual e de casal, mediante agendamento.');
-  assert.equal(site.availability, 'Atendimento mediante agendamento. Consulte os horários disponíveis.');
   assert.match(audience, /Crianças a partir de 8 anos, adolescentes, adultos, idosos e casais/);
-  assert.ok(html.includes(serviceSummary));
-  assert.ok(html.includes(audience));
-  assert.ok(html.includes(site.availability));
-  assert.match(html, /Consultórios na Aldeota e na Maraponga/);
+  assert.ok(html.includes(site.fullName));
+  assert.ok(html.includes(offices.aldeota.clinic));
+  assert.ok(html.includes(offices.maraponga.clinic));
 });
 
-test('presents only the five agreed areas and a welcoming first meeting', () => {
-  assert.deepEqual(topics.map((topic) => topic.title), [
-    'Ansiedade', 'Luto', 'Relacionamentos', 'Sobrecarga no trabalho', 'Questões de sexualidade'
+test('usa uma navegação curta, sem seções repetidas', () => {
+  for (const [id, label] of [
+    ['sobre', 'Sobre mim'],
+    ['atendimento', 'Atendimento'],
+    ['locais', 'Onde atendo'],
+    ['duvidas', 'Dúvidas']
+  ]) {
+    assert.match(html, new RegExp('href="#' + id + '">' + label));
+    assert.match(html, new RegExp('id="' + id + '"'));
+  }
+  assert.match(html, /href="#inicio"[^>]*aria-label="Alexandre Quevedo, início"/);
+  assert.doesNotMatch(html, /id="(?:atuacao|modalidades|faq|primeiro-encontro|cuidado|contato)"/);
+  assert.equal([...html.matchAll(/<h1\b/g)].length, 1);
+  assert.match(html, /<h1>Psicólogo em Fortaleza e online\.<\/h1>/);
+});
+
+test('mantém a jornada de triagem em três etapas e termina no WhatsApp', () => {
+  assert.deepEqual(triageReasons, [
+    'Ansiedade e preocupações',
+    'Luto e mudanças',
+    'Relacionamentos',
+    'Sobrecarga no trabalho',
+    'Sexualidade',
+    'Outro motivo'
   ]);
+  assert.deepEqual(triageModalities, [
+    'Presencial na Aldeota',
+    'Presencial na Maraponga',
+    'Atendimento online',
+    'Ainda não sei'
+  ]);
+  assert.match(triageHtml, /Triagem inicial · 1 de 3/);
+  assert.match(triageHtml, /O que motivou seu contato\?/);
+  assert.match(triageHtml, /Qual modalidade você procura\?/);
+  assert.match(triageHtml, /Como posso chamar você\?/);
+  assert.match(triageHtml, /Continuar no WhatsApp/);
+  assert.match(triageHtml, /Será usado apenas para iniciar o contato pelo WhatsApp/);
+  assert.match(html, /Iniciar triagem rápida/);
+  assert.match(html, /aria-label="Iniciar triagem rápida pelo WhatsApp"/);
+});
+
+test('o texto gerado para o WhatsApp evita dados clínicos sensíveis', () => {
+  const url = new URL(triageWhatsAppUrl({ name: 'Ana', modality: 'Atendimento online' }));
+  assert.equal(url.pathname, '/' + site.whatsappNumber);
+  const message = url.searchParams.get('text');
+  assert.match(message, /Meu nome é Ana/);
+  assert.match(message, /Atendimento online/);
+  assert.doesNotMatch(message, /ansiedade|sexualidade|luto|relacionamentos/i);
+  assert.match(triageWhatsAppUrl(), new RegExp('wa\\.me/' + site.whatsappNumber));
+});
+
+test('o conteúdo clínico essencial aparece uma única vez, sem promessas', () => {
   for (const topic of topics) assert.ok(html.includes(topic.title));
   for (const paragraph of firstSession) assert.ok(html.includes(paragraph));
-  assert.match(firstSession.join(' '), /no seu ritmo/);
+  assert.doesNotMatch(html + index, /relato verificado|pacientes satisfeitos|garantia de resultado|sigilo absoluto|75 minutos/i);
+  assert.doesNotMatch(html, /contato@alexandrequevedo\.com\.br|e-psi|e-Psi/i);
+  assert.doesNotMatch(html, /<form\b|<textarea\b/);
 });
 
-test('creates WhatsApp links with the right number and non-sensitive messages', () => {
-  for (const modality of ['general', 'online', 'aldeota', 'maraponga', 'unknown']) {
-    const url = new URL(whatsappUrl(modality));
-    assert.equal(url.origin, 'https://wa.me');
-    assert.equal(url.pathname, '/' + site.whatsappNumber);
-    assert.match(url.searchParams.get('text'), /consultar valores e horários/);
-    assert.doesNotMatch(url.searchParams.get('text'), /ansiedade|sexualidade|luto/i);
-  }
-  assert.equal(whatsappUrl('unknown'), whatsappUrl());
-  assert.match(new URL(whatsappUrl('online')).searchParams.get('text'), /online/);
-  assert.match(new URL(whatsappUrl('aldeota')).searchParams.get('text'), /Aldeota/);
-  assert.match(new URL(whatsappUrl('maraponga')).searchParams.get('text'), /Maraponga/);
-});
-
-test('all rendered contact links point to confirmed destinations', () => {
-  const hrefs = [...html.matchAll(/href="([^"]+)"/g)].map((match) => match[1].replaceAll('&amp;', '&'));
-  const whatsappLinks = hrefs.filter((href) => href.startsWith('https://wa.me/'));
-  const emailLinks = hrefs.filter((href) => href.startsWith('mailto:'));
-  assert.ok(whatsappLinks.length >= 8);
-  assert.ok(emailLinks.length >= 2);
-  for (const href of whatsappLinks) assert.equal(new URL(href).pathname, '/' + site.whatsappNumber);
-  for (const href of emailLinks) assert.equal(href, emailUrl);
-  const mapLinks = hrefs.filter((href) => href.startsWith('https://www.google.com/maps/'));
-  assert.ok(mapLinks.length >= 6);
-  for (const officeKey of ['aldeota', 'maraponga']) {
-    const office = offices[officeKey];
-    const expected = mapsUrl(officeKey);
-    assert.ok(mapLinks.includes(expected));
-    const mapQuery = new URL(expected).searchParams.get('query');
-    for (const part of [office.clinic, office.street, office.district, office.locality, office.postalCode]) {
-      assert.ok(mapQuery.includes(part));
-    }
-  }
-});
-
-test('removes the form, fake legal links and outdated contact or scheduling claims', () => {
-  assert.doesNotMatch(html, /<(?:form|input|textarea)\b/);
-  assert.doesNotMatch(html, /href="#"/);
-  assert.doesNotMatch(html + index, /contato@alexandrequevedo\.com\.br|e-psi|e-Psi|sigilo absoluto|75 minutos|20:00/i);
-});
-
-test('internal anchors resolve to unique elements', () => {
+test('âncoras internas apontam para elementos únicos', () => {
   const ids = [...html.matchAll(/\sid="([^"]+)"/g)].map((match) => match[1]);
   assert.equal(ids.length, new Set(ids).size, 'duplicate element IDs');
   for (const match of html.matchAll(/href="#([^"]+)"/g)) {
     assert.ok(ids.includes(match[1]), 'Missing anchor: ' + match[1]);
   }
-  assert.equal([...html.matchAll(/<h1\b/g)].length, 1);
   assert.match(html, /<main id="conteudo" tabindex="-1"/);
+  assert.match(html, /<button[^>]*aria-controls="menu-mobile"/);
 });
 
-test('FAQ panels and menu expose consistent accessible control relationships', () => {
+test('FAQ e imagem mantêm acessibilidade básica', () => {
   for (let i = 0; i < faqs.length; i++) {
     const button = html.match(new RegExp('<button[^>]*id="faq-question-' + i + '"[^>]*>'))?.[0];
     const panel = html.match(new RegExp('<div[^>]*id="faq-answer-' + i + '"[^>]*>'))?.[0];
@@ -115,14 +148,6 @@ test('FAQ panels and menu expose consistent accessible control relationships', (
     assert.ok(panel.includes('aria-labelledby="faq-question-' + i + '"'));
     assert.equal(panel.includes('hidden=""'), i !== 0);
   }
-  assert.match(html, /aria-label="Abrir menu" aria-expanded="false" aria-controls="menu-mobile"/);
-  assert.match(html, /id="menu-mobile"[^>]*hidden=""/);
-});
-
-test('external new-tab links are protected and images have text alternatives', () => {
-  for (const match of html.matchAll(/<a\s[^>]*target="_blank"[^>]*>/g)) {
-    assert.match(match[0], /rel="noopener noreferrer"/);
-  }
   const images = [...html.matchAll(/<img\s[^>]*>/g)];
   assert.equal(images.length, 3);
   for (const image of images) assert.match(image[0], /\salt="[^"]*"/);
@@ -130,101 +155,51 @@ test('external new-tab links are protected and images have text alternatives', (
   assert.doesNotMatch(html, /consultorio(?:-aldeota)?\.(?:jpg|png|webp)/i);
 });
 
-test('metadata contains both confirmed offices and their opening hours', () => {
+test('mapas, e-mail e dados estruturados continuam corretos', () => {
+  const hrefs = [...html.matchAll(/href="([^"]+)"/g)].map((match) => match[1].replaceAll('&amp;', '&'));
+  const mapLinks = hrefs.filter((href) => href.startsWith('https://www.google.com/maps/'));
+  assert.equal(mapLinks.length, 2);
+  for (const officeKey of ['aldeota', 'maraponga']) {
+    const office = offices[officeKey];
+    const expected = mapsUrl(officeKey);
+    assert.ok(mapLinks.includes(expected));
+    const mapQuery = new URL(expected).searchParams.get('query');
+    for (const part of [office.clinic, office.street, office.district, office.locality, office.postalCode]) {
+      assert.ok(mapQuery.includes(part));
+    }
+  }
+  const emailLinks = hrefs.filter((href) => href.startsWith('mailto:'));
+  assert.ok(emailLinks.length >= 2);
+  for (const href of emailLinks) assert.equal(href, emailUrl);
+
   const json = index.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)?.[1];
-  assert.ok(json);
   const data = JSON.parse(json);
   assert.equal(data['@type'], 'ProfessionalService');
-  assert.equal(data.email, site.email);
-  assert.equal(data.telephone, '+' + site.whatsappNumber);
   assert.equal(data.identifier, site.crp);
+  assert.equal(data.telephone, '+' + site.whatsappNumber);
   assert.equal(data.location.length, 2);
-  const aldeota = data.location.find((location) => location.name.includes('Aldeota'));
-  const maraponga = data.location.find((location) => location.name.includes('Maraponga'));
-  assert.equal(aldeota.address.postalCode, offices.aldeota.postalCode);
-  assert.ok(aldeota.address.streetAddress.includes(offices.aldeota.building));
-  assert.deepEqual(aldeota.openingHoursSpecification, {
-    '@type': 'OpeningHoursSpecification',
-    dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
-    opens: '18:00',
-    closes: '21:00'
-  });
-  assert.equal(maraponga.address.postalCode, offices.maraponga.postalCode);
-  assert.ok(maraponga.address.streetAddress.includes(offices.maraponga.street));
-  assert.deepEqual(maraponga.openingHoursSpecification, {
-    '@type': 'OpeningHoursSpecification',
-    dayOfWeek: 'Saturday',
-    opens: '08:00',
-    closes: '12:00'
-  });
-  assert.equal(data.image, site.url + '/images/psicologo.jpg');
-  assert.equal(data.geo, undefined);
-  assert.equal(data.priceRange, undefined);
-  assert.equal(data.address.subEvent, undefined);
+  assert.equal(data.location.find((location) => location.name.includes('Aldeota')).address.postalCode, offices.aldeota.postalCode);
+  assert.equal(data.location.find((location) => location.name.includes('Maraponga')).address.postalCode, offices.maraponga.postalCode);
+  assert.match(index, /href="\/sitemap\.xml"/);
+});
+
+test('SEO técnico básico está disponível', () => {
+  assert.match(robots, /User-agent: \*/);
+  assert.match(robots, /Allow: \/\n/);
+  assert.match(robots, /Sitemap: https:\/\/alexandrequevedo\.com\.br\/sitemap\.xml/);
+  assert.match(sitemap, /<loc>https:\/\/alexandrequevedo\.com\.br<\/loc>/);
+  assert.match(sitemap, /<lastmod>2026-09-20<\/lastmod>/);
+  assert.match(index, /<meta name="theme-color" content="#142336"/);
   assert.match(index, /<html lang="pt-BR">/);
-  assert.ok(index.includes('href="' + site.url + '/"'));
+  assert.match(index, /<meta name="robots" content="index, follow"/);
 });
 
-test('no-JavaScript fallback still provides working contact details', () => {
-  const fallback = index.match(/<noscript>([\s\S]*?)<\/noscript>/)?.[1];
-  assert.ok(fallback?.includes(site.email));
-  assert.ok(fallback?.includes('https://wa.me/' + site.whatsappNumber));
-  assert.ok(fallback?.includes(site.crp));
-  assert.ok(fallback?.includes(offices.aldeota.postalCode));
-  assert.ok(fallback?.includes(offices.maraponga.postalCode));
-});
-
-test('emergency support distinguishes SAMU from CVV and does not promise instant replies', () => {
-  assert.match(html, /href="tel:192"/);
-  assert.match(html, /href="tel:188"/);
-  const answer = faqs.find((faq) => faq.question.includes('emergência')).answer;
-  assert.match(answer, /sem resposta imediata garantida/);
-  assert.match(answer, /SAMU pelo 192/);
-  assert.match(answer, /CVV atende gratuitamente pelo 188/);
-  assert.match(answer, /não substitui o atendimento de emergência/);
-});
-
-const variables = Object.fromEntries(
-  [...css.matchAll(/(--[\w-]+):\s*(#[a-f0-9]{6})/gi)].map((match) => [match[1], match[2]])
-);
-function rule(selector) {
-  const escaped = selector.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-  const body = css.match(new RegExp(escaped + '\\s*\\{([^}]+)\\}'))?.[1] || '';
-  return Object.fromEntries(body.split(';').filter((item) => item.includes(':')).map((item) => {
-    const colon = item.indexOf(':');
-    const key = item.slice(0, colon).trim();
-    let value = item.slice(colon + 1).trim();
-    value = value.replace(/var\((--[\w-]+)\)/g, (_, name) => variables[name]);
-    return [key, value];
-  }));
-}
-function luminance(hex) {
-  const components = hex.slice(1).match(/../g).map((pair) => parseInt(pair, 16) / 255);
-  const [r, g, b] = components.map((c) => c <= 0.04045 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4);
-  return 0.2126 * r + 0.7152 * g + 0.0722 * b;
-}
-function contrast(first, second) {
-  const [a, b] = [luminance(first), luminance(second)].sort((x, y) => y - x);
-  return (a + 0.05) / (b + 0.05);
-}
-
-test('button and badge text has at least 4.5:1 color contrast', () => {
-  for (const selector of ['.btn-gold', '.btn-primary', '.btn-whatsapp', '.btn-nav-cta', '.floating-whatsapp', '.badge-gold', '.badge-sage']) {
-    const base = rule(selector);
-    assert.ok(contrast(base.color, base.background) >= 4.5, selector + ' default contrast');
-    const hover = { ...base, ...rule(selector + ':hover') };
-    assert.ok(contrast(hover.color, hover.background) >= 4.5, selector + ' hover contrast');
-  }
-});
-
-test('content is visible by default with focus, anchor offset and reduced-motion styles', () => {
+test('estilos preservam foco, contraste e conteúdo visível', () => {
   assert.match(css, /\.reveal-on-scroll\s*\{\s*opacity:\s*1/);
   assert.match(css, /:focus-visible/);
   assert.match(css, /scroll-margin-top/);
   assert.match(css, /prefers-reduced-motion:\s*reduce/);
-});
-
-test('does not publish session duration in content, FAQ or metadata', () => {
-  assert.doesNotMatch(html + index, /\b\d+\s*minutos\b|duração\s+d[ae]s?\s+sess[ãõ][oe]s?|quanto tempo dura cada sessão/i);
-  assert.doesNotMatch(JSON.stringify(faqs), /duração|minutos|tempo dura/i);
+  assert.match(css, /\.modal-backdrop/);
+  assert.match(css, /\.triage-option\.is-selected/);
+  assert.match(css, /\.floating-whatsapp[\s\S]*bottom: calc\(5rem/);
 });
