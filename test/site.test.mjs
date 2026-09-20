@@ -80,7 +80,6 @@ test('mantém identidade, contatos e locais confirmados', () => {
 test('usa uma navegação curta, sem seções repetidas', () => {
   for (const [id, label] of [
     ['sobre', 'Sobre mim'],
-    ['primeiro-encontro', 'Primeiro encontro'],
     ['atendimento', 'Atendimento'],
     ['locais', 'Onde atendo'],
     ['duvidas', 'Dúvidas']
@@ -94,6 +93,7 @@ test('usa uma navegação curta, sem seções repetidas', () => {
   assert.match(html, /<h1>Um espaço para compreender o que você vive\.<\/h1>/);
   assert.match(html, /hero-eyebrow">Psicólogo em Fortaleza e online<\/span>/);
   assert.equal((html.match(/>Iniciar triagem<\/span>/g) || []).length, 2);
+  assert.doesNotMatch(html, /href="#primeiro-encontro"/);
   assert.doesNotMatch(html, /Conheça meu trabalho|Iniciar triagem na|Iniciar triagem online|Não sabe por onde começar|Próximo passo/);
 });
 
@@ -140,14 +140,17 @@ test('o conteúdo clínico essencial aparece uma única vez, sem promessas', () 
   assert.doesNotMatch(html, /<form\b|<textarea\b/);
 });
 
-test('separa o primeiro encontro da seção de dúvidas', () => {
-  const firstSessionPosition = html.indexOf('id="primeiro-encontro"');
+test('unifica o primeiro encontro e as dúvidas em uma única seção', () => {
   const attendancePosition = html.indexOf('id="atendimento"');
   const faqPosition = html.indexOf('id="duvidas"');
-  assert.ok(firstSessionPosition >= 0);
-  assert.ok(firstSessionPosition < attendancePosition);
-  assert.ok(firstSessionPosition < faqPosition);
-  assert.match(html.slice(firstSessionPosition, attendancePosition), /Como começamos\?/);
+  assert.ok(faqPosition >= 0);
+  assert.ok(attendancePosition < faqPosition);
+  const duvidasHtml = html.slice(faqPosition);
+  assert.match(duvidasHtml, /class="duvidas-band duvidas-band-intro"/);
+  assert.match(duvidasHtml, /class="duvidas-band duvidas-band-faq"/);
+  assert.match(duvidasHtml, /Como começamos\?/);
+  assert.match(duvidasHtml, /Dúvidas frequentes/);
+  assert.doesNotMatch(html, /id="primeiro-encontro"/);
   assert.match(html, /class="grid-3 topic-grid"/);
 });
 
@@ -216,6 +219,9 @@ test('redes sociais usam os perfis profissionais confirmados', () => {
     assert.match(html, new RegExp(`href="${href.replace(/[.*+?^${}()|[\\]\\\\]/g, '\\\\$&')}"`));
     assert.match(html, new RegExp(`aria-label="${label} de Alexandre Quevedo"`));
   }
+  assert.match(html, />Conecte-se<\/h3>/);
+  assert.doesNotMatch(html, />Redes sociais<\/span>/);
+  assert.match(css, /grid-template-columns:\s*repeat\(3, minmax\(0, 1fr\)\)/);
 });
 
 test('SEO técnico básico está disponível', () => {
