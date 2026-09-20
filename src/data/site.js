@@ -6,27 +6,48 @@ export const site = Object.freeze({
   whatsappNumber: '5585989234111',
   phoneDisplay: '(85) 98923-4111',
   url: 'https://alexandrequevedo.com.br',
-  clinic: 'Transcender Psicologia',
-  street: 'Av. Dom Luís, 500',
-  suite: 'Sala 818, 8º andar',
-  building: 'Torre do Shopping Aldeota',
-  locality: 'Aldeota, Fortaleza, CE',
-  postalCode: '60160-196',
   minimumAge: 8,
   availability: 'Atendimento mediante agendamento. Consulte os horários disponíveis.'
+});
+
+export const offices = Object.freeze({
+  aldeota: Object.freeze({
+    district: 'Aldeota',
+    clinic: 'Transcender Psicologia',
+    street: 'Av. Dom Luís, 500',
+    complement: 'Sala 818, 8º andar',
+    building: 'Torre do Shopping Aldeota',
+    locality: 'Fortaleza, CE',
+    postalCode: '60160-196',
+    hours: 'De segunda a sexta-feira, das 18h às 21h.'
+  }),
+  maraponga: Object.freeze({
+    district: 'Maraponga',
+    clinic: 'MultiMais Clínica',
+    street: 'Rua Luxemburgo, 148',
+    complement: '',
+    building: '',
+    locality: 'Fortaleza, CE',
+    postalCode: '60711-025',
+    hours: 'Aos sábados, das 8h às 12h.'
+  })
 });
 
 export const audience = 'Crianças a partir de ' + site.minimumAge + ' anos, adolescentes, adultos, idosos e casais';
 export const serviceSummary = 'Atendimento individual e de casal, mediante agendamento.';
 export const emailUrl = 'mailto:' + site.email;
-export const mapsUrl = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(
-  site.clinic + ', ' + site.street + ', ' + site.suite + ', ' + site.building + ', ' + site.locality
-);
+export function mapsUrl(officeKey) {
+  const office = offices[officeKey];
+  if (!office) return '';
+  const parts = [office.clinic, office.street, office.complement, office.building, office.district, office.locality, office.postalCode];
+  return 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(parts.filter(Boolean).join(', '));
+}
 
 const messages = {
   general: 'Olá, Alexandre! Encontrei seu site e gostaria de consultar valores e horários para atendimento psicológico.',
   online: 'Olá, Alexandre! Gostaria de consultar valores e horários para atendimento psicológico online.',
-  presencial: 'Olá, Alexandre! Gostaria de consultar valores e horários para atendimento presencial na Transcender Psicologia.'
+  aldeota: 'Olá, Alexandre! Gostaria de consultar valores e horários para atendimento presencial na Aldeota.',
+  maraponga: 'Olá, Alexandre! Gostaria de consultar valores e horários para atendimento presencial na Maraponga.'
 };
 
 export function whatsappUrl(modality = 'general') {

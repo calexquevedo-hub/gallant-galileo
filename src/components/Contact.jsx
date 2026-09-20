@@ -1,6 +1,29 @@
 import React from 'react';
-import { MessageCircle, Mail, MapPin, Clock, ArrowUpRight } from 'lucide-react';
-import { site, whatsappUrl, emailUrl, mapsUrl } from '../data/site';
+import { MessageCircle, Mail, MapPin, ArrowUpRight } from 'lucide-react';
+import { site, offices, whatsappUrl, emailUrl, mapsUrl } from '../data/site';
+
+function OfficeContact({ officeKey }) {
+  const office = offices[officeKey];
+  return (
+    <div className="contact-detail">
+      <MapPin size={23} aria-hidden="true" />
+      <div>
+        <h3>Consultório na {office.district}</h3>
+        <address>
+          <strong>{office.clinic}</strong><br />
+          {office.street}<br />
+          {office.complement && <>{office.complement}<br /></>}
+          {office.building && <>{office.building}<br /></>}
+          {office.district}, {office.locality}, CEP {office.postalCode}
+        </address>
+        <p><strong>Horário:</strong> {office.hours} Mediante agendamento.</p>
+        <a className="text-link" href={mapsUrl(officeKey)} target="_blank" rel="noopener noreferrer">
+          Ver localização no mapa <ArrowUpRight size={16} aria-hidden="true" />
+        </a>
+      </div>
+    </div>
+  );
+}
 
 export default function Contact() {
   return (
@@ -26,25 +49,9 @@ export default function Contact() {
           </div>
 
           <div className="contact-details">
-            <div className="contact-detail">
-              <MapPin size={23} aria-hidden="true" />
-              <div>
-                <h3>Consultório na Aldeota</h3>
-                <address>
-                  <strong>{site.clinic}</strong><br />
-                  {site.street}, {site.suite}<br />
-                  {site.building}<br />
-                  {site.locality}, CEP {site.postalCode}
-                </address>
-                <a className="text-link" href={mapsUrl} target="_blank" rel="noopener noreferrer">
-                  Ver localização no mapa <ArrowUpRight size={16} aria-hidden="true" />
-                </a>
-              </div>
-            </div>
-            <div className="contact-detail">
-              <Clock size={23} aria-hidden="true" />
-              <div><h3>Disponibilidade</h3><p>{site.availability}</p></div>
-            </div>
+            <OfficeContact officeKey="aldeota" />
+            <OfficeContact officeKey="maraponga" />
+            <p className="contact-availability"><strong>Atendimento online:</strong> {site.availability}</p>
             <div className="contact-detail">
               <Mail size={23} aria-hidden="true" />
               <div>

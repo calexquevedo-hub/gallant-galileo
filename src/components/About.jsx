@@ -21,7 +21,7 @@ export default function About() {
             <Clock size={24} aria-hidden="true" />
             <h3>Como nos encontramos</h3>
             <p>{serviceSummary}</p>
-            <p className="small-note">Presencialmente na Aldeota, em Fortaleza, ou online, mediante agendamento.</p>
+            <p className="small-note">Presencialmente na Aldeota e na Maraponga, em Fortaleza, ou online, mediante agendamento.</p>
           </div>
         </div>
       </div>

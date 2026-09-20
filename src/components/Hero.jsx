@@ -9,7 +9,7 @@ export default function Hero() {
         <div className="grid-2 hero-grid">
           <div className="hero-copy">
             <span className="badge badge-sage">Psicoterapia presencial e online</span>
-            <h1>Psicólogo na Aldeota, em Fortaleza, e online.</h1>
+            <h1>Psicólogo em Fortaleza e online.</h1>
             <p className="hero-intro">Um espaço para conversar sobre o que você está vivendo, compreender suas dificuldades e construir caminhos possíveis.</p>
             <p><strong>{site.fullName}</strong><br />Psicólogo · {site.crp}</p>
             <ul className="hero-highlights">
@@ -23,7 +23,7 @@ export default function Hero() {
               <a href="#primeiro-encontro" className="btn btn-outline">Como funciona</a>
             </div>
             <div className="hero-details">
-              <p><MapPin size={17} aria-hidden="true" /><span>{site.clinic}, Aldeota, Fortaleza.</span></p>
+              <p><MapPin size={17} aria-hidden="true" /><span>Consultórios na Aldeota e na Maraponga, em Fortaleza.</span></p>
               <p><Users size={17} aria-hidden="true" /><span>{audience}.</span></p>
             </div>
           </div>

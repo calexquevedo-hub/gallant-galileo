@@ -1,6 +1,30 @@
 import React from 'react';
 import { Video, MapPin, ArrowUpRight, MessageCircle } from 'lucide-react';
-import { site, serviceSummary, whatsappUrl, mapsUrl } from '../data/site';
+import { offices, serviceSummary, whatsappUrl, mapsUrl } from '../data/site';
+
+function OfficeCard({ officeKey }) {
+  const office = offices[officeKey];
+  return (
+    <article className="modality-card">
+      <MapPin size={28} aria-hidden="true" />
+      <h3>Consultório na {office.district}</h3>
+      <p>Atendimento presencial na <strong>{office.clinic}</strong>.</p>
+      <address>
+        {office.street}<br />
+        {office.complement && <>{office.complement}<br /></>}
+        {office.building && <>{office.building}<br /></>}
+        {office.district}, {office.locality}, CEP {office.postalCode}
+      </address>
+      <p><strong>Horário de atendimento</strong><br />{office.hours}<br />Mediante agendamento.</p>
+      <a className="text-link" href={mapsUrl(officeKey)} target="_blank" rel="noopener noreferrer">
+        Ver localização no mapa <ArrowUpRight size={16} aria-hidden="true" />
+      </a>
+      <a href={whatsappUrl(officeKey)} target="_blank" rel="noopener noreferrer" className="btn btn-gold">
+        <MessageCircle size={18} aria-hidden="true" /><span>Consultar horários na {office.district}</span>
+      </a>
+    </article>
+  );
+}
 
 export default function Modalities() {
   return (
@@ -11,7 +35,9 @@ export default function Modalities() {
           <h2>Atendimento que considera sua rotina.</h2>
           <p>{serviceSummary}</p>
         </div>
-        <div className="grid-2">
+        <div className="grid-3 modalities-grid">
+          <OfficeCard officeKey="aldeota" />
+          <OfficeCard officeKey="maraponga" />
           <article className="modality-card">
             <Video size={28} aria-hidden="true" />
             <h3>Atendimento online</h3>
@@ -23,18 +49,6 @@ export default function Modalities() {
             </ul>
             <a href={whatsappUrl('online')} target="_blank" rel="noopener noreferrer" className="btn btn-primary">
               <MessageCircle size={18} aria-hidden="true" /><span>Consultar atendimento online</span>
-            </a>
-          </article>
-          <article className="modality-card">
-            <MapPin size={28} aria-hidden="true" />
-            <h3>Consultório na Aldeota</h3>
-            <p>Atendimento presencial na <strong>{site.clinic}</strong>, na {site.building}, em Fortaleza.</p>
-            <address>{site.street}<br />{site.suite}<br />{site.locality}, CEP {site.postalCode}</address>
-            <a className="text-link" href={mapsUrl} target="_blank" rel="noopener noreferrer">
-              Ver localização no mapa <ArrowUpRight size={16} aria-hidden="true" />
-            </a>
-            <a href={whatsappUrl('presencial')} target="_blank" rel="noopener noreferrer" className="btn btn-gold">
-              <MessageCircle size={18} aria-hidden="true" /><span>Consultar atendimento presencial</span>
             </a>
           </article>
         </div>

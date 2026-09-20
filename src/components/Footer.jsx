@@ -1,5 +1,22 @@
 import React from 'react';
-import { site, emailUrl, whatsappUrl, mapsUrl } from '../data/site';
+import { site, offices, emailUrl, whatsappUrl, mapsUrl } from '../data/site';
+
+function FooterOffice({ officeKey }) {
+  const office = offices[officeKey];
+  return (
+    <div className="footer-office">
+      <address>
+        <strong>{office.clinic} · {office.district}</strong><br />
+        {office.street}<br />
+        {office.complement && <>{office.complement}<br /></>}
+        {office.building && <>{office.building}<br /></>}
+        {office.locality}, {office.postalCode}
+      </address>
+      <p>{office.hours}<br />Mediante agendamento.</p>
+      <a href={mapsUrl(officeKey)} target="_blank" rel="noopener noreferrer">Ver no mapa</a>
+    </div>
+  );
+}
 
 export default function Footer() {
   return (
@@ -15,19 +32,14 @@ export default function Footer() {
               </span>
             </div>
             <p>{site.fullName}<br />Psicólogo · {site.crp}</p>
-            <p>Atendimento presencial na Aldeota e online.</p>
-          </div>
-          <div>
-            <h3>Contato e localização</h3>
-            <address>
-              <strong>{site.clinic}</strong><br />
-              {site.street}, {site.suite}<br />
-              {site.building}<br />
-              {site.locality}, {site.postalCode}
-            </address>
-            <a href={mapsUrl} target="_blank" rel="noopener noreferrer">Ver no mapa</a>
+            <p>Atendimento presencial na Aldeota e na Maraponga, além do atendimento online.</p>
             <a href={whatsappUrl()} target="_blank" rel="noopener noreferrer">WhatsApp: {site.phoneDisplay}</a>
             <a className="email-link" href={emailUrl}>{site.email}</a>
+          </div>
+          <div>
+            <h3>Consultórios</h3>
+            <FooterOffice officeKey="aldeota" />
+            <FooterOffice officeKey="maraponga" />
           </div>
           <div className="footer-support">
             <h3>Apoio emocional e emergências</h3>
