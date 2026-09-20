@@ -144,8 +144,8 @@ img { max-width: 100%; }
 .btn:disabled { opacity: 0.5; transform: none; box-shadow: none; }
 .btn-primary { background: var(--bg-dark); color: #fff; }
 .btn-primary:hover { background: var(--bg-dark-surface); }
-.btn-gold { background: var(--accent-terracotta); color: #fff; }
-.btn-gold:hover { background: var(--accent-terracotta-hover); }
+.btn-gold { background: #d6a773; color: var(--bg-dark); }
+.btn-gold:hover { background: #c79562; }
 .btn-outline { border: 1px solid var(--bg-dark); color: var(--bg-dark); background: transparent; }
 .btn-outline:hover { background: var(--bg-dark); color: #fff; }
 .btn-whatsapp { background: #25d366; color: var(--bg-dark); }
