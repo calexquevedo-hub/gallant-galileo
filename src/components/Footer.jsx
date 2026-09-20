@@ -9,7 +9,24 @@ export default function Footer({ onOpenPrivacy }) {
     <footer className="site-footer">
       <div className="container">
         <div className="footer-grid">
-          <div>
+          <div className="footer-column footer-connect">
+            <h3>Conecte-se</h3>
+            <p>Você também pode acompanhar meu trabalho pelas redes sociais.</p>
+            <div className="footer-social-links">
+              {socialLinks.map(({ label, href }) => {
+                const Icon = socialIcons[label];
+                return (
+                  <a key={label} href={href} target="_blank" rel="noopener noreferrer"
+                    aria-label={`${label} de ${site.name}`}>
+                    <Icon size={18} strokeWidth={1.8} aria-hidden="true" />
+                    <span>{label}</span>
+                  </a>
+                );
+              })}
+            </div>
+          </div>
+
+          <div className="footer-column footer-identity">
             <div className="brand footer-brand">
               <img src="/images/logo-tree-white.png" alt="" width="42" height="42" loading="lazy" />
               <span className="brand-copy">
@@ -19,24 +36,9 @@ export default function Footer({ onOpenPrivacy }) {
             </div>
             <p><strong>{site.fullName}</strong><br />{site.profession} · {site.crp}</p>
             <p>Atendimento presencial em Fortaleza e online, mediante agendamento.</p>
-            <div className="footer-social">
-              <span className="footer-social-label">Redes sociais</span>
-              <div className="footer-social-links">
-                {socialLinks.map(({ label, href }) => {
-                  const Icon = socialIcons[label];
-                  return (
-                    <a key={label} href={href} target="_blank" rel="noopener noreferrer"
-                      aria-label={`${label} de ${site.name}`}>
-                      <Icon size={18} strokeWidth={1.8} aria-hidden="true" />
-                      <span>{label}</span>
-                    </a>
-                  );
-                })}
-              </div>
-            </div>
           </div>
 
-          <div className="footer-support">
+          <div className="footer-column footer-support">
             <h3>Apoio emocional e emergências</h3>
             <p>Este site e seus canais de contato não oferecem atendimento de emergência.</p>
             <p>Em uma emergência ou risco à vida, acione o <a href="tel:192">SAMU: 192</a> ou procure um pronto-socorro.</p>

@@ -4,7 +4,6 @@ import { site } from '../data/site';
 
 const navigation = [
   { href: '#sobre', label: 'Sobre mim' },
-  { href: '#primeiro-encontro', label: 'Primeiro encontro' },
   { href: '#atendimento', label: 'Atendimento' },
   { href: '#locais', label: 'Onde atendo' },
   { href: '#duvidas', label: 'Dúvidas' }
