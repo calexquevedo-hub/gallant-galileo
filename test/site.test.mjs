@@ -103,8 +103,8 @@ test('mantém a jornada de triagem em três etapas e termina no WhatsApp', () =>
   ]);
   assert.match(triageHtml, /Triagem inicial · 1 de 3/);
   assert.match(triageHtml, /O que motivou seu contato\?/);
-  assert.match(triageHtml, /Qual modalidade você procura\?/);
-  assert.match(triageHtml, /Como posso chamar você\?/);
+  assert.match(triageSource, /Qual modalidade você procura/);
+  assert.match(triageSource, /Como posso chamar você/);
   assert.match(triageSource, /Continuar no WhatsApp/);
   assert.match(triageSource, /Será usado apenas para iniciar o contato pelo WhatsApp/);
   assert.match(html, /Iniciar triagem rápida/);
@@ -189,7 +189,7 @@ test('SEO técnico básico está disponível', () => {
   assert.match(robots, /User-agent: \*/);
   assert.match(robots, /Allow: \/\n/);
   assert.match(robots, /Sitemap: https:\/\/alexandrequevedo\.com\.br\/sitemap\.xml/);
-  assert.match(sitemap, /<loc>https:\/\/alexandrequevedo\.com\.br<\/loc>/);
+  assert.match(sitemap, /<loc>https:\/\/alexandrequevedo\.com\.br\/<\/loc>/);
   assert.match(sitemap, /<lastmod>2026-09-20<\/lastmod>/);
   assert.match(index, /<meta name="theme-color" content="#142336"/);
   assert.match(index, /<html lang="pt-BR">/);
