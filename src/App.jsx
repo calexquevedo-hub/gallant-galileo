@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import About from './components/About';
-import FirstSession from './components/FirstSession';
 import Specialties from './components/Specialties';
 import Modalities from './components/Modalities';
 import FAQ from './components/FAQ';
@@ -58,7 +57,6 @@ export default function App() {
       <main id="conteudo" tabIndex={-1}>
         <Hero />
         <About />
-        <FirstSession />
         <Specialties />
         <Modalities />
         <FAQ />
