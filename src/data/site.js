@@ -1,6 +1,7 @@
 export const site = Object.freeze({
   name: 'Alexandre Quevedo',
   fullName: 'Carlos Alexandre Quevedo',
+  profession: 'Psicólogo',
   crp: 'CRP 11/24669',
   email: 'alexandrequevedo@outlook.com',
   whatsappNumber: '5585989234111',
@@ -36,6 +37,23 @@ export const offices = Object.freeze({
 export const audience = 'Crianças a partir de ' + site.minimumAge + ' anos, adolescentes, adultos, idosos e casais';
 export const serviceSummary = 'Atendimento individual e de casal, mediante agendamento.';
 export const emailUrl = 'mailto:' + site.email;
+
+export const triageReasons = Object.freeze([
+  'Ansiedade e preocupações',
+  'Luto e mudanças',
+  'Relacionamentos',
+  'Sobrecarga no trabalho',
+  'Sexualidade',
+  'Outro motivo'
+]);
+
+export const triageModalities = Object.freeze([
+  'Presencial na Aldeota',
+  'Presencial na Maraponga',
+  'Atendimento online',
+  'Ainda não sei'
+]);
+
 export function mapsUrl(officeKey) {
   const office = offices[officeKey];
   if (!office) return '';
@@ -54,9 +72,17 @@ export function whatsappUrl(modality = 'general') {
   return 'https://wa.me/' + site.whatsappNumber + '?text=' + encodeURIComponent(messages[modality] || messages.general);
 }
 
+export function triageWhatsAppUrl({ name = '', modality = '' } = {}) {
+  const cleanName = name.trim();
+  const cleanModality = modality.trim() || 'presencial ou online';
+  const greeting = cleanName ? 'Meu nome é ' + cleanName + '. ' : '';
+  const message = 'Olá, Alexandre. ' + greeting + 'Gostaria de iniciar uma triagem para atendimento ' + cleanModality + '.';
+  return 'https://wa.me/' + site.whatsappNumber + '?text=' + encodeURIComponent(message);
+}
+
 export const firstSession = [
-  'O primeiro encontro é um momento para nos conhecermos, conversar sobre o que motivou sua busca por atendimento e começar a construir uma relação de confiança. Você poderá compartilhar suas dificuldades e expectativas no seu ritmo, sem precisar chegar com tudo organizado ou saber por onde começar.',
-  'Também explicarei como trabalho, esclareceremos suas dúvidas e combinaremos os próximos passos do acompanhamento.'
+  'O primeiro encontro é um momento para nos conhecermos, conversar sobre o que motivou sua busca por atendimento e começar a construir uma relação de confiança. Você poderá compartilhar suas dificuldades e expectativas no seu ritmo, sem precisar chegar com tudo organizado.',
+  'Também explicarei como trabalho, esclarecerei suas dúvidas e combinaremos os próximos passos do acompanhamento.'
 ];
 
 export const topics = [
@@ -74,6 +100,5 @@ export const faqs = [
   { question: 'Como funciona a terapia de casal?', answer: 'O atendimento oferece espaço para escutar os dois integrantes e compreender a relação, suas dificuldades e expectativas. Os objetivos do acompanhamento são construídos em conjunto.' },
   { question: 'Como funciona o atendimento online?', answer: 'As sessões acontecem por videochamada, em horário previamente agendado. Você precisará de conexão com a internet e de um local reservado. As orientações de acesso são enviadas após o agendamento, e a adequação dessa modalidade é conversada antes do início.' },
   { question: 'Como a Análise do Comportamento orienta o atendimento?', answer: 'Buscamos compreender como sua história, suas relações e as situações do dia a dia se relacionam com o que você sente, pensa e faz. A partir dessa compreensão, construímos possibilidades de lidar com as dificuldades e com aquilo que é importante para você.' },
-  { question: 'Posso solicitar reembolso ao plano de saúde?', answer: 'Converse comigo sobre o comprovante do atendimento e consulte previamente seu plano para conhecer a cobertura e os documentos exigidos. A aprovação e o valor do reembolso dependem das condições do seu contrato com a operadora.' },
   { question: 'O WhatsApp oferece atendimento de emergência?', answer: 'Não. O WhatsApp e o e-mail são canais de contato para informações e agendamento, sem resposta imediata garantida. Em uma emergência ou risco à vida, acione o SAMU pelo 192 ou procure um pronto-socorro. Para apoio emocional, o CVV atende gratuitamente pelo 188, 24 horas por dia; ele não substitui o atendimento de emergência.' }
 ];

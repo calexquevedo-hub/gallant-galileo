@@ -1,16 +1,15 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { MessageCircle, Menu, X } from 'lucide-react';
-import { site, whatsappUrl } from '../data/site';
+import { ArrowRight, Menu, X } from 'lucide-react';
+import { site } from '../data/site';
 
 const navigation = [
   { href: '#sobre', label: 'Sobre mim' },
-  { href: '#atuacao', label: 'Atendimento' },
-  { href: '#modalidades', label: 'Consultório' },
-  { href: '#faq', label: 'Dúvidas' },
-  { href: '#contato', label: 'Contato' }
+  { href: '#atendimento', label: 'Atendimento' },
+  { href: '#locais', label: 'Onde atendo' },
+  { href: '#duvidas', label: 'Dúvidas' }
 ];
 
-export default function Header() {
+export default function Header({ onOpenTriage }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const toggleRef = useRef(null);
@@ -23,7 +22,7 @@ export default function Header() {
   }, []);
 
   useEffect(() => {
-    if (!mobileMenuOpen) return;
+    if (!mobileMenuOpen) return undefined;
     const handleEscape = (event) => {
       if (event.key === 'Escape') {
         setMobileMenuOpen(false);
@@ -33,6 +32,11 @@ export default function Header() {
     document.addEventListener('keydown', handleEscape);
     return () => document.removeEventListener('keydown', handleEscape);
   }, [mobileMenuOpen]);
+
+  const startTriage = () => {
+    setMobileMenuOpen(false);
+    onOpenTriage?.();
+  };
 
   return (
     <>
@@ -44,7 +48,7 @@ export default function Header() {
             <img src="/images/logo-tree-blue.png" alt="" width="48" height="48" />
             <span className="brand-copy">
               <span className="brand-name">{site.name}</span>
-              <span className="brand-registration">Psicólogo · {site.crp}</span>
+              <span className="brand-registration">{site.profession}</span>
             </span>
           </a>
 
@@ -55,10 +59,9 @@ export default function Header() {
           </nav>
 
           <div className="header-actions">
-            <a href={whatsappUrl()} target="_blank" rel="noopener noreferrer" className="btn-nav-cta">
-              <MessageCircle size={17} aria-hidden="true" />
-              <span>Consultar horários</span>
-            </a>
+            <button type="button" className="btn-nav-cta" onClick={startTriage}>
+              <span>Iniciar triagem</span><ArrowRight size={16} aria-hidden="true" />
+            </button>
             <button ref={toggleRef} type="button" className="mobile-toggle"
               onClick={() => setMobileMenuOpen((open) => !open)}
               aria-label={mobileMenuOpen ? 'Fechar menu' : 'Abrir menu'}
@@ -71,8 +74,7 @@ export default function Header() {
           {navigation.map((item) => (
             <a key={item.href} href={item.href} onClick={() => setMobileMenuOpen(false)}>{item.label}</a>
           ))}
-          <a href={whatsappUrl()} target="_blank" rel="noopener noreferrer"
-            onClick={() => setMobileMenuOpen(false)} className="mobile-contact-link">Consultar horários pelo WhatsApp</a>
+          <button type="button" onClick={startTriage} className="mobile-contact-link">Iniciar triagem rápida</button>
         </nav>
       </header>
     </>

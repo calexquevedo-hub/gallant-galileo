@@ -1,20 +1,19 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Header from './components/Header';
-import CrisisBanner from './components/CrisisBanner';
 import Hero from './components/Hero';
 import About from './components/About';
 import Specialties from './components/Specialties';
-import SloganBanner from './components/SloganBanner';
 import Modalities from './components/Modalities';
-import EthicsSigilo from './components/EthicsSigilo';
 import FAQ from './components/FAQ';
-import Contact from './components/Contact';
 import Footer from './components/Footer';
 import FloatingWhatsApp from './components/FloatingWhatsApp';
+import TriageModal from './components/TriageModal';
 
 export default function App() {
+  const [triageOpen, setTriageOpen] = useState(false);
+  const [triageModality, setTriageModality] = useState('');
+
   useEffect(() => {
-    // Content stays visible when animation support is unavailable.
     if (!('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
     const targets = document.querySelectorAll('.reveal-on-scroll');
@@ -40,22 +39,29 @@ export default function App() {
     };
   }, []);
 
+  const openTriage = (modality = '') => {
+    setTriageModality(modality);
+    setTriageOpen(true);
+  };
+
+  const closeTriage = () => {
+    setTriageOpen(false);
+    setTriageModality('');
+  };
+
   return (
     <div className="site-shell">
-      <Header />
+      <Header onOpenTriage={() => openTriage()} />
       <main id="conteudo" tabIndex={-1}>
-        <CrisisBanner />
-        <Hero />
+        <Hero onOpenTriage={() => openTriage()} />
         <About />
-        <Specialties />
-        <SloganBanner />
-        <Modalities />
-        <EthicsSigilo />
-        <FAQ />
-        <Contact />
+        <Specialties onOpenTriage={() => openTriage()} />
+        <Modalities onOpenTriage={openTriage} />
+        <FAQ onOpenTriage={() => openTriage()} />
       </main>
-      <Footer />
-      <FloatingWhatsApp />
+      <Footer onOpenTriage={() => openTriage()} />
+      <FloatingWhatsApp onOpenTriage={() => openTriage()} />
+      <TriageModal isOpen={triageOpen} initialModality={triageModality} onClose={closeTriage} />
     </div>
   );
 }
