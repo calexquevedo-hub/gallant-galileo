@@ -13,6 +13,7 @@ import {
   mapsUrl,
   offices,
   serviceSummary,
+  socialLinks,
   site,
   topics,
   triageModalities,
@@ -192,6 +193,17 @@ test('mapas, privacidade e dados estruturados continuam corretos', () => {
   assert.equal(data.location.find((location) => location.name.includes('Aldeota')).address.postalCode, offices.aldeota.postalCode);
   assert.equal(data.location.find((location) => location.name.includes('Maraponga')).address.postalCode, offices.maraponga.postalCode);
   assert.match(index, /href="\/sitemap\.xml"/);
+});
+
+test('redes sociais usam os perfis profissionais confirmados', () => {
+  assert.deepEqual(socialLinks, [
+    { label: 'Instagram', href: 'https://www.instagram.com/alexandrequevedo.psi/' },
+    { label: 'TikTok', href: 'https://www.tiktok.com/@alexandrequevedo.psi' }
+  ]);
+  for (const { label, href } of socialLinks) {
+    assert.match(html, new RegExp(`href="${href.replace(/[.*+?^${}()|[\\]\\\\]/g, '\\\\$&')}"`));
+    assert.match(html, new RegExp(`aria-label="${label} de Alexandre Quevedo"`));
+  }
 });
 
 test('SEO técnico básico está disponível', () => {

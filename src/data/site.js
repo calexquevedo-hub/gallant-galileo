@@ -37,6 +37,10 @@ export const offices = Object.freeze({
 export const audience = 'Crianças a partir de ' + site.minimumAge + ' anos, adolescentes, adultos, idosos e casais';
 export const serviceSummary = 'Atendimento individual e de casal, mediante agendamento.';
 export const emailUrl = 'mailto:' + site.email;
+export const socialLinks = Object.freeze([
+  Object.freeze({ label: 'Instagram', href: 'https://www.instagram.com/alexandrequevedo.psi/' }),
+  Object.freeze({ label: 'TikTok', href: 'https://www.tiktok.com/@alexandrequevedo.psi' })
+]);
 
 export const triageReasons = Object.freeze([
   'Ansiedade e preocupações',

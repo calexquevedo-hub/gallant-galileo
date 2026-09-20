@@ -45,7 +45,7 @@ export default function Header({ onOpenTriage }) {
         <div className="container header-inner">
           <a className="brand" href="#inicio" onClick={() => setMobileMenuOpen(false)}
             aria-label={site.name + ', início'}>
-            <img src="/images/logo-tree-blue.png" alt="" width="48" height="48" />
+            <img src="/images/logo-tree-forest.png" alt="" width="48" height="48" />
             <span className="brand-copy">
               <span className="brand-name">{site.name}</span>
               <span className="brand-registration">{site.profession}</span>

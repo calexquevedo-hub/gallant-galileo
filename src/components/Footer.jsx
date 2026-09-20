@@ -1,5 +1,8 @@
 import React from 'react';
-import { site } from '../data/site';
+import { Instagram, Music2 } from 'lucide-react';
+import { site, socialLinks } from '../data/site';
+
+const socialIcons = { Instagram, TikTok: Music2 };
 
 export default function Footer({ onOpenPrivacy }) {
   return (
@@ -16,6 +19,21 @@ export default function Footer({ onOpenPrivacy }) {
             </div>
             <p><strong>{site.fullName}</strong><br />{site.profession} · {site.crp}</p>
             <p>Atendimento presencial em Fortaleza e online, mediante agendamento.</p>
+            <div className="footer-social">
+              <span className="footer-social-label">Redes sociais</span>
+              <div className="footer-social-links">
+                {socialLinks.map(({ label, href }) => {
+                  const Icon = socialIcons[label];
+                  return (
+                    <a key={label} href={href} target="_blank" rel="noopener noreferrer"
+                      aria-label={`${label} de ${site.name}`}>
+                      <Icon size={18} strokeWidth={1.8} aria-hidden="true" />
+                      <span>{label}</span>
+                    </a>
+                  );
+                })}
+              </div>
+            </div>
           </div>
 
           <div className="footer-support">
