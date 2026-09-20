@@ -80,6 +80,7 @@ test('mantém identidade, contatos e locais confirmados', () => {
 test('usa uma navegação curta, sem seções repetidas', () => {
   for (const [id, label] of [
     ['sobre', 'Sobre mim'],
+    ['primeiro-encontro', 'Primeiro encontro'],
     ['atendimento', 'Atendimento'],
     ['locais', 'Onde atendo'],
     ['duvidas', 'Dúvidas']
@@ -93,7 +94,7 @@ test('usa uma navegação curta, sem seções repetidas', () => {
   assert.match(html, /<h1>Um espaço para compreender o que você vive\.<\/h1>/);
   assert.match(html, /hero-eyebrow">Psicólogo em Fortaleza e online<\/span>/);
   assert.equal((html.match(/>Iniciar triagem<\/span>/g) || []).length, 2);
-  assert.doesNotMatch(html, /href="#primeiro-encontro"/);
+  assert.match(html, /href="#primeiro-encontro">Primeiro encontro/);
   assert.doesNotMatch(html, /Conheça meu trabalho|Iniciar triagem na|Iniciar triagem online|Não sabe por onde começar|Próximo passo/);
 });
 
@@ -135,22 +136,27 @@ test('o texto gerado para o WhatsApp evita dados clínicos sensíveis', () => {
 test('o conteúdo clínico essencial aparece uma única vez, sem promessas', () => {
   for (const topic of topics) assert.ok(html.includes(topic.title));
   for (const paragraph of firstSession) assert.ok(html.includes(paragraph));
+  assert.doesNotMatch(html, /UNINASSAU/);
+  assert.doesNotMatch(html, /Díade\|Lab/);
   assert.doesNotMatch(html + index, /relato verificado|pacientes satisfeitos|garantia de resultado|sigilo absoluto|75 minutos/i);
   assert.doesNotMatch(html, /contato@alexandrequevedo\.com\.br|e-psi|e-Psi/i);
   assert.doesNotMatch(html, /<form\b|<textarea\b/);
 });
 
-test('unifica o primeiro encontro e as dúvidas em uma única seção', () => {
+test('mantém primeiro encontro e dúvidas em seções próprias', () => {
   const attendancePosition = html.indexOf('id="atendimento"');
+  const firstSessionPosition = html.indexOf('id="primeiro-encontro"');
   const faqPosition = html.indexOf('id="duvidas"');
+  assert.ok(firstSessionPosition >= 0);
   assert.ok(faqPosition >= 0);
+  assert.ok(firstSessionPosition < attendancePosition);
   assert.ok(attendancePosition < faqPosition);
+  const firstSessionHtml = html.slice(firstSessionPosition, attendancePosition);
   const duvidasHtml = html.slice(faqPosition);
-  assert.match(duvidasHtml, /class="duvidas-band duvidas-band-intro"/);
-  assert.match(duvidasHtml, /class="duvidas-band duvidas-band-faq"/);
-  assert.match(duvidasHtml, /Como começamos\?/);
+  assert.match(firstSessionHtml, /Como começamos\?/);
+  assert.match(firstSessionHtml, /first-session-layout/);
   assert.match(duvidasHtml, /Dúvidas frequentes/);
-  assert.doesNotMatch(html, /id="primeiro-encontro"/);
+  assert.doesNotMatch(duvidasHtml, /Primeiro encontro/);
   assert.match(html, /class="grid-3 topic-grid"/);
 });
 
@@ -180,6 +186,8 @@ test('FAQ e imagem mantêm acessibilidade básica', () => {
   for (const image of images) assert.match(image[0], /\salt="[^"]*"/);
   assert.match(html, /src="\/images\/psicologo\.jpg"[^>]*loading="lazy"/);
   assert.doesNotMatch(html, /consultorio(?:-aldeota)?\.(?:jpg|png|webp)/i);
+  assert.match(css, /\.about-portrait img\s*\{[^}]*height:\s*auto/);
+  assert.doesNotMatch(css, /\.about-portrait img\s*\{[^}]*object-fit:\s*cover/);
 });
 
 test('mapas, privacidade e dados estruturados continuam corretos', () => {
@@ -222,6 +230,7 @@ test('redes sociais usam os perfis profissionais confirmados', () => {
   assert.match(html, />Conecte-se<\/h3>/);
   assert.doesNotMatch(html, />Redes sociais<\/span>/);
   assert.match(css, /grid-template-columns:\s*repeat\(3, minmax\(0, 1fr\)\)/);
+  assert.doesNotMatch(html, /class="card-hover topic-card"/);
 });
 
 test('SEO técnico básico está disponível', () => {

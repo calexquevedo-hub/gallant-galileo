@@ -18,7 +18,7 @@ export default function Specialties() {
           {topics.map((topic, index) => {
             const Icon = icons[index];
             return (
-              <article key={topic.title} className="card-hover topic-card">
+              <article key={topic.title} className="topic-card">
                 <div className="topic-icon"><Icon size={23} aria-hidden="true" /></div>
                 <h3>{topic.title}</h3>
                 <p>{topic.description}</p>

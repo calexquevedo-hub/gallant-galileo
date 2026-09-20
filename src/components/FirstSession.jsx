@@ -9,7 +9,7 @@ const firstSessionSteps = [
 
 export default function FirstSession() {
   return (
-    <section id="primeiro-encontro" className="section reveal-on-scroll">
+    <section id="primeiro-encontro" className="section reveal-on-scroll first-session-section">
       <div className="container first-session-layout">
         <div className="first-session-copy">
           <span className="eyebrow eyebrow-sage">Primeiro encontro</span>

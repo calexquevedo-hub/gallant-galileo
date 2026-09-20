@@ -28,10 +28,10 @@ export default function About() {
           <h2>Quem vai caminhar com você.</h2>
           <p className="about-lead"><strong>{site.fullName}</strong><br />{site.profession} · {site.crp}</p>
           <p>
-            Sou graduado em Psicologia pela UNINASSAU. Minha trajetória na Psicologia começou no Rio de Janeiro e continua sendo construída por meio de estudo, supervisão e atualização clínica.
+            Minha trajetória na Psicologia começou no Rio de Janeiro e continua sendo construída por meio de estudo, supervisão e atualização clínica.
           </p>
           <p>
-            Minha atuação é orientada pela Análise do Comportamento, com formação continuada pela Díade|Lab e estudos em terapias comportamentais e práticas psicológicas baseadas em evidências. No atendimento, busco compreender com você como sua história, suas relações e os contextos do cotidiano se relacionam com o que sente, pensa e faz.
+            Minha atuação é orientada pela Análise do Comportamento, com formação continuada pela Díade Lab e estudos em terapias comportamentais e práticas psicológicas baseadas em evidências. No atendimento, busco compreender com você como sua história, suas relações e os contextos do cotidiano se relacionam com o que sente, pensa e faz.
           </p>
           <p>
             A partir dessa compreensão, construímos possibilidades de lidar com as dificuldades e de aproximar o acompanhamento daquilo que é importante para você.
