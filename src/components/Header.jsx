@@ -1,97 +1,80 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { MessageCircle, Menu, X } from 'lucide-react';
+import { site, whatsappUrl } from '../data/site';
+
+const navigation = [
+  { href: '#sobre', label: 'Sobre mim' },
+  { href: '#atuacao', label: 'Atendimento' },
+  { href: '#modalidades', label: 'Consultório' },
+  { href: '#faq', label: 'Dúvidas' },
+  { href: '#contato', label: 'Contato' }
+];
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const toggleRef = useRef(null);
 
   useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 20) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
-      }
-    };
-    window.addEventListener('scroll', handleScroll);
+    const handleScroll = () => setScrolled(window.scrollY > 20);
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const whatsappUrl = "https://wa.me/5585989234111?text=Olá!%20Gostaria%20de%20informações%20sobre%20agendamento%20de%20consulta%20com%20o%20Psicólogo%20Carlos%20Alexandre%20Quevedo.";
+  useEffect(() => {
+    if (!mobileMenuOpen) return;
+    const handleEscape = (event) => {
+      if (event.key === 'Escape') {
+        setMobileMenuOpen(false);
+        toggleRef.current?.focus();
+      }
+    };
+    document.addEventListener('keydown', handleEscape);
+    return () => document.removeEventListener('keydown', handleEscape);
+  }, [mobileMenuOpen]);
 
   return (
-    <header className={`glass-header ${scrolled ? 'scrolled' : ''}`}>
-      <div className="container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '1.1rem 1.5rem' }}>
-        
-        {/* Brand Logo & Non-Repetitive Lockup */}
-        <a href="#" style={{ display: 'flex', alignItems: 'center', gap: '0.85rem', textDecoration: 'none' }}>
-          <img 
-            src="/images/logo-tree-blue.png" 
-            alt="Logo Árvore Alexandre Quevedo Psicologia" 
-            style={{ height: '48px', width: 'auto', objectFit: 'contain' }}
-          />
-          <div style={{ display: 'flex', flexDirection: 'column' }}>
-            <span style={{ fontFamily: 'var(--font-serif)', fontSize: '1.55rem', fontWeight: '700', color: 'var(--text-main)', letterSpacing: '-0.02em', lineHeight: '1.1' }}>
-              Alexandre Quevedo
+    <>
+      <a className="skip-link" href="#conteudo">Pular para o conteúdo</a>
+      <header className={'glass-header' + (scrolled ? ' scrolled' : '')}>
+        <div className="container header-inner">
+          <a className="brand" href="#inicio" onClick={() => setMobileMenuOpen(false)}
+            aria-label={site.name + ', início'}>
+            <img src="/images/logo-tree-blue.png" alt="" width="48" height="48" />
+            <span className="brand-copy">
+              <span className="brand-name">{site.name}</span>
+              <span className="brand-registration">Psicólogo · {site.crp}</span>
             </span>
-            <span style={{ fontSize: '0.78rem', color: 'var(--text-muted)', fontWeight: '500', display: 'flex', alignItems: 'center', gap: '0.35rem', marginTop: '0.15rem' }}>
-              <span>Psicólogo Clínico</span>
-              <span style={{ color: 'var(--accent-gold)' }}>•</span>
-              <span style={{ color: 'var(--accent-navy)', fontWeight: '600' }}>CRP 11/24669</span>
-            </span>
-          </div>
-        </a>
-
-        {/* Desktop Nav with Animated Hover States */}
-        <nav style={{ display: 'flex', alignItems: 'center', gap: '2.2rem' }} className="desktop-nav">
-          <a href="#sobre" className="nav-link">Sobre Mim</a>
-          <a href="#atuacao" className="nav-link">Atendimento</a>
-          <a href="#modalidades" className="nav-link">Consultório</a>
-          <a href="#faq" className="nav-link">Dúvidas</a>
-          <a href="#contato" className="nav-link">Contato</a>
-        </nav>
-
-        {/* Action Group */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-          <a 
-            href={whatsappUrl}
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="btn-nav-cta"
-          >
-            <MessageCircle size={17} />
-            <span>Agendar Consulta</span>
           </a>
 
-          {/* Mobile Menu Toggle Button */}
-          <button 
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            style={{ display: 'none', padding: '0.5rem', borderRadius: '8px', color: 'var(--text-main)' }}
-            className="mobile-toggle"
-            aria-label="Abrir Menu"
-          >
-            {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
-        </div>
-      </div>
+          <nav className="desktop-nav" aria-label="Navegação principal">
+            {navigation.map((item) => (
+              <a key={item.href} href={item.href} className="nav-link">{item.label}</a>
+            ))}
+          </nav>
 
-      {/* Mobile Drawer */}
-      {mobileMenuOpen && (
-        <div style={{ background: '#FFFFFF', padding: '1.5rem', borderBottom: '1px solid var(--border-subtle)', display: 'flex', flexDirection: 'column', gap: '1.2rem' }}>
-          <a href="#sobre" onClick={() => setMobileMenuOpen(false)} style={{ fontSize: '1.05rem', fontWeight: '500' }}>Sobre Mim</a>
-          <a href="#atuacao" onClick={() => setMobileMenuOpen(false)} style={{ fontSize: '1.05rem', fontWeight: '500' }}>Atendimento</a>
-          <a href="#modalidades" onClick={() => setMobileMenuOpen(false)} style={{ fontSize: '1.05rem', fontWeight: '500' }}>Consultório</a>
-          <a href="#faq" onClick={() => setMobileMenuOpen(false)} style={{ fontSize: '1.05rem', fontWeight: '500' }}>Dúvidas</a>
-          <a href="#contato" onClick={() => setMobileMenuOpen(false)} style={{ fontSize: '1.05rem', fontWeight: '500' }}>Contato</a>
+          <div className="header-actions">
+            <a href={whatsappUrl()} target="_blank" rel="noopener noreferrer" className="btn-nav-cta">
+              <MessageCircle size={17} aria-hidden="true" />
+              <span>Consultar horários</span>
+            </a>
+            <button ref={toggleRef} type="button" className="mobile-toggle"
+              onClick={() => setMobileMenuOpen((open) => !open)}
+              aria-label={mobileMenuOpen ? 'Fechar menu' : 'Abrir menu'}
+              aria-expanded={mobileMenuOpen} aria-controls="menu-mobile">
+              {mobileMenuOpen ? <X size={24} aria-hidden="true" /> : <Menu size={24} aria-hidden="true" />}
+            </button>
+          </div>
         </div>
-      )}
-
-      <style>{`
-        @media (max-width: 868px) {
-          .desktop-nav { display: none !important; }
-          .mobile-toggle { display: block !important; }
-        }
-      `}</style>
-    </header>
+        <nav id="menu-mobile" className="mobile-nav" aria-label="Navegação no celular" hidden={!mobileMenuOpen}>
+          {navigation.map((item) => (
+            <a key={item.href} href={item.href} onClick={() => setMobileMenuOpen(false)}>{item.label}</a>
+          ))}
+          <a href={whatsappUrl()} target="_blank" rel="noopener noreferrer"
+            onClick={() => setMobileMenuOpen(false)} className="mobile-contact-link">Consultar horários pelo WhatsApp</a>
+        </nav>
+      </header>
+    </>
   );
 }

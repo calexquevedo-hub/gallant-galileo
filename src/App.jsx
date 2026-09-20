@@ -14,28 +14,36 @@ import FloatingWhatsApp from './components/FloatingWhatsApp';
 
 export default function App() {
   useEffect(() => {
-    // Scroll reveal observer (Karalee Wellness inspired scroll animation)
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('revealed');
-          }
-        });
-      },
-      { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
-    );
+    // Content stays visible when animation support is unavailable.
+    if (!('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
     const targets = document.querySelectorAll('.reveal-on-scroll');
-    targets.forEach((el) => observer.observe(el));
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.remove('reveal-pending');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0, rootMargin: '0px 0px -20px 0px' });
 
-    return () => observer.disconnect();
+    targets.forEach((element) => {
+      if (element.getBoundingClientRect().top >= window.innerHeight) {
+        element.classList.add('reveal-pending');
+        observer.observe(element);
+      }
+    });
+
+    return () => {
+      observer.disconnect();
+      targets.forEach((element) => element.classList.remove('reveal-pending'));
+    };
   }, []);
 
   return (
-    <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', backgroundColor: 'var(--bg-primary)' }}>
+    <div className="site-shell">
       <Header />
-      <main>
+      <main id="conteudo" tabIndex={-1}>
         <CrisisBanner />
         <Hero />
         <About />
