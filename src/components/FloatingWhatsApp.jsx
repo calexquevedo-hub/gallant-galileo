@@ -1,13 +1,12 @@
 import React from 'react';
 import { MessageCircle } from 'lucide-react';
-import { whatsappUrl } from '../data/site';
 
-export default function FloatingWhatsApp() {
+export default function FloatingWhatsApp({ onOpenTriage }) {
   return (
-    <a href={whatsappUrl()} target="_blank" rel="noopener noreferrer" className="floating-whatsapp"
-      aria-label="Consultar horários pelo WhatsApp com Alexandre Quevedo">
+    <button type="button" className="floating-whatsapp" onClick={() => onOpenTriage?.()}
+      aria-label="Iniciar triagem rápida pelo WhatsApp">
       <MessageCircle size={22} aria-hidden="true" />
-      <span>Consultar horários</span>
-    </a>
+      <span>Iniciar triagem</span>
+    </button>
   );
 }
