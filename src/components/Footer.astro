@@ -5,9 +5,24 @@ import { site, socialLinks } from '../data/site';
 <footer class="site-footer">
   <div class="container">
     <div class="footer-grid">
+      <div class="footer-column footer-identity">
+        <div class="brand footer-brand">
+          <img src="/images/logo-tree-white.png" alt="" width="42" height="42" loading="lazy" />
+          <span class="brand-copy">
+            <span class="brand-name">{site.name}</span>
+            <span class="brand-registration">{site.profession}</span>
+          </span>
+        </div>
+        <p class="footer-credentials"><strong>{site.fullName}</strong><br />{site.profession} · {site.crp}</p>
+      </div>
+
+      <div class="footer-column footer-hours">
+        <h3>Atendimento</h3>
+        <p>Online para todo o Brasil<br />Presencial em Fortaleza<br />Segunda a sábado, com hora marcada</p>
+      </div>
+
       <div class="footer-column footer-connect">
         <h3>Conecte-se</h3>
-        <p>Você também pode acompanhar meu trabalho pelas redes sociais.</p>
         <div class="footer-social-links">
           {socialLinks.map(({ label, href }) => (
             <a href={href} target="_blank" rel="noopener noreferrer" aria-label={`${label} de ${site.name}`}>
@@ -51,30 +66,16 @@ import { site, socialLinks } from '../data/site';
           ></script>
         </div>
       </div>
-
-      <div class="footer-column footer-identity">
-        <div class="brand footer-brand">
-          <img src="/images/logo-tree-white.png" alt="" width="42" height="42" loading="lazy" />
-          <span class="brand-copy">
-            <span class="brand-name">{site.name}</span>
-            <span class="brand-registration">{site.profession}</span>
-          </span>
-        </div>
-        <p><strong>{site.fullName}</strong><br />{site.profession} · {site.crp}</p>
-        <p>Atendimento presencial em Fortaleza e online, mediante agendamento.</p>
-      </div>
-
-      <div class="footer-column footer-support">
-        <h3>Apoio emocional e emergências</h3>
-        <p>Este site e seus canais de contato não oferecem atendimento de emergência.</p>
-        <p>Em uma emergência ou risco à vida, acione o <a href="tel:192">SAMU: 192</a> ou procure um pronto-socorro.</p>
-        <p>Para apoio emocional, o <a href="tel:188">CVV: 188</a> atende gratuitamente, 24 horas por dia. Não substitui o atendimento de emergência.</p>
-      </div>
     </div>
 
     <div class="footer-bottom">
-      <span>© {new Date().getFullYear()} {site.fullName} · {site.crp}</span>
-      <slot name="privacy" />
+      <div class="footer-meta">
+        <span>© {new Date().getFullYear()} {site.fullName} · {site.crp}</span>
+        <slot name="privacy" />
+      </div>
+      <p class="footer-emergency">
+        Este site não oferece atendimento emergencial. Em situações de crise, procure o <a href="tel:192">SAMU (192)</a>, o <a href="tel:188">CVV (188)</a> ou o pronto atendimento mais próximo.
+      </p>
     </div>
   </div>
 </footer>
