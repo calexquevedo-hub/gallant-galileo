@@ -339,7 +339,7 @@ img { max-width: 100%; }
 .footer-meta { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.6rem 1.5rem; }
 .footer-privacy-link { color: var(--text-on-dark-muted); font-size: 0.8rem; text-decoration: underline; text-underline-offset: 4px; }
 .footer-privacy-link:hover { color: #fff; }
-.footer-emergency { margin: 0.75rem 0 0; font-size: 0.76rem !important; line-height: 1.6; color: var(--text-on-dark-muted); }
+.footer-emergency { width: 100%; max-width: none; margin: 0.75rem 0 0; font-size: 0.76rem !important; line-height: 1.6; color: var(--text-on-dark-muted); }
 .footer-emergency a { color: var(--text-on-dark); font-size: inherit; }
 
 /* Progressive enhancement: content stays visible without JavaScript. */
