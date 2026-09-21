@@ -3,7 +3,7 @@ import { ArrowRight, Menu, X } from 'lucide-react';
 import { site } from '../data/site';
 
 const navigation = [
-  { href: '#sobre', label: 'Sobre mim' },
+  { href: '#sobre', label: 'Sobre' },
   { href: '#primeiro-encontro', label: 'Primeiro encontro' },
   { href: '#atendimento', label: 'Atendimento' },
   { href: '#locais', label: 'Onde atendo' },
@@ -20,6 +20,29 @@ export default function Header() {
     handleScroll();
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  useEffect(() => {
+    const header = document.querySelector<HTMLElement>('.glass-header');
+    const headerInner = header?.querySelector<HTMLElement>('.header-inner');
+    if (!header || !headerInner) return undefined;
+
+    const updateAnchorOffset = () => {
+      const rect = headerInner.getBoundingClientRect();
+      const offset = Math.ceil(rect.bottom + 12);
+      document.documentElement.style.setProperty('--anchor-scroll-offset', `${offset}px`);
+    };
+
+    updateAnchorOffset();
+    const observer = new ResizeObserver(updateAnchorOffset);
+    observer.observe(header);
+    window.addEventListener('resize', updateAnchorOffset, { passive: true });
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener('resize', updateAnchorOffset);
+      document.documentElement.style.removeProperty('--anchor-scroll-offset');
+    };
   }, []);
 
   useEffect(() => {
