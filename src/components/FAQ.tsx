@@ -10,7 +10,7 @@ export default function FAQ() {
       <div className="container">
         <div className="section-heading section-heading-left">
           <span className="eyebrow eyebrow-gold">Dúvidas frequentes</span>
-          <h2>Antes de agendar</h2>
+          <h2>Antes de <em className="heading-accent">agendar</em></h2>
           <p>Algumas informações para você decidir se este acompanhamento faz sentido para o momento que está vivendo.</p>
         </div>
         <div className="faq-panel faq-panel-centered">
