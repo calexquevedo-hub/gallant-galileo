@@ -6,7 +6,7 @@ export default function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <section id="duvidas" className="section reveal-on-scroll surface-section">
+    <section id="duvidas" className="section reveal-on-scroll alternate-section">
       <div className="container">
         <div className="section-heading section-heading-left">
           <span className="eyebrow eyebrow-gold">Dúvidas frequentes</span>
