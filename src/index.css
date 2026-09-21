@@ -48,7 +48,7 @@ address { font-style: normal; }
 svg { flex-shrink: 0; }
 img { max-width: 100%; }
 [hidden] { display: none !important; }
-[id] { scroll-margin-top: 8rem; }
+[id] { scroll-margin-top: var(--anchor-scroll-offset, 6.5rem); }
 :focus-visible { outline: 3px solid var(--accent-navy); outline-offset: 4px; }
 .site-shell { min-height: 100vh; display: flex; flex-direction: column; }
 .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
@@ -225,10 +225,10 @@ img { max-width: 100%; }
 .hero-details p + p { margin-top: 0.55rem; }
 
 /* About */
-.about-layout { display: grid; grid-template-columns: minmax(340px, 0.95fr) minmax(0, 1.05fr); gap: clamp(2.5rem, 6vw, 6rem); align-items: center; }
-.about-portrait-wrap { display: flex; justify-content: center; }
-.about-portrait { position: relative; width: min(100%, 390px); margin: 0; }
-.about-portrait img { display: block; width: 100%; height: auto; border-radius: 18px; box-shadow: 0 18px 36px rgba(20, 35, 54, 0.14); }
+.about-layout { display: grid; grid-template-columns: minmax(340px, 0.95fr) minmax(0, 1.05fr); gap: clamp(2.5rem, 6vw, 6rem); align-items: start; }
+.about-portrait-wrap { display: flex; justify-content: center; align-self: start; }
+.about-portrait { position: relative; display: inline-block; width: fit-content; max-width: 100%; margin: 0; }
+.about-portrait img { display: block; width: auto; max-width: 100%; max-height: 34rem; height: auto; margin-inline: auto; border-radius: 18px; box-shadow: 0 18px 36px rgba(20, 35, 54, 0.14); }
 .about-portrait .portrait-caption { position: absolute; z-index: 2; bottom: 0.85rem; left: 0.85rem; display: inline-flex; align-items: center; gap: 0.5rem; width: fit-content; max-width: calc(100% - 1.7rem); background: rgba(255, 253, 249, 0.94); padding: 0.45rem 0.7rem; border: 1px solid rgba(82, 116, 97, 0.18); border-radius: 999px; color: var(--text-main); box-shadow: 0 8px 22px rgba(20, 35, 54, 0.1); }
 .about-portrait .portrait-caption strong, .about-portrait .portrait-caption span { display: block; }
 .about-portrait .portrait-caption strong { display: flex; align-items: center; gap: 0.32rem; font-family: var(--font-serif); font-size: 0.95rem; line-height: 1.2; white-space: nowrap; }
@@ -354,6 +354,8 @@ img { max-width: 100%; }
 @media (max-width: 768px) {
   .section { padding: 3.75rem 0; }
   .grid-2, .grid-3, .about-layout, .footer-grid { grid-template-columns: minmax(0, 1fr); }
+  .about-portrait { width: min(100%, 390px); }
+  .about-portrait img { width: 100%; max-height: none; }
   .hero-section { padding: 2.25rem 0 3.5rem; }
   .hero-section { min-height: auto; }
   .hero-copy h1 { max-width: 620px; }
