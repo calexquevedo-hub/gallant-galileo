@@ -326,6 +326,10 @@ img { max-width: 100%; }
 .footer-social-links { display: flex; flex-direction: column; align-items: flex-start; gap: 0.75rem; }
 .footer-social-links a { display: inline-flex; align-items: center; gap: 0.4rem; color: var(--text-on-dark); text-decoration: none; font-weight: 600; }
 .footer-social-links a:hover { color: #d6a773; }
+.footer-cronoshare { display: flex; flex-direction: column; align-items: flex-start; gap: 0.55rem; margin-top: 1.25rem; }
+.footer-cronoshare-label { color: var(--text-on-dark-muted); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; }
+.footer-cronoshare .cronoWidget { display: block; width: 76px !important; height: 76px !important; line-height: 0; text-decoration: none; }
+.footer-cronoshare .cronoWidget svg { display: block; width: 100%; height: 100%; }
 .footer-bottom { display: flex; flex-wrap: wrap; gap: 0.9rem 1.5rem; margin-top: 2rem; padding-top: 1.25rem; border-top: 1px solid var(--border-dark); color: var(--text-on-dark-muted); font-size: 0.8rem; }
 .footer-privacy-link { color: var(--text-on-dark-muted); font-size: 0.8rem; text-decoration: underline; text-underline-offset: 4px; }
 .footer-privacy-link:hover { color: #fff; }
