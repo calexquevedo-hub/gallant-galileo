@@ -13,6 +13,7 @@
   --accent-terracotta-hover: #a86043;
   --accent-terracotta-light: #f8eade;
   --accent-sage: #527461;
+  --accent-forest: #0d4036;
   --accent-sage-light: #e9f0ec;
   --accent-navy: #173f62;
   --border-subtle: rgba(48, 63, 74, 0.16);
@@ -37,7 +38,7 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 h1, h2, h3, h4 { font-family: var(--font-serif); font-weight: 600; line-height: 1.2; }
-.heading-accent { color: var(--accent-sage); font-style: italic; font-weight: 500; }
+.heading-accent { color: var(--accent-forest); font-style: italic; font-weight: 600; }
 h1 { font-size: clamp(2.45rem, 4.6vw, 3.65rem); letter-spacing: -0.03em; }
 h2 { font-size: clamp(2rem, 3.5vw, 3rem); letter-spacing: -0.02em; }
 h3 { font-size: 1.6rem; }
