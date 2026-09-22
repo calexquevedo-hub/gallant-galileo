@@ -116,7 +116,7 @@ img { max-width: 100%; }
 .desktop-nav { display: flex; align-items: center; gap: 0.2rem; padding: 0.25rem; background: rgba(233, 240, 236, 0.58); border: 1px solid rgba(82, 116, 97, 0.14); border-radius: var(--radius-full); }
 .nav-link { font-size: 0.86rem; font-weight: 500; padding: 0.52rem 0.78rem; border-radius: var(--radius-full); white-space: nowrap; }
 .nav-link:hover { background: var(--accent-sage-light); color: #315747; }
-.header-actions { display: flex; align-items: center; gap: 0.65rem; }
+.header-actions { display: flex; align-items: center; gap: 0.65rem; flex-shrink: 0; }
 .btn-nav-cta {
   display: inline-flex;
   align-items: center;
@@ -124,6 +124,7 @@ img { max-width: 100%; }
   gap: 0.5rem;
   padding: 0.7rem 1.1rem;
   min-height: 44px;
+  flex-shrink: 0;
   border-radius: var(--radius-full);
   font-size: 0.85rem;
   font-weight: 600;
@@ -132,6 +133,7 @@ img { max-width: 100%; }
   color: #fff;
 }
 .btn-nav-cta:hover { background: var(--bg-dark-surface); }
+.btn-nav-cta-label-compact { display: none; }
 .mobile-toggle { display: none; align-items: center; justify-content: center; min-width: 44px; min-height: 44px; border-radius: var(--radius-sm); }
 .mobile-nav { display: none; border-top: 1px solid var(--border-subtle); border-radius: 0 0 20px 20px; }
 
@@ -398,6 +400,20 @@ img { max-width: 100%; }
   .triage-next { width: 100%; }
   .triage-back { justify-content: center; }
   .faq-question > svg { display: none; }
+}
+@media (max-width: 480px) {
+  .header-inner { gap: 0.35rem; }
+  .header-actions { gap: 0.35rem; }
+  .brand-copy { overflow: hidden; }
+  .brand-name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .btn-nav-cta-label-full { display: none; }
+  .btn-nav-cta-label-compact { display: inline; }
+  .btn-nav-cta { padding-inline: 0.62rem; }
+}
+@media (max-width: 360px) {
+  .brand-name { font-size: 1.18rem; }
+  .btn-nav-cta { width: 44px; padding-inline: 0; gap: 0; }
+  .btn-nav-cta-label-compact { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
