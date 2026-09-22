@@ -58,7 +58,7 @@ export default function Header() {
 
           <div className="header-actions">
             <button type="button" className="btn-nav-cta" onClick={startTriage}>
-              <span>Iniciar triagem</span><ArrowRight size={16} aria-hidden="true" />
+              <span>Iniciar triagem rápida</span><ArrowRight size={16} aria-hidden="true" />
             </button>
             <button ref={toggleRef} type="button" className="mobile-toggle" onClick={() => setMobileMenuOpen((open) => !open)}
               aria-label={mobileMenuOpen ? 'Fechar menu' : 'Abrir menu'} aria-expanded={mobileMenuOpen} aria-controls="menu-mobile">

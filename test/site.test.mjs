@@ -29,7 +29,7 @@ test('Astro page keeps the approved professional and office information', () => 
 });
 
 test('Astro page preserves the two triage entry points and privacy access', () => {
-  assert.equal((output.match(/>Iniciar triagem</g) ?? []).length, 2);
+  assert.equal((output.match(/>Iniciar triagem rápida</g) ?? []).length, 2);
   assert.match(output, /Iniciar triagem rápida pelo WhatsApp/);
   assert.match(output, /Conecte-se/);
   assert.match(output, /Sigilo e privacidade/);

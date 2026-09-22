@@ -1,6 +1,8 @@
 ---
 import { AtSign, Music2 } from 'lucide-react';
 import { site, socialLinks } from '../data/site';
+
+const cronoshareScript = '<script id="cronoscript" src="https://www.cronoshare.com.br/assets/cronoSealWidget-ba977fd463539c4e3a5e7cec83eb3f99.js" type="text/javascript" domain="https://www.cronoshare.com.br" csspath="/assets/cronoSealWidget-c1a93f6d3bd9edeb8fc8ba80fcc1be00.css" defer></script>';
 ---
 <footer class="site-footer">
   <div class="container">
@@ -55,15 +57,7 @@ import { site, socialLinks } from '../data/site';
               </text>
             </svg>
           </a>
-          <script
-            is:inline
-            id="cronoscript"
-            src="https://www.cronoshare.com.br/assets/cronoSealWidget-ba977fd463539c4e3a5e7cec83eb3f99.js"
-            type="text/javascript"
-            domain="https://www.cronoshare.com.br"
-            csspath="/assets/cronoSealWidget-c1a93f6d3bd9edeb8fc8ba80fcc1be00.css"
-            defer
-          ></script>
+          <Fragment set:html={cronoshareScript} />
         </div>
       </div>
     </div>

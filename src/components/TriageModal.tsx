@@ -43,7 +43,7 @@ export default function TriageModal() {
   const close = () => setIsOpen(false);
   const finish = () => {
     if (!firstName.trim()) return;
-    window.open(triageWhatsAppUrl({ name: firstName, modality }), '_blank', 'noopener,noreferrer');
+    window.open(triageWhatsAppUrl({ name: firstName, modality, reason }), '_blank', 'noopener,noreferrer');
     close();
   };
 

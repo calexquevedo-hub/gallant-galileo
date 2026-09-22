@@ -1,6 +1,6 @@
 ---
 import '../index.css';
-import { site, offices } from '../data/site';
+import { site, offices, socialLinks, topics } from '../data/site';
 
 interface Props {
   title?: string;
@@ -8,23 +8,34 @@ interface Props {
 }
 
 const {
-  title = 'Alexandre Quevedo | Psicólogo em Fortaleza e online',
-  description = 'Psicoterapia com Carlos Alexandre Quevedo, CRP 11/24669. Atendimento presencial na Aldeota e na Maraponga, em Fortaleza, e online, mediante agendamento.'
+  title = 'Psicólogo em Fortaleza | Alexandre Quevedo | CRP 11/24669',
+  description = 'Psicoterapia para ansiedade, sobrecarga e dificuldades nos relacionamentos com Carlos Alexandre Quevedo, psicólogo, CRP 11/24669. Atendimento presencial em Fortaleza e online, mediante agendamento.'
 } = Astro.props;
 
 const structuredData = {
   '@context': 'https://schema.org',
-  '@type': 'ProfessionalService',
+  '@type': ['Person', 'ProfessionalService'],
   '@id': `${site.url}/#psicologo`,
   name: 'Alexandre Quevedo, Psicólogo',
   alternateName: site.fullName,
-  description: 'Atendimento psicológico presencial na Aldeota e na Maraponga, em Fortaleza, e online. Atendimento mediante agendamento.',
+  jobTitle: site.profession,
+  description: 'Psicoterapia para ansiedade, sobrecarga e dificuldades nos relacionamentos. Atendimento presencial em Fortaleza e online, mediante agendamento.',
   image: `${site.url}/images/psicologo.jpg`,
   logo: `${site.url}/images/logo-tree-forest.png`,
   url: `${site.url}/`,
   telephone: `+${site.whatsappNumber}`,
   email: site.email,
-  identifier: site.crp,
+  identifier: {
+    '@type': 'PropertyValue',
+    propertyID: 'CRP',
+    value: site.crp
+  },
+  sameAs: socialLinks.map(({ href }) => href),
+  areaServed: [
+    { '@type': 'City', name: 'Fortaleza' },
+    { '@type': 'Country', name: 'Brasil' }
+  ],
+  knowsAbout: topics.map(({ title }) => title),
   location: [
     {
       '@type': 'Place',
@@ -84,7 +95,7 @@ const structuredData = {
     <meta property="og:url" content={`${site.url}/`} />
     <meta property="og:site_name" content="Alexandre Quevedo | Psicólogo" />
     <meta property="og:title" content={title} />
-    <meta property="og:description" content="Atendimento presencial na Aldeota e na Maraponga, em Fortaleza, e online. Crianças a partir de 8 anos, adolescentes, adultos, idosos e casais." />
+    <meta property="og:description" content={description} />
     <meta property="og:image" content={`${site.url}/images/psicologo.jpg`} />
     <meta property="og:image:alt" content="Carlos Alexandre Quevedo, psicólogo, em retrato profissional" />
 

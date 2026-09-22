@@ -62,7 +62,7 @@ export const offices: Record<OfficeKey, Office> = {
   }
 };
 
-export const audience = `Crianças a partir de ${site.minimumAge} anos, adolescentes, adultos, idosos e casais`;
+export const audience = `Adultos, casais, adolescentes e crianças a partir de ${site.minimumAge} anos`;
 export const serviceSummary = 'Atendimento individual e de casal, mediante agendamento.';
 export const emailUrl = `mailto:${site.email}`;
 
@@ -104,11 +104,13 @@ export function whatsappUrl(modality: keyof typeof messages = 'general'): string
   return `https://wa.me/${site.whatsappNumber}?text=${encodeURIComponent(messages[modality] || messages.general)}`;
 }
 
-export function triageWhatsAppUrl({ name = '', modality = '' }: { name?: string; modality?: string } = {}): string {
+export function triageWhatsAppUrl({ name = '', modality = '', reason = '' }: { name?: string; modality?: string; reason?: string } = {}): string {
   const cleanName = name.trim();
   const cleanModality = modality.trim() || 'presencial ou online';
+  const cleanReason = reason.trim();
   const greeting = cleanName ? `Meu nome é ${cleanName}. ` : '';
-  const message = `Olá, Alexandre. ${greeting}Gostaria de iniciar uma triagem para atendimento ${cleanModality}.`;
+  const reasonMessage = cleanReason ? ` O motivo principal do meu contato é ${cleanReason.toLowerCase()}.` : '';
+  const message = `Olá, Alexandre. ${greeting}Gostaria de iniciar uma triagem para atendimento ${cleanModality}.${reasonMessage}`;
   return `https://wa.me/${site.whatsappNumber}?text=${encodeURIComponent(message)}`;
 }
 

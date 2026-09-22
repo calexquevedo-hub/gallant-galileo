@@ -5,7 +5,7 @@ export default function FloatingWhatsApp() {
     <button type="button" className="floating-whatsapp" onClick={() => window.dispatchEvent(new Event('open-triage'))}
       aria-label="Iniciar triagem rápida pelo WhatsApp">
       <MessageCircle size={22} aria-hidden="true" />
-      <span>Iniciar triagem</span>
+      <span>Iniciar triagem rápida</span>
     </button>
   );
 }
