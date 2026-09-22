@@ -13,7 +13,8 @@ test('Astro generates the public page with the expected structure', () => {
   assert.match(output, /id="atendimento"/);
   assert.match(output, /id="locais"/);
   assert.match(output, /id="duvidas"/);
-  assert.match(output, /href="#primeiro-encontro"/);
+  assert.match(output, /id="primeiro-encontro"/);
+  assert.doesNotMatch(output, /class="nav-link"[^>]*href="#primeiro-encontro"/);
 });
 
 test('Astro page keeps the approved professional and office information', () => {

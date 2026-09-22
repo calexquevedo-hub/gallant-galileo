@@ -52,12 +52,13 @@ address { font-style: normal; }
 svg { flex-shrink: 0; }
 img { max-width: 100%; }
 [hidden] { display: none !important; }
-[id] { scroll-margin-top: var(--anchor-offset); }
+section[id] { scroll-margin-top: var(--anchor-offset); }
 :focus-visible { outline: 3px solid var(--accent-navy); outline-offset: 4px; }
 .site-shell { min-height: 100vh; display: flex; flex-direction: column; }
 .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
 .section { padding: 8rem 0 5.5rem; }
-.full-viewport-section { min-height: 100vh; min-height: 100svh; }
+.full-viewport-section { min-height: max(0px, calc(100svh - var(--anchor-offset))); }
+#sobre, #primeiro-encontro, #atendimento, #locais, #duvidas { min-height: max(0px, calc(100svh - var(--anchor-offset))); }
 .surface-section { background: var(--bg-surface); }
 .alternate-section { background: var(--bg-primary); }
 .section-heading { max-width: 740px; text-align: center; margin: 0 auto 2.5rem; }

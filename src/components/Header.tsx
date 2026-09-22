@@ -1,10 +1,9 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, type MouseEvent } from 'react';
 import { ArrowRight, Menu, X } from 'lucide-react';
 import { site } from '../data/site';
 
 const navigation = [
   { href: '#sobre', label: 'Sobre' },
-  { href: '#primeiro-encontro', label: 'Primeiro encontro' },
   { href: '#atendimento', label: 'Atendimento' },
   { href: '#locais', label: 'Onde atendo' },
   { href: '#duvidas', label: 'Dúvidas' }
@@ -34,6 +33,29 @@ export default function Header() {
     return () => document.removeEventListener('keydown', handleEscape);
   }, [mobileMenuOpen]);
 
+  useEffect(() => {
+    const hash = window.location.hash;
+    if (!hash) return undefined;
+
+    const frame = window.requestAnimationFrame(() => {
+      document.querySelector<HTMLElement>(hash)?.scrollIntoView({ behavior: 'auto', block: 'start' });
+    });
+
+    return () => window.cancelAnimationFrame(frame);
+  }, []);
+
+  const navigateTo = (event: MouseEvent<HTMLAnchorElement>, href: string) => {
+    if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+
+    event.preventDefault();
+    setMobileMenuOpen(false);
+    window.history.replaceState(null, '', href);
+
+    window.requestAnimationFrame(() => {
+      document.querySelector<HTMLElement>(href)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  };
+
   const startTriage = () => {
     setMobileMenuOpen(false);
     window.dispatchEvent(new Event('open-triage'));
@@ -44,7 +66,7 @@ export default function Header() {
       <a className="skip-link" href="#conteudo">Pular para o conteúdo</a>
       <header className={'glass-header' + (scrolled ? ' scrolled' : '')}>
         <div className="container header-inner">
-          <a className="brand" href="#inicio" onClick={() => setMobileMenuOpen(false)} aria-label={`${site.name}, início`}>
+          <a className="brand" href="#inicio" onClick={(event) => navigateTo(event, '#inicio')} aria-label={`${site.name}, início`}>
             <img src="/images/logo-tree-forest.png" alt="" width="48" height="48" />
             <span className="brand-copy">
               <span className="brand-name">{site.name}</span>
@@ -53,7 +75,7 @@ export default function Header() {
           </a>
 
           <nav className="desktop-nav" aria-label="Navegação principal">
-            {navigation.map((item) => <a key={item.href} href={item.href} className="nav-link">{item.label}</a>)}
+            {navigation.map((item) => <a key={item.href} href={item.href} className="nav-link" onClick={(event) => navigateTo(event, item.href)}>{item.label}</a>)}
           </nav>
 
           <div className="header-actions">
@@ -67,7 +89,7 @@ export default function Header() {
           </div>
         </div>
         <nav id="menu-mobile" className="mobile-nav" aria-label="Navegação no celular" hidden={!mobileMenuOpen}>
-          {navigation.map((item) => <a key={item.href} href={item.href} onClick={() => setMobileMenuOpen(false)}>{item.label}</a>)}
+          {navigation.map((item) => <a key={item.href} href={item.href} onClick={(event) => navigateTo(event, item.href)}>{item.label}</a>)}
         </nav>
       </header>
     </>
