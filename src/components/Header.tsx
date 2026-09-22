@@ -61,7 +61,7 @@ export default function Header() {
 
           <div className="header-actions">
             <button type="button" className="btn-nav-cta" onClick={startTriage} aria-label="Iniciar triagem rápida">
-              <span className="btn-nav-cta-label-full">Iniciar triagem rápida</span>
+              <span className="btn-nav-cta-label-full" aria-hidden="true">Iniciar triagem rápida</span>
               <span className="btn-nav-cta-label-compact" aria-hidden="true">Triagem</span>
               <ArrowRight size={16} aria-hidden="true" />
             </button>
