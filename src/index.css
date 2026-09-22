@@ -368,7 +368,7 @@ img { max-width: 100%; }
   .grid-2, .grid-3, .about-layout, .footer-grid { grid-template-columns: minmax(0, 1fr); }
   .about-portrait { width: min(100%, 390px); }
   .about-portrait img { width: 100%; max-height: none; }
-  .hero-section { padding: 2.25rem 0 3.5rem; }
+  .hero-section { padding: 6rem 0 3.5rem; }
   .hero-section { min-height: auto; }
   .hero-copy h1 { max-width: 620px; }
   .first-session-layout { grid-template-columns: minmax(0, 1fr); gap: 2.5rem; }
@@ -384,6 +384,7 @@ img { max-width: 100%; }
   .brand img, .footer-brand img { width: 44px; height: 44px; }
   .brand-name { font-size: 1.32rem; }
   .brand-registration { font-size: 0.7rem; }
+  .hero-section { padding-top: 6.5rem; }
   .btn-nav-cta { gap: 0.25rem; padding-inline: 0.72rem; font-size: 0.76rem; }
   .btn-nav-cta svg { width: 14px; height: 14px; }
   .hero-copy h1 { font-size: clamp(2.05rem, 10vw, 2.8rem); }
