@@ -213,7 +213,7 @@ img { max-width: 100%; }
 /* Hero */
 .hero-section {
   position: relative;
-  min-height: min(680px, calc(100vh - 86px));
+  min-height: min(760px, calc(100svh - 24px));
   display: flex;
   align-items: center;
   padding: 4.75rem 0 5.25rem;
@@ -267,12 +267,12 @@ img { max-width: 100%; }
 .map-link { margin-top: auto; font-size: 0.9rem; }
 
 /* First encounter and FAQs */
-.first-session-section { background: var(--bg-surface); padding: 5rem 0 4rem; }
+.first-session-section { background: var(--bg-surface); padding: 3.75rem 0 2.75rem; }
 .first-session-layout { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: 4rem; align-items: center; }
 .first-session-copy { max-width: 620px; }
-.first-session-copy h2 { margin: 1rem 0; }
-.first-session-copy p { color: var(--text-muted); margin-bottom: 1rem; }
-.first-session-steps { list-style: none; display: grid; gap: 0.85rem; margin-top: 1.5rem; }
+.first-session-copy h2 { margin: 0.75rem 0; }
+.first-session-copy p { color: var(--text-muted); margin-bottom: 0.75rem; }
+.first-session-steps { list-style: none; display: grid; gap: 0.65rem; margin-top: 1rem; }
 .first-session-steps li { display: grid; grid-template-columns: 2.2rem 1fr; gap: 0.7rem; align-items: start; }
 .first-session-steps li > span { color: var(--accent-terracotta); font-size: 0.78rem; font-weight: 700; letter-spacing: 0.05em; padding-top: 0.25rem; }
 .first-session-steps strong { font-size: 0.94rem; font-weight: 600; line-height: 1.55; }
@@ -371,7 +371,7 @@ img { max-width: 100%; }
   .hero-copy h1 { max-width: 620px; }
   .first-session-layout { grid-template-columns: minmax(0, 1fr); gap: 2.5rem; }
   .first-session-copy { position: static; }
-  .first-session-section { padding: 4rem 0 3rem; }
+  .first-session-section { padding: 3rem 0 2.5rem; }
   .topic-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (max-width: 600px) {
