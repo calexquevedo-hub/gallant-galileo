@@ -1,6 +1,5 @@
 /* Direção visual: acolhimento editorial, contraste claro e ações objetivas. */
 :root {
-  --anchor-offset: 6.25rem;
   --bg-primary: #f8f5ef;
   --bg-surface: #fffdf9;
   --bg-surface-elevated: #edf1ed;
@@ -52,13 +51,12 @@ address { font-style: normal; }
 svg { flex-shrink: 0; }
 img { max-width: 100%; }
 [hidden] { display: none !important; }
-section[id] { scroll-margin-top: var(--anchor-offset); }
 :focus-visible { outline: 3px solid var(--accent-navy); outline-offset: 4px; }
 .site-shell { min-height: 100vh; display: flex; flex-direction: column; }
 .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
 .section { padding: 8rem 0 5.5rem; }
-.full-viewport-section { min-height: max(0px, calc(100svh - var(--anchor-offset))); }
-#sobre, #primeiro-encontro, #atendimento, #locais, #duvidas { min-height: max(0px, calc(100svh - var(--anchor-offset))); }
+.full-viewport-section { min-height: 100svh; }
+#sobre, #primeiro-encontro, #atendimento, #locais, #duvidas { min-height: 100svh; }
 .surface-section { background: var(--bg-surface); }
 .alternate-section { background: var(--bg-primary); }
 .section-heading { max-width: 740px; text-align: center; margin: 0 auto 2.5rem; }
@@ -95,11 +93,13 @@ section[id] { scroll-margin-top: var(--anchor-offset); }
 }
 .skip-link:focus { transform: none; }
 .glass-header {
-  position: sticky;
+  position: fixed;
   top: 0.75rem;
+  left: 50%;
   z-index: 1000;
   width: min(calc(100% - 2rem), 1240px);
-  margin: 0 auto;
+  margin: 0;
+  transform: translateX(-50%);
   background: rgba(248, 245, 239, 0.96);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
@@ -378,7 +378,6 @@ section[id] { scroll-margin-top: var(--anchor-offset); }
   .topic-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (max-width: 600px) {
-  :root { --anchor-offset: 5rem; }
   .container { padding-inline: 1.1rem; }
   .glass-header { top: 0.5rem; width: calc(100% - 1rem); border-radius: 16px; }
   .header-inner { gap: 0.5rem; padding-block: 0.65rem; }
