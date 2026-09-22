@@ -221,7 +221,8 @@ img { max-width: 100%; }
 .hero-copy { display: flex; flex-direction: column; align-items: flex-start; gap: 1.15rem; max-width: 800px; }
 .hero-eyebrow { color: var(--accent-sage); font-size: 0.92rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
 .hero-copy h1 { max-width: 760px; }
-.hero-intro { font-size: 1.12rem; color: var(--text-muted); max-width: 650px; }
+.hero-intro { font-size: 1.18rem; color: var(--text-main); max-width: 650px; font-weight: 500; }
+.hero-support { font-size: 1rem; color: var(--text-muted); max-width: 680px; }
 .hero-professional { display: flex; flex-direction: column; gap: 0.15rem; color: var(--text-muted); }
 .hero-professional strong { color: var(--text-main); font-family: var(--font-serif); font-size: 1.45rem; line-height: 1.2; }
 .hero-highlights { list-style: none; display: flex; flex-wrap: wrap; gap: 0.7rem 1.8rem; font-size: 0.95rem; }

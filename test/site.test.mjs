@@ -28,6 +28,15 @@ test('Astro page keeps the approved professional and office information', () => 
   assert.doesNotMatch(output, /Díade\|Lab/);
 });
 
+test('Astro page uses the approved positioning and opening copy', () => {
+  assert.match(output, /<title>Alexandre Quevedo \| Psicólogo em Fortaleza<\/title>/);
+  assert.match(output, /Quando a vida pesa, compreender o que acontece é um/);
+  assert.match(output, /Psicoterapia para ansiedade, sobrecarga e dificuldades nos relacionamentos\./);
+  assert.match(output, /Um espaço de escuta, compreensão e construção de mudanças possíveis\./);
+  assert.match(output, /Atendimento presencial em Fortaleza e online, com hora marcada/);
+  assert.match(output, /Trabalho com Análise do Comportamento e mantenho formação continuada/);
+});
+
 test('Astro page preserves the two triage entry points and privacy access', () => {
   assert.equal((output.match(/>Iniciar triagem rápida</g) ?? []).length, 2);
   assert.match(output, /Iniciar triagem rápida pelo WhatsApp/);

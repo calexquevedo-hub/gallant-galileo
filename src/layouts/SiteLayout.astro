@@ -8,70 +8,87 @@ interface Props {
 }
 
 const {
-  title = 'Psicólogo em Fortaleza | Alexandre Quevedo | CRP 11/24669',
-  description = 'Psicoterapia para ansiedade, sobrecarga e dificuldades nos relacionamentos com Carlos Alexandre Quevedo, psicólogo, CRP 11/24669. Atendimento presencial em Fortaleza e online, mediante agendamento.'
+  title = 'Alexandre Quevedo | Psicólogo em Fortaleza',
+  description = 'Carlos Alexandre Quevedo, psicólogo, CRP 11/24669. Psicoterapia presencial em Fortaleza e atendimento online, com agendamento prévio, para adultos, casais, crianças a partir de 8 anos e adolescentes.'
 } = Astro.props;
 
 const structuredData = {
   '@context': 'https://schema.org',
-  '@type': ['Person', 'ProfessionalService'],
-  '@id': `${site.url}/#psicologo`,
-  name: 'Alexandre Quevedo, Psicólogo',
-  alternateName: site.fullName,
-  jobTitle: site.profession,
-  description: 'Psicoterapia para ansiedade, sobrecarga e dificuldades nos relacionamentos. Atendimento presencial em Fortaleza e online, mediante agendamento.',
-  image: `${site.url}/images/psicologo.jpg`,
-  logo: `${site.url}/images/logo-tree-forest.png`,
-  url: `${site.url}/`,
-  telephone: `+${site.whatsappNumber}`,
-  email: site.email,
-  identifier: {
-    '@type': 'PropertyValue',
-    propertyID: 'CRP',
-    value: site.crp
-  },
-  sameAs: socialLinks.map(({ href }) => href),
-  areaServed: [
-    { '@type': 'City', name: 'Fortaleza' },
-    { '@type': 'Country', name: 'Brasil' }
-  ],
-  knowsAbout: topics.map(({ title }) => title),
-  location: [
+  '@graph': [
     {
-      '@type': 'Place',
-      name: 'Transcender Psicologia · Aldeota',
-      address: {
-        '@type': 'PostalAddress',
-        streetAddress: 'Av. Dom Luís, 500, sala 818, 8º andar, Torre do Shopping Aldeota, Aldeota',
-        addressLocality: 'Fortaleza',
-        addressRegion: 'CE',
-        postalCode: offices.aldeota.postalCode,
-        addressCountry: 'BR'
+      '@type': 'Person',
+      '@id': `${site.url}/#person`,
+      name: site.fullName,
+      alternateName: site.name,
+      jobTitle: site.profession,
+      description: 'Psicólogo, CRP 11/24669, com atuação presencial em Fortaleza e atendimento online.',
+      image: `${site.url}/images/psicologo.jpg`,
+      url: `${site.url}/#sobre`,
+      telephone: `+${site.whatsappNumber}`,
+      email: site.email,
+      identifier: {
+        '@type': 'PropertyValue',
+        propertyID: 'CRP',
+        value: site.crp
       },
-      openingHoursSpecification: {
-        '@type': 'OpeningHoursSpecification',
-        dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
-        opens: '18:00',
-        closes: '21:00'
-      }
+      sameAs: socialLinks.map(({ href }) => href),
+      knowsAbout: topics.map(({ title }) => title),
+      worksFor: { '@id': `${site.url}/#practice` }
     },
     {
-      '@type': 'Place',
-      name: 'MultiMais Clínica · Maraponga',
-      address: {
-        '@type': 'PostalAddress',
-        streetAddress: 'Rua Luxemburgo, 148, Maraponga',
-        addressLocality: 'Fortaleza',
-        addressRegion: 'CE',
-        postalCode: offices.maraponga.postalCode,
-        addressCountry: 'BR'
-      },
-      openingHoursSpecification: {
-        '@type': 'OpeningHoursSpecification',
-        dayOfWeek: 'Saturday',
-        opens: '08:00',
-        closes: '12:00'
-      }
+      '@type': 'ProfessionalService',
+      '@id': `${site.url}/#practice`,
+      name: `${site.name} | ${site.profession}`,
+      description,
+      image: `${site.url}/images/psicologo.jpg`,
+      logo: `${site.url}/images/logo-tree-forest.png`,
+      url: `${site.url}/`,
+      telephone: `+${site.whatsappNumber}`,
+      email: site.email,
+      employee: { '@id': `${site.url}/#person` },
+      sameAs: socialLinks.map(({ href }) => href),
+      areaServed: [
+        { '@type': 'City', name: 'Fortaleza' },
+        { '@type': 'Country', name: 'Brasil' }
+      ],
+      location: [
+        {
+          '@type': 'Place',
+          name: 'Transcender Psicologia · Aldeota',
+          address: {
+            '@type': 'PostalAddress',
+            streetAddress: 'Av. Dom Luís, 500, sala 818, 8º andar, Torre do Shopping Aldeota, Aldeota',
+            addressLocality: 'Fortaleza',
+            addressRegion: 'CE',
+            postalCode: offices.aldeota.postalCode,
+            addressCountry: 'BR'
+          },
+          openingHoursSpecification: {
+            '@type': 'OpeningHoursSpecification',
+            dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+            opens: '18:00',
+            closes: '21:00'
+          }
+        },
+        {
+          '@type': 'Place',
+          name: 'MultiMais Clínica · Maraponga',
+          address: {
+            '@type': 'PostalAddress',
+            streetAddress: 'Rua Luxemburgo, 148, Maraponga',
+            addressLocality: 'Fortaleza',
+            addressRegion: 'CE',
+            postalCode: offices.maraponga.postalCode,
+            addressCountry: 'BR'
+          },
+          openingHoursSpecification: {
+            '@type': 'OpeningHoursSpecification',
+            dayOfWeek: 'Saturday',
+            opens: '08:00',
+            closes: '12:00'
+          }
+        }
+      ]
     }
   ]
 };
@@ -101,7 +118,7 @@ const structuredData = {
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
-    <meta name="twitter:description" content="Psicoterapia presencial em Fortaleza e online. Atendimento individual e de casal, mediante agendamento. CRP 11/24669." />
+    <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={`${site.url}/images/psicologo.jpg`} />
     <meta name="twitter:image:alt" content="Carlos Alexandre Quevedo, psicólogo, em retrato profissional" />
 

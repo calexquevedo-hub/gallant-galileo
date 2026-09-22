@@ -1,27 +1,18 @@
 ---
-import { CheckCircle2, MapPin, Users } from 'lucide-react';
 import { site, audience } from '../data/site';
 ---
 <section id="inicio" class="section hero-section">
   <div class="container">
     <div class="hero-copy">
-      <span class="hero-eyebrow">Psicoterapia para ansiedade, sobrecarga e relacionamentos</span>
-      <h1>Um espaço para compreender o que você <em class="heading-accent">vive.</em></h1>
-      <p class="hero-intro">Psicoterapia para olhar com mais cuidado para suas dificuldades, relações e escolhas, respeitando o seu ritmo e a sua história.</p>
+      <span class="hero-eyebrow">Psicoterapia</span>
+      <h1>Quando a vida pesa, compreender o que acontece é um <em class="heading-accent">começo.</em></h1>
+      <p class="hero-intro">Psicoterapia para ansiedade, sobrecarga e dificuldades nos relacionamentos.</p>
+      <p class="hero-support">Um espaço de escuta, compreensão e construção de mudanças possíveis.</p>
+      <p class="hero-support">Atendimento presencial em Fortaleza e online, com hora marcada, para {audience.toLowerCase()}.</p>
 
       <div class="hero-professional">
         <strong>{site.name}</strong>
         <span>{site.profession}</span>
-      </div>
-
-      <ul class="hero-highlights">
-        <li><CheckCircle2 size={18} aria-hidden="true" /><span>Atuação orientada pela Análise do Comportamento.</span></li>
-        <li><CheckCircle2 size={18} aria-hidden="true" /><span>Atendimento presencial em Fortaleza e online.</span></li>
-      </ul>
-
-      <div class="hero-details">
-        <p><MapPin size={17} aria-hidden="true" /><span>Aldeota, Maraponga e atendimento online.</span></p>
-        <p><Users size={17} aria-hidden="true" /><span>{audience}.</span></p>
       </div>
     </div>
   </div>

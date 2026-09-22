@@ -62,7 +62,7 @@ export const offices: Record<OfficeKey, Office> = {
   }
 };
 
-export const audience = `Adultos, casais, adolescentes e crianças a partir de ${site.minimumAge} anos`;
+export const audience = `Adultos, casais, crianças a partir de ${site.minimumAge} anos e adolescentes`;
 export const serviceSummary = 'Atendimento individual e de casal, mediante agendamento.';
 export const emailUrl = `mailto:${site.email}`;
 
