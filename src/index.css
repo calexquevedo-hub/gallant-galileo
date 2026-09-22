@@ -56,7 +56,7 @@ img { max-width: 100%; }
 .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
 .section { padding: 8rem 0 5.5rem; }
 .full-viewport-section { min-height: 100svh; }
-#sobre, #primeiro-encontro, #atendimento, #locais, #duvidas { min-height: 100svh; }
+#sobre, #atendimento, #locais, #duvidas { min-height: 100svh; }
 .surface-section { background: var(--bg-surface); }
 .alternate-section { background: var(--bg-primary); }
 .section-heading { max-width: 740px; text-align: center; margin: 0 auto 2.5rem; }
@@ -267,7 +267,7 @@ img { max-width: 100%; }
 .map-link { margin-top: auto; font-size: 0.9rem; }
 
 /* First encounter and FAQs */
-.first-session-section { background: var(--bg-primary); }
+.first-session-section { background: var(--bg-surface); padding: 5rem 0 4rem; }
 .first-session-layout { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: 4rem; align-items: center; }
 .first-session-copy { max-width: 620px; }
 .first-session-copy h2 { margin: 1rem 0; }
@@ -312,8 +312,8 @@ img { max-width: 100%; }
 /* Privacy modal */
 .privacy-backdrop { z-index: 2100; }
 .privacy-dialog { width: min(100%, 650px); max-height: min(720px, calc(100dvh - 2.5rem)); overflow-y: auto; padding: 1.75rem; border-radius: var(--radius-lg); background: var(--bg-surface); box-shadow: 0 30px 90px rgba(0, 0, 0, 0.24); }
-.privacy-dialog-top { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
-.privacy-dialog h2 { margin: 1.25rem 0 1rem; }
+.privacy-dialog-top { display: flex; align-items: center; justify-content: flex-end; gap: 1rem; }
+.privacy-dialog h2 { margin: 0.4rem 0 1rem; }
 .privacy-copy { color: var(--text-muted); }
 .privacy-copy p + p { margin-top: 0.9rem; }
 .privacy-copy a { color: var(--accent-navy); text-decoration: underline; text-underline-offset: 3px; }
@@ -371,6 +371,7 @@ img { max-width: 100%; }
   .hero-copy h1 { max-width: 620px; }
   .first-session-layout { grid-template-columns: minmax(0, 1fr); gap: 2.5rem; }
   .first-session-copy { position: static; }
+  .first-session-section { padding: 4rem 0 3rem; }
   .topic-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (max-width: 600px) {

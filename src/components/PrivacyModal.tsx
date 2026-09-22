@@ -33,7 +33,6 @@ export default function PrivacyModal() {
     }}>
       <div className="privacy-dialog" role="dialog" aria-modal="true" aria-labelledby="privacy-title">
         <div className="privacy-dialog-top">
-          <span className="badge badge-sage">Informação institucional</span>
           <button type="button" className="icon-button" onClick={() => setIsOpen(false)} aria-label="Fechar sigilo e privacidade"><X size={20} aria-hidden="true" /></button>
         </div>
         <h2 id="privacy-title">Sigilo e privacidade</h2>
