@@ -7,7 +7,11 @@ import { site, socialLinks } from '../data/site';
     <div class="footer-grid">
       <div class="footer-column footer-identity">
         <div class="brand footer-brand">
-          <img src="/images/logo-tree-white.png" alt="" width="42" height="42" loading="lazy" />
+          <picture>
+            <source type="image/avif" srcset="/images/logo-tree-white-96.avif 1x, /images/logo-tree-white-192.avif 2x" />
+            <source type="image/webp" srcset="/images/logo-tree-white-96.webp 1x, /images/logo-tree-white-192.webp 2x" />
+            <img src="/images/logo-tree-white-96.webp" alt="" width="56" height="67" loading="lazy" decoding="async" />
+          </picture>
           <span class="brand-copy">
             <span class="brand-name">{site.name}</span>
             <span class="brand-registration">{site.profession}</span>

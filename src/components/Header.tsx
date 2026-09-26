@@ -48,7 +48,11 @@ export default function Header() {
       <header className={'glass-header' + (scrolled ? ' scrolled' : '')}>
         <div className="container header-inner">
           <a className="brand" href="#inicio" onClick={closeMobileMenu} aria-label={`${site.name}, início`}>
-            <img src="/images/logo-tree-forest.png" alt="" width="48" height="48" />
+            <picture>
+              <source type="image/avif" srcSet="/images/logo-tree-forest-96.avif 1x, /images/logo-tree-forest-192.avif 2x" />
+              <source type="image/webp" srcSet="/images/logo-tree-forest-96.webp 1x, /images/logo-tree-forest-192.webp 2x" />
+              <img src="/images/logo-tree-forest-96.webp" alt="" width="48" height="48" loading="eager" decoding="async" />
+            </picture>
             <span className="brand-copy">
               <span className="brand-name">{site.name}</span>
               <span className="brand-registration">{site.profession}</span>

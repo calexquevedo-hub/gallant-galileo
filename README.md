@@ -23,7 +23,8 @@ O conteúdo público fica nos componentes Astro e os comportamentos interativos 
 - `src/components/`: seções visuais e componentes interativos.
 - `src/layouts/SiteLayout.astro`: metadados, dados estruturados e estrutura HTML da página.
 - `src/index.css`: estilos e comportamento responsivo.
-- `public/images/`: logotipos e retrato profissional.
+- `public/images/`: logotipos, retrato profissional e versões responsivas em AVIF/WebP.
+- `public/fonts/`: fontes locais em WOFF2, para evitar dependência de carregamento externo.
 
 O site mantém dois pontos de entrada para a triagem: o botão do menu superior e o botão fixo no canto inferior direito. A jornada de triagem continua antes da abertura do WhatsApp. Não há formulário de contato nem fotos dos consultórios.
 
@@ -34,4 +35,5 @@ Os atendimentos presenciais ocorrem na Aldeota, de segunda a sexta-feira, das 18
 - Revisar o menu no celular, o FAQ, os links de WhatsApp, e-mail e localização.
 - Confirmar a apresentação da marca e da foto pessoal nos tamanhos de tela usados pelo público.
 - Conferir os horários e endereços nos dados da página e nos dados estruturados.
+- Verificar as versões responsivas das imagens e o contraste da seção “Primeiro encontro”.
 - Se for necessário alterar a política de privacidade, conferir antes os serviços efetivamente ativos na hospedagem, analytics, cookies e canais de contato.

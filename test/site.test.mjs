@@ -44,12 +44,25 @@ test('Astro page preserves the two triage entry points and privacy access', () =
   assert.match(output, /Conecte-se/);
   assert.match(output, /Sigilo e privacidade/);
   assert.match(output, /ProfessionalService/);
+  assert.doesNotMatch(output, /Powered by Netlify|Netlify badge/i);
+});
+
+test('Astro page uses distinct office map links and local font loading', () => {
+  assert.match(output, /Ver rota para Transcender Psicologia/);
+  assert.match(output, /Ver rota para MultiMais Clínica/);
+  assert.doesNotMatch(output, /fonts\.googleapis\.com/);
+  assert.match(output, /plus-jakarta-sans-400\.woff2/);
+  assert.match(output, /cormorant-garamond-600\.woff2/);
 });
 
 test('Astro project contains TypeScript configuration and required public assets', () => {
   assert.equal(existsSync(resolve(projectRoot, 'astro.config.ts')), true);
   assert.equal(existsSync(resolve(projectRoot, 'tsconfig.json')), true);
   assert.equal(existsSync(resolve(projectRoot, 'public/images/psicologo.jpg')), true);
+  assert.equal(existsSync(resolve(projectRoot, 'public/images/psicologo-480.avif')), true);
+  assert.equal(existsSync(resolve(projectRoot, 'public/images/psicologo-768.webp')), true);
+  assert.equal(existsSync(resolve(projectRoot, 'public/images/logo-tree-forest-192.avif')), true);
+  assert.equal(existsSync(resolve(projectRoot, 'public/fonts/plus-jakarta-sans-400.woff2')), true);
   assert.equal(existsSync(resolve(projectRoot, 'public/robots.txt')), true);
   assert.equal(existsSync(resolve(projectRoot, 'public/sitemap.xml')), true);
 });

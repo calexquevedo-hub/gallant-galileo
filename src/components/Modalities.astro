@@ -28,7 +28,7 @@ const officeKeys: OfficeKey[] = ['aldeota', 'maraponga'];
               {office.district}, {office.locality}, CEP {office.postalCode}
             </address>
             <p><strong>Horário</strong><br />{office.hours}</p>
-            <a class="text-link map-link" href={mapsUrl(officeKey)} target="_blank" rel="noopener noreferrer">Ver localização no mapa <ArrowUpRight size={16} aria-hidden="true" /></a>
+            <a class="text-link map-link" href={mapsUrl(officeKey)} target="_blank" rel="noopener noreferrer" aria-label={`Ver rota para ${office.clinic}, ${office.district}`}>Ver rota para {office.clinic} <ArrowUpRight size={16} aria-hidden="true" /></a>
           </article>
         );
       })}
