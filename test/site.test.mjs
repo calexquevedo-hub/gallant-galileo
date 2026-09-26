@@ -5,6 +5,7 @@ import { resolve } from 'node:path';
 
 const projectRoot = resolve(import.meta.dirname, '..');
 const output = readFileSync(resolve(projectRoot, 'dist/index.html'), 'utf8');
+const firstContactSource = readFileSync(resolve(projectRoot, 'src/components/FirstContactModal.tsx'), 'utf8');
 
 test('Astro generates the public page with the expected structure', () => {
   assert.match(output, /<html lang="pt-BR">/);
@@ -38,9 +39,13 @@ test('Astro page uses the approved positioning and opening copy', () => {
   assert.match(output, /Trabalho com Análise do Comportamento e mantenho formação continuada/);
 });
 
-test('Astro page preserves the two triage entry points and privacy access', () => {
-  assert.equal((output.match(/>Iniciar triagem rápida</g) ?? []).length, 2);
-  assert.match(output, /Iniciar triagem rápida pelo WhatsApp/);
+test('Astro page preserves the two first-contact entry points and privacy access', () => {
+  assert.equal((output.match(/>Iniciar conversa</g) ?? []).length, 2);
+  assert.match(output, /Iniciar conversa pelo WhatsApp/);
+  assert.match(firstContactSource, /Primeiro contato/);
+  assert.match(firstContactSource, /Onde você prefere ser atendido\?/);
+  assert.match(firstContactSource, /Abrir WhatsApp/);
+  assert.doesNotMatch(firstContactSource, /triagem|sintomas|Seu primeiro nome/i);
   assert.match(output, /Conecte-se/);
   assert.match(output, /Sigilo e privacidade/);
   assert.match(output, /ProfessionalService/);

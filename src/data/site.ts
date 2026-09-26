@@ -71,21 +71,17 @@ export const socialLinks: SocialLink[] = [
   { label: 'TikTok', href: 'https://www.tiktok.com/@alexandrequevedo.psi' }
 ];
 
-export const triageReasons = [
-  'Ansiedade e preocupações',
-  'Luto e mudanças',
-  'Relacionamentos',
-  'Sobrecarga no trabalho',
-  'Sexualidade',
-  'Outro motivo'
-] as const;
+export interface ContactOption {
+  label: string;
+  message: string;
+}
 
-export const triageModalities = [
-  'Presencial na Aldeota',
-  'Presencial na Maraponga',
-  'Atendimento online',
-  'Ainda não sei'
-] as const;
+export const contactOptions: ContactOption[] = [
+  { label: 'Presencial na Aldeota', message: 'atendimento presencial na Aldeota' },
+  { label: 'Presencial na Maraponga', message: 'atendimento presencial na Maraponga' },
+  { label: 'Atendimento online', message: 'atendimento online' },
+  { label: 'Ainda não sei', message: '' }
+];
 
 export function mapsUrl(officeKey: OfficeKey): string {
   const office = offices[officeKey];
@@ -104,13 +100,11 @@ export function whatsappUrl(modality: keyof typeof messages = 'general'): string
   return `https://wa.me/${site.whatsappNumber}?text=${encodeURIComponent(messages[modality] || messages.general)}`;
 }
 
-export function triageWhatsAppUrl({ name = '', modality = '', reason = '' }: { name?: string; modality?: string; reason?: string } = {}): string {
-  const cleanName = name.trim();
-  const cleanModality = modality.trim() || 'presencial ou online';
-  const cleanReason = reason.trim();
-  const greeting = cleanName ? `Meu nome é ${cleanName}. ` : '';
-  const reasonMessage = cleanReason ? ` O motivo principal do meu contato é ${cleanReason.toLowerCase()}.` : '';
-  const message = `Olá, Alexandre. ${greeting}Gostaria de iniciar uma triagem para atendimento ${cleanModality}.${reasonMessage}`;
+export function firstContactWhatsAppUrl({ modality = '' }: { modality?: string } = {}): string {
+  const cleanModality = modality.trim();
+  const message = cleanModality
+    ? `Olá, Alexandre. Gostaria de consultar horários e informações sobre ${cleanModality}.`
+    : 'Olá, Alexandre. Gostaria de consultar horários e informações sobre atendimento psicológico.';
   return `https://wa.me/${site.whatsappNumber}?text=${encodeURIComponent(message)}`;
 }
 

@@ -37,9 +37,9 @@ export default function Header() {
     setMobileMenuOpen(false);
   };
 
-  const startTriage = () => {
+  const startFirstContact = () => {
     setMobileMenuOpen(false);
-    window.dispatchEvent(new Event('open-triage'));
+    window.dispatchEvent(new Event('open-first-contact'));
   };
 
   return (
@@ -64,9 +64,9 @@ export default function Header() {
           </nav>
 
           <div className="header-actions">
-            <button type="button" className="btn-nav-cta" onClick={startTriage} aria-label="Iniciar triagem rápida">
-              <span className="btn-nav-cta-label-full" aria-hidden="true">Iniciar triagem rápida</span>
-              <span className="btn-nav-cta-label-compact" aria-hidden="true">Triagem</span>
+            <button type="button" className="btn-nav-cta" onClick={startFirstContact} aria-label="Iniciar conversa">
+              <span className="btn-nav-cta-label-full" aria-hidden="true">Iniciar conversa</span>
+              <span className="btn-nav-cta-label-compact" aria-hidden="true">Conversa</span>
               <ArrowRight size={16} aria-hidden="true" />
             </button>
             <button ref={toggleRef} type="button" className="mobile-toggle" onClick={() => setMobileMenuOpen((open) => !open)}

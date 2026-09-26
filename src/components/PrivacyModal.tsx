@@ -38,7 +38,7 @@ export default function PrivacyModal() {
         <h2 id="privacy-title">Sigilo e privacidade</h2>
         <div className="privacy-copy">
           <p>O atendimento psicológico é protegido pelo dever de sigilo profissional, observado o Código de Ética Profissional do Psicólogo e os limites previstos na legislação aplicável.</p>
-          <p>A triagem deste site solicita apenas o primeiro nome e a modalidade de atendimento desejada. Essas informações são usadas para iniciar o contato pelo WhatsApp e organizar o atendimento. Evite enviar relatos clínicos detalhados ou outras informações sensíveis antes da sessão.</p>
+          <p>O primeiro contato deste site solicita apenas o local ou formato de atendimento desejado e abre uma conversa no WhatsApp. Evite enviar relatos clínicos detalhados ou outras informações sensíveis antes da sessão.</p>
           <p>O tratamento de dados pessoais segue os princípios da <a href="https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2018/lei/l13709.htm" target="_blank" rel="noopener noreferrer">Lei Geral de Proteção de Dados Pessoais, Lei nº 13.709/2018</a>.</p>
           <p>Responsável pelo atendimento e por este canal: <strong>{site.fullName}</strong>, {site.profession}, {site.crp}. Para dúvidas ou solicitações relacionadas à privacidade, escreva para <a href={`mailto:${site.email}`}>{site.email}</a>.</p>
         </div>

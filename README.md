@@ -26,7 +26,7 @@ O conteúdo público fica nos componentes Astro e os comportamentos interativos 
 - `public/images/`: logotipos, retrato profissional e versões responsivas em AVIF/WebP.
 - `public/fonts/`: fontes locais em WOFF2, para evitar dependência de carregamento externo.
 
-O site mantém dois pontos de entrada para a triagem: o botão do menu superior e o botão fixo no canto inferior direito. A jornada de triagem continua antes da abertura do WhatsApp. Não há formulário de contato nem fotos dos consultórios.
+O site mantém dois pontos de entrada para o primeiro contato: o botão do menu superior e o botão fixo no canto inferior direito. A jornada permite escolher o local ou formato antes da abertura do WhatsApp, sem coletar nome ou motivo clínico no site. Não há formulário de contato nem fotos dos consultórios.
 
 Os atendimentos presenciais ocorrem na Aldeota, de segunda a sexta-feira, das 18h às 21h, e na Maraponga, aos sábados, das 8h às 12h, sempre mediante agendamento. O atendimento online permanece sujeito a consulta.
 
