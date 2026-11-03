@@ -9,7 +9,7 @@ interface Props {
 
 const {
   title = 'Alexandre Quevedo | Psicólogo em Fortaleza',
-  description = 'Carlos Alexandre Quevedo, psicólogo em Fortaleza, CRP 11/24669. Psicoterapia presencial e online para adultos: ansiedade, sobrecarga e relacionamentos.'
+  description = 'Carlos Alexandre Quevedo, psicólogo em Fortaleza, CRP 11/24669. Psicoterapia presencial e online para adultos, casais, adolescentes e crianças.'
 } = Astro.props;
 
 const structuredData = {
@@ -63,6 +63,7 @@ const structuredData = {
             postalCode: offices.aldeota.postalCode,
             addressCountry: 'BR'
           },
+          hasMap: 'https://maps.google.com/?cid=11906281297393702649',
           openingHoursSpecification: {
             '@type': 'OpeningHoursSpecification',
             dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
@@ -75,12 +76,13 @@ const structuredData = {
           name: 'MultiMais Clínica · Maraponga',
           address: {
             '@type': 'PostalAddress',
-            streetAddress: 'Rua Luxemburgo, 148, Maraponga',
+            streetAddress: 'Rua Luxemburgo, 148, sala 8, MultiMais Clínica, Maraponga',
             addressLocality: 'Fortaleza',
             addressRegion: 'CE',
             postalCode: offices.maraponga.postalCode,
             addressCountry: 'BR'
           },
+          hasMap: 'https://maps.google.com/?cid=6751457411754260967',
           openingHoursSpecification: {
             '@type': 'OpeningHoursSpecification',
             dayOfWeek: 'Saturday',
