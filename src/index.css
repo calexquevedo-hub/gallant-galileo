@@ -121,9 +121,14 @@ img { max-width: 100%; height: auto; }
 .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
 .section { padding: 8rem 0 5.5rem; }
 .full-viewport-section { min-height: 100svh; }
-#inicio, #sobre, #atendimento, #locais, #duvidas, #primeiro-encontro { scroll-margin-top: 6.5rem; }
+/*
+ * NAVEGAÇÃO POR ÂNCORAS
+ * Mantenha as âncoras nativas sem scroll-margin/scroll-padding artificial.
+ * O cabeçalho é fixo e o próprio padding superior das seções reserva o espaço
+ * necessário. Reintroduzir offsets faz a seção anterior aparecer acima do
+ * destino e recria as faixas/"buracos" corrigidos no benchmark.
+ */
 #sobre, #atendimento, #locais, #duvidas, #primeiro-encontro { min-height: 100svh; }
-#rodape { scroll-margin-top: 1rem; }
 .surface-section { background: var(--bg-surface); }
 .alternate-section { background: var(--bg-primary); }
 .section-heading { max-width: 740px; text-align: center; margin: 0 auto 2.5rem; }
@@ -336,7 +341,7 @@ img { max-width: 100%; height: auto; }
 .map-link { margin-top: auto; font-size: 0.9rem; }
 
 /* First encounter and FAQs */
-.first-session-section { background: var(--bg-surface-elevated); padding: 3.75rem 0 2.75rem; }
+.first-session-section { background: var(--bg-surface-elevated); }
 .first-session-layout { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: 4rem; align-items: center; }
 .first-session-copy { max-width: 620px; }
 .first-session-copy h2 { margin: 0.75rem 0; }
@@ -444,7 +449,6 @@ img { max-width: 100%; height: auto; }
   .hero-copy h1 { max-width: 620px; }
   .first-session-layout { grid-template-columns: minmax(0, 1fr); gap: 2.5rem; }
   .first-session-copy { position: static; }
-  .first-session-section { padding: 3rem 0 2.5rem; }
   .topic-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (max-width: 600px) {
