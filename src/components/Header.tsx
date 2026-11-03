@@ -1,12 +1,16 @@
 import { useEffect, useRef, useState } from 'react';
 import { ArrowRight, Menu, X } from 'lucide-react';
 import { site } from '../data/site';
+import { clearStaleBodyScrollLock } from '../utils/scrollLock';
 
 const navigation = [
+  { href: '#inicio', label: 'Início' },
   { href: '#sobre', label: 'Sobre' },
   { href: '#atendimento', label: 'Atendimento' },
   { href: '#locais', label: 'Onde atendo' },
-  { href: '#duvidas', label: 'Dúvidas' }
+  { href: '#duvidas', label: 'Dúvidas' },
+  { href: '#primeiro-encontro', label: 'Primeiro encontro' },
+  { href: '#rodape', label: 'Contato' }
 ] as const;
 
 export default function Header() {
@@ -15,6 +19,7 @@ export default function Header() {
   const toggleRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
+    clearStaleBodyScrollLock();
     const handleScroll = () => setScrolled(window.scrollY > 20);
     handleScroll();
     window.addEventListener('scroll', handleScroll, { passive: true });
