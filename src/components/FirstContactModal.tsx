@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { ArrowLeft, ArrowRight, Check, X } from 'lucide-react';
 import { contactOptions, firstContactWhatsAppUrl } from '../data/site';
+import { lockBodyScroll } from '../utils/scrollLock';
 
 export default function FirstContactModal() {
   const [isOpen, setIsOpen] = useState(false);
@@ -22,11 +23,10 @@ export default function FirstContactModal() {
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') setIsOpen(false);
     };
-    const previousOverflow = document.body.style.overflow;
-    document.body.style.overflow = 'hidden';
+    const releaseScrollLock = lockBodyScroll();
     document.addEventListener('keydown', onKeyDown);
     return () => {
-      document.body.style.overflow = previousOverflow;
+      releaseScrollLock();
       document.removeEventListener('keydown', onKeyDown);
     };
   }, [isOpen]);
