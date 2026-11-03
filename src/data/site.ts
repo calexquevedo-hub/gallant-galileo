@@ -9,6 +9,8 @@ export interface Office {
   locality: string;
   postalCode: string;
   hours: string;
+  mapUrl: string;
+  routeLabel: string;
 }
 
 export interface SocialLink {
@@ -47,7 +49,9 @@ export const offices: Record<OfficeKey, Office> = {
     building: 'Torre do Shopping Aldeota',
     locality: 'Fortaleza, CE',
     postalCode: '60160-196',
-    hours: 'De segunda a sexta-feira, das 18h às 21h.'
+    hours: 'De segunda a sexta-feira, das 18h às 21h.',
+    mapUrl: 'https://maps.app.goo.gl/7Z1i29d4GykqXn3e6',
+    routeLabel: 'Como chegar à Transcender · Aldeota'
   },
   maraponga: {
     district: 'Maraponga',
@@ -57,7 +61,9 @@ export const offices: Record<OfficeKey, Office> = {
     building: '',
     locality: 'Fortaleza, CE',
     postalCode: '60711-025',
-    hours: 'Aos sábados, das 8h às 12h.'
+    hours: 'Aos sábados, das 8h às 12h.',
+    mapUrl: 'https://maps.app.goo.gl/apB2vpDF95uMKgvC6',
+    routeLabel: 'Como chegar à MultiMais · Maraponga'
   }
 };
 
@@ -84,9 +90,7 @@ export const contactOptions: ContactOption[] = [
 ];
 
 export function mapsUrl(officeKey: OfficeKey): string {
-  const office = offices[officeKey];
-  const parts = [office.clinic, office.street, office.complement, office.building, office.district, office.locality, office.postalCode];
-  return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(parts.filter(Boolean).join(', '))}`;
+  return offices[officeKey].mapUrl;
 }
 
 const messages = {
