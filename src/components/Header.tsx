@@ -19,11 +19,19 @@ export default function Header() {
   const toggleRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
-    clearStaleBodyScrollLock();
+    const recoverScroll = () => clearStaleBodyScrollLock();
     const handleScroll = () => setScrolled(window.scrollY > 20);
+
+    recoverScroll();
     handleScroll();
+
+    window.addEventListener('pageshow', recoverScroll);
     window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('pageshow', recoverScroll);
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, []);
 
   useEffect(() => {
