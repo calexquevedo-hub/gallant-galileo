@@ -12,7 +12,7 @@ export interface Office {
 }
 
 export interface SocialLink {
-  label: 'Instagram' | 'TikTok';
+  label: 'Instagram' | 'TikTok' | 'Facebook';
   href: string;
 }
 
@@ -35,7 +35,6 @@ export const site = {
   whatsappNumber: '5585989234111',
   phoneDisplay: '(85) 98923-4111',
   url: 'https://alexandrequevedo.com.br',
-  minimumAge: 8,
   availability: 'Atendimento mediante agendamento. Consulte os horários disponíveis.'
 } as const;
 
@@ -54,7 +53,7 @@ export const offices: Record<OfficeKey, Office> = {
     district: 'Maraponga',
     clinic: 'MultiMais Clínica',
     street: 'Rua Luxemburgo, 148',
-    complement: '',
+    complement: 'Sala 8',
     building: '',
     locality: 'Fortaleza, CE',
     postalCode: '60711-025',
@@ -62,13 +61,14 @@ export const offices: Record<OfficeKey, Office> = {
   }
 };
 
-export const audience = `Adultos, casais, crianças a partir de ${site.minimumAge} anos e adolescentes`;
+export const audience = 'Adultos, casais, crianças e adolescentes';
 export const serviceSummary = 'Atendimento individual e de casal, mediante agendamento.';
 export const emailUrl = `mailto:${site.email}`;
 
 export const socialLinks: SocialLink[] = [
   { label: 'Instagram', href: 'https://www.instagram.com/alexandrequevedo.psi/' },
-  { label: 'TikTok', href: 'https://www.tiktok.com/@alexandrequevedo.psi' }
+  { label: 'TikTok', href: 'https://www.tiktok.com/@alexandrequevedo.psi' },
+  { label: 'Facebook', href: 'https://www.facebook.com/alexandrequevedo' }
 ];
 
 export interface ContactOption {
@@ -124,8 +124,8 @@ export const topics: Topic[] = [
 export const faqs: FAQItem[] = [
   { question: 'Qual é o valor da sessão?', answer: 'Entre em contato pelo WhatsApp para consultar os valores, as formas de pagamento e os horários disponíveis. Essas informações são combinadas antes do agendamento.' },
   { question: 'Com que frequência acontecem as sessões?', answer: 'A frequência é combinada a partir das suas necessidades e da disponibilidade de horários. Esse acordo pode ser revisto ao longo do acompanhamento.' },
-  { question: 'Você atende crianças a partir de qual idade?', answer: `Atendo crianças a partir de ${site.minimumAge} anos. O acompanhamento é adaptado à idade e às necessidades da criança e envolve também os responsáveis. No atendimento infantil e de adolescentes, o primeiro contato e o agendamento são realizados pelos responsáveis legais. Conversaremos sobre a demanda e o formato mais adequado antes de iniciar.` },
-  { question: 'Como funciona a terapia de casal?', answer: 'O atendimento oferece espaço para escutar os dois integrantes e compreender a relação, suas dificuldades e expectativas. Os objetivos do acompanhamento são construídos em conjunto.' },
+  { question: 'Você atende crianças?', answer: `Sim, atendo crianças, com o acompanhamento adaptado à idade e às necessidades de cada uma. O processo envolve também os responsáveis. No atendimento infantil e de adolescentes, o primeiro contato e o agendamento são realizados pelos responsáveis legais. Conversaremos sobre a demanda e o formato mais adequado antes de iniciar.` },
+  { question: 'Como funciona a terapia de casal?', answer: 'O atendimento oferece espaço para escutar todas as pessoas da relação e compreender suas dificuldades e expectativas, incluindo casais LGBTQIAPN+ e relações não monogâmicas. Os objetivos do acompanhamento são construídos em conjunto.' },
   { question: 'Como funciona o atendimento online?', answer: 'As sessões acontecem por videochamada, em horário previamente agendado. Você precisará de conexão com a internet e de um local reservado. As orientações de acesso são enviadas após o agendamento, e a adequação dessa modalidade é conversada antes do início.' },
   { question: 'Como a Análise do Comportamento orienta o atendimento?', answer: 'Buscamos compreender como sua história, suas relações e as situações do dia a dia se relacionam com o que você sente, pensa e faz. A partir dessa compreensão, construímos possibilidades de lidar com as dificuldades e com aquilo que é importante para você.' }
 ];
