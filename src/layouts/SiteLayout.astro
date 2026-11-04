@@ -127,6 +127,23 @@ const structuredData = {
     <link rel="preload" href="/fonts/plus-jakarta-sans-400.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/cormorant-garamond-600.woff2" as="font" type="font/woff2" crossorigin />
     <script type="application/ld+json" set:html={JSON.stringify(structuredData)}></script>
+
+    <!-- Metricool: acompanhamento de acessos do site -->
+    <script is:inline>
+      function loadScript(a) {
+        var b = document.getElementsByTagName("head")[0],
+          c = document.createElement("script");
+        c.type = "text/javascript";
+        c.src = "https://tracker.metricool.com/resources/be.js";
+        c.onreadystatechange = a;
+        c.onload = a;
+        b.appendChild(c);
+      }
+
+      loadScript(function () {
+        beTracker.t({ hash: "fcf7bf1199e74fcf2956e0c3a56b2d1b" });
+      });
+    </script>
   </head>
   <body>
     <slot />
