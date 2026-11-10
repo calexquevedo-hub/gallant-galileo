@@ -1,5 +1,4 @@
 ---
-import { ArrowRight } from 'lucide-react';
 import { firstSession } from '../data/site';
 
 const firstSessionSteps = [
@@ -21,15 +20,4 @@ const firstSessionSteps = [
       ))}
     </ol>
   </div>
-  <div class="container first-session-footer-link">
-    <button type="button" class="btn btn-primary first-session-cta" data-open-first-contact>
-      Agendar o primeiro encontro <ArrowRight size={18} aria-hidden="true" />
-    </button>
-  </div>
 </section>
-
-<script>
-  document.querySelectorAll('[data-open-first-contact]').forEach((element) => {
-    element.addEventListener('click', () => window.dispatchEvent(new Event('open-first-contact')));
-  });
-</script>
