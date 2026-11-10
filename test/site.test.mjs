@@ -15,9 +15,9 @@ test('Astro generates the public page with the expected structure', () => {
   assert.match(output, /id="locais"/);
   assert.match(output, /id="duvidas"/);
   assert.match(output, /id="rodape"/);
-  assert.match(output, /class="nav-link"[^>]*href="#inicio"/);
-  assert.match(output, /class="nav-link"[^>]*href="#primeiro-encontro"/);
-  assert.match(output, /class="nav-link"[^>]*href="#rodape"/);
+  assert.match(output, /<a (?=[^>]*class="nav-link")(?=[^>]*href="#inicio")[^>]*>/);
+  assert.match(output, /<a (?=[^>]*class="nav-link")(?=[^>]*href="#primeiro-encontro")[^>]*>/);
+  assert.match(output, /<a (?=[^>]*class="nav-link")(?=[^>]*href="#rodape")[^>]*>/);
 });
 
 test('Astro page keeps the approved professional and office information', () => {
@@ -62,11 +62,11 @@ test('Astro page includes the Metricool tracker exactly once', () => {
 test('Astro page uses distinct office map links and local font loading', () => {
   assert.match(output, /Como chegar à Transcender · Aldeota/);
   assert.match(output, /Como chegar à MultiMais · Maraponga/);
-  assert.match(output, /https://maps.app.goo.gl/7Z1i29d4GykqXn3e6/);
-  assert.match(output, /https://maps.app.goo.gl/apB2vpDF95uMKgvC6/);
+  assert.ok(output.includes('https://maps.app.goo.gl/7Z1i29d4GykqXn3e6'));
+  assert.ok(output.includes('https://maps.app.goo.gl/apB2vpDF95uMKgvC6'));
   assert.doesNotMatch(output, /fonts\.googleapis\.com/);
-  assert.match(output, /plus-jakarta-sans-400\.woff2/);
-  assert.match(output, /cormorant-garamond-600\.woff2/);
+  assert.ok(output.includes('inter-variable-latin.woff2'));
+  assert.ok(output.includes('lora-variable-latin.woff2'));
 });
 
 test('Astro project contains TypeScript configuration and required public assets', () => {
@@ -75,8 +75,8 @@ test('Astro project contains TypeScript configuration and required public assets
   assert.equal(existsSync(resolve(projectRoot, 'public/images/psicologo.jpg')), true);
   assert.equal(existsSync(resolve(projectRoot, 'public/images/psicologo-480.avif')), true);
   assert.equal(existsSync(resolve(projectRoot, 'public/images/psicologo-768.webp')), true);
-  assert.equal(existsSync(resolve(projectRoot, 'public/images/logo-tree-forest-192.avif')), true);
-  assert.equal(existsSync(resolve(projectRoot, 'public/fonts/plus-jakarta-sans-400.woff2')), true);
+  assert.equal(existsSync(resolve(projectRoot, 'public/images/logo-tree-blue-192.webp')), true);
+  assert.equal(existsSync(resolve(projectRoot, 'public/fonts/inter-variable-latin.woff2')), true);
   assert.equal(existsSync(resolve(projectRoot, 'public/robots.txt')), true);
   assert.equal(existsSync(resolve(projectRoot, 'public/sitemap.xml')), true);
 });
