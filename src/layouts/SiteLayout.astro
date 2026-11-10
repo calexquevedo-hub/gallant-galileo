@@ -41,7 +41,7 @@ const structuredData = {
       name: `${site.name} | ${site.profession}`,
       description,
       image: `${site.url}/images/psicologo.jpg`,
-      logo: `${site.url}/images/logo-tree-forest.png`,
+      logo: `${site.url}/images/logo-tree-blue-512.png`,
       url: `${site.url}/`,
       telephone: `+${site.whatsappNumber}`,
       email: site.email,
@@ -99,9 +99,9 @@ const structuredData = {
 <html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/png" href="/images/logo-tree-forest.png" />
+    <link rel="icon" type="image/png" href="/images/logo-tree-blue-512.png" />
     <meta name="viewport" content="width=device-width" />
-    <meta name="theme-color" content="#142336" />
+    <meta name="theme-color" content="#1f3c88" />
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta name="author" content={site.fullName} />
@@ -124,8 +124,8 @@ const structuredData = {
     <meta name="twitter:image" content={`${site.url}/images/psicologo.jpg`} />
     <meta name="twitter:image:alt" content="Carlos Alexandre Quevedo, psicólogo, em retrato profissional" />
 
-    <link rel="preload" href="/fonts/plus-jakarta-sans-400.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href="/fonts/cormorant-garamond-600.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/inter-variable-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/lora-variable-latin.woff2" as="font" type="font/woff2" crossorigin />
     <script type="application/ld+json" set:html={JSON.stringify(structuredData)}></script>
 
     <!-- Metricool: acompanhamento de acessos do site -->
