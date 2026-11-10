@@ -259,10 +259,12 @@ Isso é intencional para manter o ritmo visual inspirado no benchmark usado dura
 
 ### Continuidade da jornada
 
-Há links internos explícitos:
+A jornada termina em uma ação:
 
-- FAQ → “Como funciona o primeiro encontro”
-- Primeiro encontro → “Contato e informações”
+- FAQ → link “Como funciona o primeiro encontro”, que leva à seção seguinte
+- Primeiro encontro → botão “Agendar o primeiro encontro”, que abre a janela de primeiro contato (evento `open-first-contact`, o mesmo do botão do cabeçalho e do botão flutuante)
+
+Decisão de 10/11/2026: o antigo link “Contato e informações”, que apenas levava ao rodapé logo abaixo, foi substituído pelo botão. Ele era redundante com o item “Contato” do menu e com o botão flutuante, e a última seção antes do rodapé é o momento de maior intenção do visitante, por isso termina com o convite para agendar.
 
 Não remover sem reavaliar a jornada completa.
 
