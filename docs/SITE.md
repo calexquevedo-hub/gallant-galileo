@@ -1,0 +1,431 @@
+# Documentação técnica do site
+
+Última revisão documental: novembro de 2026.
+
+Este documento descreve o estado funcional e técnico da versão atual de `alexandrequevedo.com.br`.
+
+## 1. Objetivo
+
+O site é a presença institucional de Carlos Alexandre Quevedo, Psicólogo, CRP 11/24669.
+
+Objetivos principais:
+
+- apresentar o profissional e sua abordagem;
+- informar temas de atendimento;
+- informar locais e horários;
+- esclarecer dúvidas frequentes;
+- explicar o primeiro encontro;
+- conduzir ao WhatsApp sem coletar dados clínicos no site;
+- dar suporte a SEO local e presença institucional.
+
+## 2. Arquitetura
+
+Stack:
+
+- Astro
+- TypeScript
+- React
+- Lucide React
+- CSS próprio
+- Netlify
+
+A página pública atual é única:
+
+`src/pages/index.astro`
+
+Componentes Astro são usados para conteúdo estático e React apenas para elementos interativos.
+
+## 3. Ordem das seções
+
+A ordem atual da página deve ser considerada intencional:
+
+1. `#inicio` — Hero
+2. `#sobre` — Sobre mim
+3. `#atendimento` — Temas de atendimento
+4. `#locais` — Onde atendo
+5. `#duvidas` — FAQ
+6. `#primeiro-encontro` — Primeiro encontro
+7. `#rodape` — Contato e informações finais
+
+O menu principal contém:
+
+- Início
+- Sobre
+- Atendimento
+- Onde atendo
+- Dúvidas
+- Primeiro encontro
+- Contato
+
+A logo também funciona como retorno ao início.
+
+## 4. Conteúdo institucional vigente
+
+### Identidade profissional
+
+- Nome de marca: Alexandre Quevedo
+- Nome completo: Carlos Alexandre Quevedo
+- Profissão: Psicólogo
+- Registro: CRP 11/24669
+- E-mail: alexandrequevedo@outlook.com
+- WhatsApp: (85) 98923-4111
+- Site: https://alexandrequevedo.com.br
+
+### Hero
+
+Título:
+
+> Quando a vida pesa, compreender o que acontece é um começo.
+
+Posicionamento:
+
+> Psicoterapia para ansiedade, sobrecarga e dificuldades nos relacionamentos.
+
+Apoio:
+
+> Um espaço de escuta, compreensão e construção de mudanças possíveis.
+
+Público publicado:
+
+> Adultos, casais, crianças e adolescentes.
+
+O código atual não publica idade mínima infantil.
+
+### Sobre
+
+Texto central:
+
+> Trabalho com Análise do Comportamento e mantenho formação continuada em terapias comportamentais e contextuais pela Díade Lab.
+
+### Temas
+
+- Ansiedade
+- Luto
+- Relacionamentos
+- Sobrecarga no trabalho
+- Questões de sexualidade
+
+## 5. Locais de atendimento
+
+### Aldeota
+
+- Transcender Psicologia
+- Av. Dom Luís, 500
+- Sala 818, 8º andar
+- Torre do Shopping Aldeota
+- Fortaleza, CE
+- CEP 60160-196
+- Segunda a sexta-feira, das 18h às 21h
+- Google Maps: https://maps.app.goo.gl/7Z1i29d4GykqXn3e6
+- Rótulo do link: “Como chegar à Transcender · Aldeota”
+
+### Maraponga
+
+- MultiMais Clínica
+- Rua Luxemburgo, 148
+- Sala 8
+- Fortaleza, CE
+- CEP 60711-025
+- Sábados, das 8h às 12h
+- Google Maps: https://maps.app.goo.gl/apB2vpDF95uMKgvC6
+- Rótulo do link: “Como chegar à MultiMais · Maraponga”
+
+## 6. Primeiro contato
+
+Eventos de interface:
+
+- `open-first-contact`
+- `open-privacy`
+
+O primeiro contato funciona em duas etapas.
+
+### Etapa 1
+
+Mensagem de orientação:
+
+> Para preservar sua privacidade, evite enviar detalhes clínicos antes da sessão.
+
+### Etapa 2
+
+Opções:
+
+- Presencial na Aldeota
+- Presencial na Maraponga
+- Atendimento online
+- Ainda não sei
+
+Após a seleção, o WhatsApp é aberto com mensagem contextualizada.
+
+Não adicionar ao site, sem decisão explícita:
+
+- campo de nome;
+- campo de sintomas;
+- relato do motivo clínico;
+- formulário com dados sensíveis;
+- questionário diagnóstico.
+
+## 7. Privacidade
+
+O modal informa:
+
+- dever de sigilo profissional;
+- limites éticos e legais;
+- prevenção de envio precoce de dados sensíveis;
+- referência à LGPD;
+- responsável pelo canal;
+- e-mail de contato.
+
+O rodapé contém aviso de não atendimento emergencial e referências ao SAMU 192 e CVV 188.
+
+## 8. SEO
+
+Implementado em `SiteLayout.astro`.
+
+Inclui:
+
+- canonical;
+- meta description;
+- Open Graph;
+- Twitter Card;
+- sitemap;
+- robots;
+- JSON-LD.
+
+Entidades estruturadas:
+
+- `Person`
+- `ProfessionalService`
+- dois `Place` para os consultórios
+
+Os links de mapa usados no JSON-LD devem permanecer sincronizados com `src/data/site.ts`.
+
+## 9. Redes sociais
+
+Atualmente integradas ao código:
+
+- Instagram: https://www.instagram.com/alexandrequevedo.psi/
+- TikTok: https://www.tiktok.com/@alexandrequevedo.psi
+- Facebook: https://www.facebook.com/alexandrequevedo
+
+Não estão integradas ao site atual:
+
+- Kwai
+- Threads
+- X
+
+Qualquer inclusão deve atualizar simultaneamente:
+
+- `SocialLink`;
+- `socialLinks`;
+- rodapé;
+- dados estruturados `sameAs`.
+
+## 10. Metricool
+
+O rastreamento do Metricool é carregado globalmente em:
+
+`src/layouts/SiteLayout.astro`
+
+Script remoto:
+
+`https://tracker.metricool.com/resources/be.js`
+
+Finalidade:
+
+- acompanhamento dos acessos do site;
+- integração com Metricool Social Media.
+
+Ao alterar analytics ou serviços externos, revisar também o conteúdo do modal de privacidade.
+
+## 11. UX/UI e navegação
+
+### Âncoras
+
+A navegação deve permanecer nativa.
+
+Não adicionar:
+
+- `scroll-margin-top` às seções;
+- `scroll-padding-top` ao documento;
+- JavaScript customizado para compensar manualmente o cabeçalho.
+
+Motivo: abordagens anteriores criaram faixas visuais com a cor da seção precedente ao navegar pelo menu.
+
+### Altura das seções
+
+As seções principais usam `min-height: 100svh`.
+
+Isso é intencional para manter o ritmo visual inspirado no benchmark usado durante o projeto.
+
+### Continuidade da jornada
+
+Há links internos explícitos:
+
+- FAQ → “Como funciona o primeiro encontro”
+- Primeiro encontro → “Contato e informações”
+
+Não remover sem reavaliar a jornada completa.
+
+## 12. Regra crítica de rolagem em modais
+
+Todos os modais devem usar:
+
+`src/utils/scrollLock.ts`
+
+Não implementar diretamente:
+
+`document.body.style.overflow = 'hidden'`
+
+em novos componentes.
+
+O utilitário atual mantém contador de locks e corrige estados antigos preservados pelo cache de navegação.
+
+Essa regra existe porque o site já apresentou regressão em que a página permanecia sem rolagem após fechar um modal.
+
+## 13. Responsividade
+
+Breakpoints:
+
+### <= 1180 px
+
+- menu desktop oculto;
+- menu mobile habilitado;
+- cards de temas passam para 3 colunas.
+
+### <= 992 px
+
+- grids gerais de 3 colunas passam para 2;
+- gaps são reduzidos.
+
+### <= 768 px
+
+- layouts principais passam para 1 coluna;
+- foto do profissional expande;
+- hero perde altura mínima rígida;
+- primeiro encontro vira coluna única;
+- temas passam para 2 colunas.
+
+### <= 600 px
+
+- container reduz padding;
+- cabeçalho é compactado;
+- botão flutuante do WhatsApp vira somente ícone;
+- temas passam para 1 coluna;
+- modais reduzem padding;
+- ações do modal empilham.
+
+### <= 480 px e <= 360 px
+
+- ajustes adicionais de marca e cabeçalho.
+
+## 14. Identidade visual
+
+Variáveis centrais em `src/index.css`.
+
+Cores:
+
+- `--bg-primary: #f8f5ef`
+- `--bg-surface: #fffdf9`
+- `--bg-surface-elevated: #edf1ed`
+- `--bg-dark: #142336`
+- `--accent-terracotta: #b86f4e`
+- `--accent-sage: #527461`
+- `--accent-forest: #0d4036`
+- `--accent-navy: #173f62`
+
+Fontes:
+
+- Cormorant Garamond
+- Plus Jakarta Sans
+
+As fontes são locais, não carregadas do Google Fonts.
+
+## 15. Imagens e marca
+
+Arquivos ficam em `public/images/`.
+
+A árvore da marca não deve ser redesenhada.
+
+A versão atual utiliza arquivos responsivos em AVIF e WebP para logo e retrato profissional.
+
+O site atual ainda não contém a galeria de fotos dos consultórios nem a página específica da Aldeota prototipada fora do repositório.
+
+## 16. Deploy
+
+Netlify:
+
+- comando de build: `npm run build`
+- pasta publicada: `dist`
+
+O `astro.config.ts` define:
+
+`site: 'https://alexandrequevedo.com.br'`
+
+## 17. Verificações obrigatórias
+
+Antes de publicar:
+
+1. `npm run check`
+2. `npm test`
+3. `npm run build`
+
+Testar manualmente:
+
+- menu desktop;
+- menu mobile;
+- todas as âncoras;
+- modal de primeiro contato;
+- modal de privacidade;
+- restauração da rolagem;
+- WhatsApp;
+- Maps Aldeota;
+- Maps Maraponga;
+- links sociais;
+- FAQ;
+- primeiro encontro;
+- rodapé;
+- Metricool;
+- desktop;
+- tablet;
+- celular.
+
+## 18. Fonte de verdade
+
+Para manutenção de conteúdo:
+
+### `src/data/site.ts`
+
+Fonte principal para:
+
+- profissional;
+- CRP;
+- e-mail;
+- telefone;
+- consultórios;
+- horários;
+- Maps;
+- redes sociais;
+- público;
+- temas;
+- FAQ;
+- mensagens do WhatsApp.
+
+### `SiteLayout.astro`
+
+Fonte para:
+
+- SEO;
+- JSON-LD;
+- dados estruturados;
+- Metricool.
+
+### `src/index.css`
+
+Fonte para:
+
+- identidade visual;
+- responsividade;
+- regras de navegação;
+- comportamento visual.
+
+Evitar duplicar informações manualmente em múltiplos arquivos quando elas puderem vir de `site.ts`.
