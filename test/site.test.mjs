@@ -14,8 +14,10 @@ test('Astro generates the public page with the expected structure', () => {
   assert.match(output, /id="atendimento"/);
   assert.match(output, /id="locais"/);
   assert.match(output, /id="duvidas"/);
-  assert.match(output, /id="primeiro-encontro"/);
-  assert.doesNotMatch(output, /class="nav-link"[^>]*href="#primeiro-encontro"/);
+  assert.match(output, /id="rodape"/);
+  assert.match(output, /class="nav-link"[^>]*href="#inicio"/);
+  assert.match(output, /class="nav-link"[^>]*href="#primeiro-encontro"/);
+  assert.match(output, /class="nav-link"[^>]*href="#rodape"/);
 });
 
 test('Astro page keeps the approved professional and office information', () => {
@@ -52,9 +54,16 @@ test('Astro page preserves the two first-contact entry points and privacy access
   assert.doesNotMatch(output, /Powered by Netlify|Netlify badge/i);
 });
 
+test('Astro page includes the Metricool tracker exactly once', () => {
+  assert.equal((output.match(/tracker\.metricool\.com\/resources\/be\.js/g) ?? []).length, 1);
+  assert.equal((output.match(/fcf7bf1199e74fcf2956e0c3a56b2d1b/g) ?? []).length, 1);
+});
+
 test('Astro page uses distinct office map links and local font loading', () => {
-  assert.match(output, /Ver rota para Transcender Psicologia/);
-  assert.match(output, /Ver rota para MultiMais Clínica/);
+  assert.match(output, /Como chegar à Transcender · Aldeota/);
+  assert.match(output, /Como chegar à MultiMais · Maraponga/);
+  assert.match(output, /https://maps.app.goo.gl/7Z1i29d4GykqXn3e6/);
+  assert.match(output, /https://maps.app.goo.gl/apB2vpDF95uMKgvC6/);
   assert.doesNotMatch(output, /fonts\.googleapis\.com/);
   assert.match(output, /plus-jakarta-sans-400\.woff2/);
   assert.match(output, /cormorant-garamond-600\.woff2/);
