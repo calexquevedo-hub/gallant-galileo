@@ -320,33 +320,58 @@ Breakpoints:
 
 ## 14. Identidade visual
 
-Variáveis centrais em `src/index.css`.
+Decisão de 10/11/2026: o site adota a **identidade azul do kit de marca "Alexandre Quevedo" no Canva**, a mesma usada nas redes sociais. A identidade anterior (verde-sálvia, creme, terracota, Cormorant Garamond e Plus Jakarta Sans) foi descontinuada.
 
-Cores:
+Motivos registrados: unificar site e redes sob uma só marca e evitar confusão com a Clínica Vitalume, concorrente na Aldeota que usa verde-sálvia e uma árvore em círculo no logotipo.
 
-- `--bg-primary: #f8f5ef`
-- `--bg-surface: #fffdf9`
-- `--bg-surface-elevated: #edf1ed`
-- `--bg-dark: #142336`
-- `--accent-terracotta: #b86f4e`
-- `--accent-sage: #527461`
-- `--accent-forest: #0d4036`
-- `--accent-navy: #173f62`
+Paleta oficial (kit de marca):
+
+- Azul Profundo `#1F3C88`: cor principal, títulos, botões, rodapé
+- Azul Médio `#4A6FA5`: ícones, destaques, rótulos
+- Grafite Suave `#2F3640`: texto principal
+- Cinza Claro `#E9EDF3`: superfícies secundárias
+- Areia Suave `#D8C3A5`: detalhes e apoio, nunca como fundo de texto branco
+- Branco `#FFFFFF`
+
+Variáveis em `src/index.css` (os nomes antigos foram mantidos para não quebrar os componentes; o valor de cada uma agora segue a paleta azul):
+
+- `--bg-primary: #f7f5f1`
+- `--bg-surface: #ffffff`
+- `--bg-surface-elevated: #e9edf3`
+- `--bg-dark: #1f3c88`
+- `--bg-dark-surface: #2a4a9c`
+- `--text-main: #2f3640`
+- `--text-muted: #5b6573`
+- `--accent-sage: #4a6fa5` (o nome é legado; a cor é Azul Médio)
+- `--accent-forest: #1f3c88` (nome legado; Azul Profundo)
+- `--accent-editorial: #4a6fa5` (nome legado)
+- `--accent-sage-light: #e9edf3` (nome legado)
+- `--accent-navy: #1f3c88`
+- `--accent-terracotta: #b8996e` (nome legado; tom de Areia, uso residual)
+
+Ao criar novos estilos, use as variáveis existentes ou os códigos da paleta oficial. Não reintroduza verdes nem terracota.
 
 Fontes:
 
-- Cormorant Garamond
-- Plus Jakarta Sans
+- **Lora** para títulos (`--font-serif`), arquivos `lora-variable-latin.woff2` e `lora-italic-variable-latin.woff2`
+- **Inter** para corpo e interface (`--font-sans`), arquivo `inter-variable-latin.woff2`
 
-As fontes são locais, não carregadas do Google Fonts.
+As fontes são variáveis (pesos 400 a 700), servidas localmente em WOFF2 a partir de `public/fonts/`, sem Google Fonts. Os arquivos antigos de Cormorant Garamond e Plus Jakarta Sans continuam na pasta, mas não são mais referenciados.
 
 ## 15. Imagens e marca
 
 Arquivos ficam em `public/images/`.
 
-A árvore da marca não deve ser redesenhada.
+A árvore da marca não deve ser redesenhada nem modificada.
 
-A versão atual utiliza arquivos responsivos em AVIF e WebP para logo e retrato profissional.
+Uso atual dos logotipos:
+
+- Cabeçalho: `logo-tree-blue-96.webp` e `logo-tree-blue-192.webp` (sem versão AVIF)
+- Favicon e dados estruturados: `logo-tree-blue-512.png`
+- Rodapé (fundo azul): `logo-tree-white-96` e `logo-tree-white-192`
+- Os arquivos `logo-tree-forest-*` são legados e não são mais referenciados
+
+O retrato profissional também usa arquivos responsivos em AVIF e WebP.
 
 O site atual ainda não contém a galeria de fotos dos consultórios nem a página específica da Aldeota prototipada fora do repositório.
 
@@ -366,8 +391,18 @@ O `astro.config.ts` define:
 Antes de publicar:
 
 1. `npm run check`
-2. `npm test`
+2. `npm test` (executa `astro build` e depois `node --test`)
 3. `npm run build`
+
+Nunca publicar com teste falhando. Um erro de sintaxe no arquivo de testes faz o conjunto inteiro falhar antes de rodar, e a proteção contra regressões deixa de existir sem aviso no deploy (o Netlify só executa o build).
+
+Regras para escrever testes em `test/site.test.mjs`:
+
+- Para conferir URLs ou trechos com barras, use `assert.ok(output.includes('...'))`. Não coloque URLs dentro de expressões regulares literais (`/https://.../`): as barras encerram a expressão e quebram o arquivo.
+- Para conferir atributos de uma tag, não dependa da ordem em que aparecem no HTML gerado. Use lookaheads, por exemplo `/<a (?=[^>]*class="nav-link")(?=[^>]*href="#inicio")[^>]*>/`.
+- Ao trocar fontes, logotipos ou outros arquivos públicos, atualize também os testes que verificam a existência e o carregamento desses arquivos.
+
+Histórico: em 09/11/2026, o commit `5493f5c` introduziu URLs em expressões regulares sem escape e uma verificação de menu dependente da ordem dos atributos. Os testes foram corrigidos em 10/11/2026.
 
 Testar manualmente:
 
