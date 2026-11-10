@@ -125,21 +125,23 @@ A integração está em `src/layouts/SiteLayout.astro`.
 
 ## Identidade visual atual
 
-A implementação atual usa principalmente:
+Desde 10/11/2026, o site segue a identidade azul do kit de marca no Canva, a mesma das redes sociais:
 
-- fundo creme: `#f8f5ef`
-- superfície clara: `#fffdf9`
-- verde sálvia: `#527461`
-- verde floresta: `#0d4036`
-- azul-marinho: `#142336`
-- terracota: `#b86f4e`
+- Azul Profundo `#1F3C88` (principal)
+- Azul Médio `#4A6FA5` (destaques)
+- Grafite Suave `#2F3640` (texto)
+- Cinza Claro `#E9EDF3` (superfícies)
+- Areia Suave `#D8C3A5` (detalhes)
+- Branco `#FFFFFF`
 
 Tipografia:
 
-- **Cormorant Garamond** para títulos;
-- **Plus Jakarta Sans** para corpo e interface.
+- **Lora** para títulos;
+- **Inter** para corpo e interface.
 
-As fontes são servidas localmente em WOFF2.
+As fontes são variáveis e servidas localmente em WOFF2. Detalhes e motivos da decisão em `docs/SITE.md`, seção 14.
+
+Antes de qualquer alteração, leia `AGENTS.md`: ele define como mais de um assistente de IA pode trabalhar neste repositório sem desfazer o trabalho do outro.
 
 ## Navegação e rolagem
 
