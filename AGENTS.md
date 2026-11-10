@@ -23,7 +23,7 @@ Este repositório é mantido por Carlos Alexandre Quevedo com o apoio de mais de
 - **Identificação profissional:** Carlos Alexandre Quevedo, Psicólogo, CRP 11/24669. O registro antigo, CRP 05/83235, não deve aparecer.
 - **Ética (Código de Ética do Psicólogo, art. 20):** sem preço como propaganda, sem promessa de resultado, sem depoimentos de pacientes, sem sensacionalismo.
 - **Primeiro contato:** não pedir relato clínico antes da sessão.
-- **Fim da seção "Primeiro encontro":** botão "Agendar o primeiro encontro", que abre a janela de primeiro contato (substituiu o link "Contato e informações" em 10/11/2026).
+- **Sem chamadas de continuação entre seções:** nada de links do tipo "Como funciona o primeiro encontro" ou "Contato e informações" e nenhum botão de agendamento no fim das seções (decisão de 10/11/2026). O contato fica no cabeçalho e no botão flutuante.
 - **Fontes e scripts externos:** fontes sempre locais; nenhum script externo além do rastreador do Metricool já documentado.
 
 ## Registro de sessões
@@ -31,3 +31,4 @@ Este repositório é mantido por Carlos Alexandre Quevedo com o apoio de mais de
 - 09/11/2026, ChatGPT: atualizou `README.md`, criou `docs/SITE.md` e atualizou os testes (commit `5493f5c` deixou os testes com erro de sintaxe).
 - 10/11/2026, Claude: corrigiu os testes, adotou a identidade azul (cores, fontes Lora e Inter, logotipo azul no cabeçalho e no favicon), atualizou a documentação e criou este arquivo.
 - 10/11/2026, Claude: trocou o link "Contato e informações" do fim da seção Primeiro encontro por um botão que abre a janela de primeiro contato, a pedido de Alexandre.
+- 10/11/2026, Claude: removeu o link "Como funciona o primeiro encontro" e o botão "Agendar o primeiro encontro", a pedido de Alexandre; limpou o CSS sem uso.
