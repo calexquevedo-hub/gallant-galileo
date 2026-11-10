@@ -259,14 +259,9 @@ Isso é intencional para manter o ritmo visual inspirado no benchmark usado dura
 
 ### Continuidade da jornada
 
-A jornada termina em uma ação:
+Decisão de 10/11/2026, por Alexandre: as seções não têm links ou botões de continuação entre si. Foram removidos o link "Como funciona o primeiro encontro" (fim das Dúvidas), o antigo link "Contato e informações" e o botão "Agendar o primeiro encontro" (fim do Primeiro encontro), por destoarem da proposta do site.
 
-- FAQ → link “Como funciona o primeiro encontro”, que leva à seção seguinte
-- Primeiro encontro → botão “Agendar o primeiro encontro”, que abre a janela de primeiro contato (evento `open-first-contact`, o mesmo do botão do cabeçalho e do botão flutuante)
-
-Decisão de 10/11/2026: o antigo link “Contato e informações”, que apenas levava ao rodapé logo abaixo, foi substituído pelo botão. Ele era redundante com o item “Contato” do menu e com o botão flutuante, e a última seção antes do rodapé é o momento de maior intenção do visitante, por isso termina com o convite para agendar.
-
-Não remover sem reavaliar a jornada completa.
+A navegação entre seções fica a cargo do menu, e o contato, do botão "Iniciar conversa" do cabeçalho e do botão flutuante. Não reintroduzir chamadas de continuação sem confirmação de Alexandre.
 
 ## 12. Regra crítica de rolagem em modais
 
