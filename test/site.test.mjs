@@ -11,8 +11,8 @@ test('Astro generates the public page with the expected structure', () => {
   assert.match(output, /<html lang="pt-BR">/);
   assert.match(output, /id="sobre"/);
   assert.match(output, /id="primeiro-encontro"/);
-  assert.match(output, /<button (?=[^>]*class="btn btn-primary first-session-cta")(?=[^>]*data-open-first-contact)[^>]*>/);
-  assert.ok(output.includes('Agendar o primeiro encontro'));
+  assert.ok(!output.includes('Agendar o primeiro encontro'));
+  assert.ok(!output.includes('Como funciona o primeiro encontro'));
   assert.ok(!output.includes('Contato e informações'));
   assert.match(output, /id="atendimento"/);
   assert.match(output, /id="locais"/);
