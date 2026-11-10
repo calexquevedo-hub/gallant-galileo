@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ArrowDownRight, ChevronDown, HelpCircle } from 'lucide-react';
+import { ChevronDown, HelpCircle } from 'lucide-react';
 import { faqs } from '../data/site';
 
 export default function FAQ() {
@@ -32,11 +32,6 @@ export default function FAQ() {
                 </div>
               );
             })}
-          </div>
-          <div className="section-continuation">
-            <a className="text-link section-next-link" href="#primeiro-encontro">
-              Como funciona o primeiro encontro <ArrowDownRight size={17} aria-hidden="true" />
-            </a>
           </div>
         </div>
       </div>
