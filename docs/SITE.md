@@ -370,7 +370,7 @@ Uso atual dos logotipos:
 
 Retrato profissional (desde 11/11/2026): `psicologo-2026.webp`, 540 × 961 px, foto de blazer marinho com fundo nos tons do site (branco a Cinza Claro `#E9EDF3`). É um arquivo único, sem variações AVIF, porque a seção exibe a foto com no máximo 30rem de altura. A foto não deve ser retocada: o rosto, a pele, o cabelo e o corpo de Alexandre precisam permanecer como são, por decisão dele.
 
-Os arquivos `psicologo-480`, `psicologo-768` e `psicologo-1024` (AVIF e WebP) são da foto anterior e não são mais usados na página. O `psicologo.jpg` ainda é a foto anterior e segue sendo usado como imagem de compartilhamento (Open Graph, X) e nos dados estruturados; deve ser substituído por uma imagem horizontal de 1200 × 630 px.
+Os arquivos `psicologo-480`, `psicologo-768` e `psicologo-1024` (AVIF e WebP) são da foto anterior e não são mais usados na página. Imagem de compartilhamento (desde 11/11/2026): `compartilhamento.jpg`, 1200 × 630 px, usada em `og:image` e `twitter:image` e como imagem do serviço nos dados estruturados. Mostra a foto profissional, o nome completo, o CRP, os temas, os locais e o endereço do site, na identidade azul. A pessoa (Person) nos dados estruturados usa `psicologo-2026.webp`. O arquivo `psicologo.jpg` é da foto anterior e não é mais referenciado pelo site; permanece no repositório apenas como histórico.
 
 O site atual ainda não contém a galeria de fotos dos consultórios nem a página específica da Aldeota prototipada fora do repositório.
 
