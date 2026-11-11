@@ -22,7 +22,7 @@ const structuredData = {
       alternateName: site.name,
       jobTitle: site.profession,
       description: 'Psicólogo, CRP 11/24669, com atuação presencial em Fortaleza e atendimento online.',
-      image: `${site.url}/images/psicologo.jpg`,
+      image: `${site.url}/images/psicologo-2026.webp`,
       url: `${site.url}/#sobre`,
       telephone: `+${site.whatsappNumber}`,
       email: site.email,
@@ -40,7 +40,7 @@ const structuredData = {
       '@id': `${site.url}/#practice`,
       name: `${site.name} | ${site.profession}`,
       description,
-      image: `${site.url}/images/psicologo.jpg`,
+      image: `${site.url}/images/compartilhamento.jpg`,
       logo: `${site.url}/images/logo-tree-blue-512.png`,
       url: `${site.url}/`,
       telephone: `+${site.whatsappNumber}`,
@@ -115,14 +115,17 @@ const structuredData = {
     <meta property="og:site_name" content="Alexandre Quevedo | Psicólogo" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content={`${site.url}/images/psicologo.jpg`} />
-    <meta property="og:image:alt" content="Carlos Alexandre Quevedo, psicólogo, em retrato profissional" />
+    <meta property="og:image" content={`${site.url}/images/compartilhamento.jpg`} />
+    <meta property="og:image:alt" content="Carlos Alexandre Quevedo, psicólogo em Fortaleza, CRP 11/24669" />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={`${site.url}/images/psicologo.jpg`} />
-    <meta name="twitter:image:alt" content="Carlos Alexandre Quevedo, psicólogo, em retrato profissional" />
+    <meta name="twitter:image" content={`${site.url}/images/compartilhamento.jpg`} />
+    <meta name="twitter:image:alt" content="Carlos Alexandre Quevedo, psicólogo em Fortaleza, CRP 11/24669" />
 
     <link rel="preload" href="/fonts/inter-variable-latin.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/lora-variable-latin.woff2" as="font" type="font/woff2" crossorigin />
