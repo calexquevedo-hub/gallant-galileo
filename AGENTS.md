@@ -17,6 +17,7 @@ Este repositório é mantido por Carlos Alexandre Quevedo com o apoio de mais de
 
 - **Identidade visual:** azul do kit de marca no Canva (Azul Profundo `#1F3C88`, Lora e Inter). Verde-sálvia, terracota, Cormorant Garamond e Plus Jakarta Sans foram descontinuados em 10/11/2026.
 - **Logotipo:** a árvore original nunca deve ser redesenhada ou modificada.
+- **Fotos de Alexandre:** nunca retocar rosto, pele, cabelo ou corpo; apenas recorte, fundo e enquadramento. A foto atual do site é `public/images/psicologo-2026.webp` (11/11/2026).
 - **Horários públicos:** Aldeota, segunda a sexta, das 18h às 21h; Maraponga, sábados, das 8h às 12h. Outros horários de Alexandre são pessoais e não devem ser publicados.
 - **Público:** adultos, casais, adolescentes e crianças, sem idade mínima publicada.
 - **Terapia de casal:** inclui casais LGBTQIAPN+ e relações não monogâmicas.
@@ -32,3 +33,4 @@ Este repositório é mantido por Carlos Alexandre Quevedo com o apoio de mais de
 - 10/11/2026, Claude: corrigiu os testes, adotou a identidade azul (cores, fontes Lora e Inter, logotipo azul no cabeçalho e no favicon), atualizou a documentação e criou este arquivo.
 - 10/11/2026, Claude: trocou o link "Contato e informações" do fim da seção Primeiro encontro por um botão que abre a janela de primeiro contato, a pedido de Alexandre.
 - 10/11/2026, Claude: removeu o link "Como funciona o primeiro encontro" e o botão "Agendar o primeiro encontro", a pedido de Alexandre; limpou o CSS sem uso.
+- 11/11/2026, Claude: trocou a foto da seção Sobre mim por `psicologo-2026.webp` (blazer marinho, sem retoques), atualizou teste e documentação. Pendência: substituir `psicologo.jpg`, ainda usado como imagem de compartilhamento.
