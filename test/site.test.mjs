@@ -12,6 +12,7 @@ test('Astro generates the public page with the expected structure', () => {
   assert.match(output, /id="sobre"/);
   assert.match(output, /id="primeiro-encontro"/);
   assert.ok(output.includes('/images/psicologo-2026.webp'));
+  assert.ok(output.includes('og:image" content="https://alexandrequevedo.com.br/images/compartilhamento.jpg'));
   assert.ok(!output.includes('Agendar o primeiro encontro'));
   assert.ok(!output.includes('Como funciona o primeiro encontro'));
   assert.ok(!output.includes('Contato e informações'));
@@ -78,6 +79,7 @@ test('Astro project contains TypeScript configuration and required public assets
   assert.equal(existsSync(resolve(projectRoot, 'tsconfig.json')), true);
   assert.equal(existsSync(resolve(projectRoot, 'public/images/psicologo.jpg')), true);
   assert.equal(existsSync(resolve(projectRoot, 'public/images/psicologo-2026.webp')), true);
+  assert.equal(existsSync(resolve(projectRoot, 'public/images/compartilhamento.jpg')), true);
   assert.equal(existsSync(resolve(projectRoot, 'public/images/psicologo-480.avif')), true);
   assert.equal(existsSync(resolve(projectRoot, 'public/images/psicologo-768.webp')), true);
   assert.equal(existsSync(resolve(projectRoot, 'public/images/logo-tree-blue-192.webp')), true);
