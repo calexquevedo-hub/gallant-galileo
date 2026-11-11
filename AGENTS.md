@@ -34,3 +34,4 @@ Este repositório é mantido por Carlos Alexandre Quevedo com o apoio de mais de
 - 10/11/2026, Claude: trocou o link "Contato e informações" do fim da seção Primeiro encontro por um botão que abre a janela de primeiro contato, a pedido de Alexandre.
 - 10/11/2026, Claude: removeu o link "Como funciona o primeiro encontro" e o botão "Agendar o primeiro encontro", a pedido de Alexandre; limpou o CSS sem uso.
 - 11/11/2026, Claude: trocou a foto da seção Sobre mim por `psicologo-2026.webp` (blazer marinho, sem retoques), atualizou teste e documentação. Pendência: substituir `psicologo.jpg`, ainda usado como imagem de compartilhamento.
+- 11/11/2026, Claude: criou e aplicou `compartilhamento.jpg` (1200 × 630 px) como imagem de compartilhamento (Open Graph, X) e dos dados estruturados; a pendência do `psicologo.jpg` foi resolvida.
